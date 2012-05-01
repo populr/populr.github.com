@@ -1,36 +1,56 @@
 ---
 layout: page
-title: "Creating Populr Themes"
-description: ""
+title: "Theming"
+tagline: ""
+description: "Creating your own Populr theme is piece of cake, once you get to know the system. This guide will help you learn the fundamentals of theming."
 group: navigation
 ---
 {% include JB/setup %}
 
 
+<div class="subnav">
+  <ul class="nav nav-pills">
+    <li><a href="#getting-started">Getting Started</a></li>
+    <li><a href="#anatomy-of-a-theme">Anatomy of a Theme</a></li>
+  </ul>
+</div>
 <section id="getting-started">
-  <div class="subnav">
-    <ul class="nav nav-pills">
-      <li><a href="#getting-started">Getting Started</a></li>
-      <li><a href="#anatomy-of-a-theme">Anatomy of a Theme</a></li>
-    </ul>
+  <div class="page-header">
+    <h1>Getting Started</h1>
   </div>
   <div class="row">
     <div class="span8">
       <p>
-        Creating your own Populr theme is easy, once you get to know the system. 
-        This guide will help you learn the fundamentals of theming.
+        Populr theming is based on a couple of existing open-source technologies. 
+        If you already know <a href="http://handlebarsjs.com" title="Handlebars.js semantic templates">Handlebars.js</a> 
+        and <a href="http://lesscss.org/" title="LESS: The dynamic stylesheet language">LESS</a>, 
+        feel free to <a href="#theme-skeleton">skip ahead</a>. Otherwise, keep reading intrepid explorer!
       </p>
       <p>
-        <span class="label label-info">Heads up!</span> The Populr theming engine 
-        is based on the javascript templating system 
-        <a href="http://handlebarsjs.com" title="Handlebars">Handlebars.js</a>. 
-        Before starting a Populr theme, you should visit the Handlebars website 
-        and familiarize yourself with the syntax. Seriously, if you don't learn 
-        how to use handlebars, you won't learn how to theme Populr. We promise.
+        A Populr theme, like any (good) html/css breakdown, is separated into two 
+        layers &mdash; first semantic structure / content, and second, style.
       </p>
+      <h2>Structure / Content</h2>
+      <p>
+        A theme's structure is built in <a href="http://handlebarsjs.com" title="Handlebars">Handlebars.js</a>, 
+        a javascript-based templating language. Although it may appear overwhelming at first, 
+        a handlebars template is simply centered around one basic construct: the 
+        curly-brace <code>{% raw %}{ }{% endraw %}</code>. With this, you can 
+        define every piece of stucture and content you will use in creating your theme.
+      </p>
+      <h2>Style</h2>
+      <p>
+        Style doc
+      </p>
+      <h2 id="theme-skeleton">The Theme Skeleton</h2>
       <p>
         Once you are comfortable with Handlebars syntax, <a href="https://github.com/populr/populr-theme-skeleton/zipball/master">download the Populr Theme 
         Skeleton</a> to get started with your own theme.
+      </p>
+      <p>
+        <span class="label label-info">Heads up!</span> If you choose not familiarize 
+        yourself with Handlebars.js and LESS before continuing, you <strong>will</strong> have a 
+        difficult journey ahead. Seriously, read up on these two easy technologies. For realsies.
       </p>
     </div>
     <div class="span4">
