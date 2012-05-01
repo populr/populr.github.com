@@ -1,3 +1,54 @@
+# developers.populr.me Documentation
+
+## Setup (Important!!!)
+
+Create and chmod a+x a post-commit hook with the code:
+
+    #!/usr/bin/env bash
+
+    # executables prefix
+    _prefix="/usr/bin"
+    # git executable
+    _git="git"
+
+    # site generation executable
+    _generate="jekyll"
+    # options for the generator
+    _opts=(--no-safe --no-server --no-auto --kramdown)
+
+    # branch from which to generate site
+    _origbranch="src"
+    # branch holding the generated site
+    _destbranch="master"
+
+    # directory holding the generated site -- should be outside this repo
+    _site="$("$_prefix/mktemp" -d /tmp/_site.XXXXXXXXX)"
+    # the current branch
+    _currbranch="$(grep "^*" < <("$_git" branch) | cut -d' ' -f2)"
+
+    if [[ $_currbranch == $_origbranch ]]; then # we should generate the site
+        # go to root dir of the repo
+        cd "$("$_git" rev-parse --show-toplevel)"
+        # generate the site
+        "$_generate" ${_opts[@]} . "$_site"
+        # switch to branch the site will be stored
+        "$_git" checkout "$_destbranch"
+        # overwrite existing files
+        builtin shopt -s dotglob
+        cp -rf "$_site"/* .
+        builtin shopt -u dotglob
+        # add any new files
+        "$_git" add .
+        # commit all changes with a default message
+        "$_git" commit -a -m "updated site @ $(date +"%F %T")"
+        # cleanup
+        rm -rfv "$_site"
+        # return
+        "$_git" checkout "$_origbranch"
+    fi
+
+
+
 # Jekyll-Bootstrap
 
 The quickest way to start and publish your Jekyll powered blog. 100% compatible with GitHub pages
