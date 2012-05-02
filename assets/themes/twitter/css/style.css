@@ -74,6 +74,9 @@ body {
 section {
   padding-top: 60px;
 }
+.nobr {
+  white-space: nowrap;
+}
 .subnav {
   width: 100%;
   height: 36px;
