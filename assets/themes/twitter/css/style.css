@@ -215,7 +215,7 @@ section {
 .anatomy-preview .asset {
   background-color: #fff;
   margin: 4px;
-  padding: 2em 4px;
+  padding: 36px 4px;
   text-align: center;
 }
 .anatomy-preview .region {
@@ -224,4 +224,13 @@ section {
 .anatomy-preview .region-title {
   margin: 4px;
   padding: 4px;
+}
+#regions .anatomy-preview .isotope-region .asset.asset-size-s {
+  width: 124px;
+}
+#regions .anatomy-preview .isotope-region .asset.asset-size-m {
+  width: 264px;
+}
+#regions .anatomy-preview .isotope-region .asset.asset-size-l {
+  width: 404px;
 }

@@ -7,12 +7,10 @@
     <meta name="description" content="Creating your own Populr theme is piece of cake, once you get to know the system. This guide will help you learn the fundamentals of theming.">
     <meta name="author" content="Populr.me">
 
-    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <!-- Le styles -->
     <link href="/assets/themes/twitter/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
     <link href="/assets/themes/twitter/bootstrap/css/prettify.css?body=1" rel="stylesheet" type="text/css" media="all">
@@ -20,15 +18,9 @@
     <script src="/assets/themes/twitter/bootstrap/js/jquery-1.7.2.min.js"></script>
     <script src="/assets/themes/twitter/bootstrap/js/bootstrap.min.js"></script>
     <script src="/assets/themes/twitter/bootstrap/js/prettify.js"></script>
+    <script src="/assets/js/jquery.masonry.min.js"></script>
     <script src="/assets/themes/twitter/bootstrap/js/main.js"></script>
 
-    <!-- Le fav and touch icons -->
-  <!-- Update these with your own images
-    <link rel="shortcut icon" href="images/favicon.ico">
-    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
-  -->
   </head>
 
   <body data-spy="scroll" data-target=".subnav" data-offset="50" data-twttr-rendered="true">
@@ -196,10 +188,8 @@
   <p>
     Once you are comfortable with Handlebars.js and LESS, 
     <a class="btn btn-mini btn-primary" href="https://github.com/populr/populr-theme-skeleton/zipball/master"><i class="icon-download-alt"></i> download the Populr Theme Skeleton</a> 
-    to get started with your own theme.
-  </p>
-  <p>Populr themes are simple HTML5 websites with a few special hooks. Let's 
-    look at an simple theme to get a feel for the syntax:</p>
+    to get started with your own theme. Populr themes are simple HTML5 websites 
+    with a few special hooks. Let's look at an simple theme to get a feel for the syntax:</p>
   <h2>Sample Theme <small>index.html</small></h2>
   <pre class="prettyprint linenums lang-html">
 &lt;!doctype html&gt;
@@ -212,7 +202,7 @@
   &lt;script src=&quot;/js/main.js&quot;&gt;&lt;/script&gt;
 &lt;/head&gt;
 &lt;body&gt;
-  &lt;script id=&quot;theme&quot; type=&quot;text/x-handlebars-template&quot;&gt;
+  <span class="nocode pln">&lt;script id=&quot;theme&quot; type=&quot;text/x-handlebars-template&quot;&gt;</span>
     {{{title}}}
     {{#region &quot;isotope&quot; id=&quot;main-region&quot; gutter_width=&quot;20&quot; dummy_content=&quot;I3,T,T,E,D4&quot;}}
       {{#asset &quot;text&quot; size=&quot;m&quot;}}
@@ -247,7 +237,7 @@
         {{{videoplayer contents width=&quot;310&quot; height=&quot;232&quot; resolution=&quot;medium&quot;}}}
       {{/asset}}
     {{/region}}
-  &lt;/script&gt;
+  <span class="nocode pln">&lt;/script&gt;</span>
 &lt;/body&gt;
 &lt;/html&gt;
 </pre>
@@ -348,6 +338,137 @@
 <section id="regions">
   <div class="page-header">
     <h1>Regions</h1>
+  </div>
+  <div class="row-fluid">
+    <div class="span4">
+      <p>
+        Regions are intelligent layout containers for assets. Defining a region 
+        is done by using the <code>{{#region}}</code> 
+        handlebars.js block helper. Every region you define will become an area 
+        users can place assets in the Pop editor.
+      </p>
+    </div>
+    <div class="span8">
+      <div class="tabbable tabs-top">
+        <ul class="nav nav-pills">
+          <li class="active"><a href="#region-code-1-template" data-toggle="tab">Template Code</a></li>
+          <li><a href="#region-code-1-compiled" data-toggle="tab">Compiled Output</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="region-code-1-template">
+            <pre class="prettyprint linenums lang-html">
+{{#region "isotope" id="main-region" gutter_width="20"}}
+{{/region}}</pre>
+          </div>
+          <div class="tab-pane" id="region-code-1-compiled">
+            <pre class="prettyprint linenums lang-handlebars">
+&lt;div class=&quot;region isotope-region&quot; id=&quot;main-region&quot; data-region-type=&quot;isotope&quot; data-region-id=&quot;0&quot;&gt;
+&lt;/div&gt;
+</pre>
+          </div>
+        </div>
+      </div>    
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span6">
+      <h2>Isotope Layout</h2>
+      <p>
+        The Isotope engine packs assets vertically based on the column a user 
+        places them in. In this layout, a user can move an asset's location 
+        between any of the logical columns. The engine then moves all of the 
+        assets in that column up. A gutter separates all of the assets and columns.
+      </p>
+      <h3>Helper</h3>
+        <pre class="prettyprint linenums lang-html">
+{{#region "isotope" id="main-region" column_width="120" gutter_width="10"}}
+{{/region}}</pre>
+      <h3>Engine-Specific Options</h3>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Usage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>column_width</code></td>
+            <td>The width of the smallest asset size</td>
+          </tr>
+          <tr>
+            <td><code>gutter_width</code></td>
+            <td>The amount of space between assets</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="span6">
+      <div class="anatomy-preview">
+        <div class="well">
+          <div class="region isotope-region" style="text-align: center;">
+            <div class="asset asset-size-s" style="padding: 134px 4px;">asset</div>
+            <div class="asset asset-size-s">asset</div>
+            <div class="asset asset-size-s">asset</div>
+            <div class="asset asset-size-s">asset</div>
+            <div class="asset asset-size-s">asset</div>
+            <div class="asset asset-size-m">asset</div>
+            <div class="asset asset-size-l">asset</div>
+            <div class="asset asset-size-s">asset</div>
+            <div class="asset asset-size-s">asset</div>
+            <div class="asset asset-size-s">asset</div>
+          </div>
+        </div>
+        <script>
+          $(document).ready(function(){
+            $('#regions .anatomy-preview .isotope-region').masonry({
+              itemSelector: '.asset',
+              columnWidth: 140
+            });  
+          });
+        </script>
+      </div>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span6">
+      <h2>Columnizer Layout</h2>
+      <p>
+        The Columnizer engine arranges assets in columns and rows. As a user adds 
+        assets to a row, the engine will push on new columns and resize existing 
+        columns to fit the width of the row. As the themer, you define the maximum 
+        number of columns per row.
+      </p>
+      <h3>Helper</h3>
+        <pre class="prettyprint linenums lang-html">
+{{#region "columnizer" id="main-region" max_cols="3"}}
+{{/region}}</pre>
+    </div>
+    <div class="span6">
+      <div class="anatomy-preview">
+        <div class="well">
+          <div class="region" style="text-align: center;">
+            <strong>One Asset</strong>
+            <div class="row-fluid">
+              <div class="span12"><div class="asset">asset</div></div>
+            </div>
+            <hr />
+            <strong>Two Assets</strong>
+            <div class="row-fluid">
+              <div class="span6"><div class="asset">asset</div></div>
+              <div class="span6"><div class="asset">asset</div></div>
+            </div>
+            <hr />
+            <strong>Three Assets</strong>
+            <div class="row-fluid">
+              <div class="span4"><div class="asset">asset</div></div>
+              <div class="span4"><div class="asset">asset</div></div>
+              <div class="span4"><div class="asset">asset</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
   </div>
