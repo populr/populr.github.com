@@ -1,18 +1,3 @@
-GIT
-  remote: git://github.com/jscheel/jekyll-ultraviolet.git
-  revision: 2160fba6805a258aafdc31dbd37ff98e8bdf1f92
-  specs:
-    jekyll-ultraviolet (0.0.3)
-      liquid
-      ultraviolet
-
-GIT
-  remote: git://github.com/wycats/ultraviolet.git
-  revision: 8603d41ba99681248cac6cea6e0744b702a8d300
-  specs:
-    ultraviolet (0.10.5)
-      spox-textpow
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -41,9 +26,6 @@ GEM
     maruku (0.6.0)
       syntax (>= 1.0.0)
     posix-spawn (0.3.6)
-    spox-plist (3.0.1)
-    spox-textpow (0.10.3)
-      spox-plist
     syntax (1.0.0)
     therubyracer (0.10.1)
       libv8 (~> 3.3.10)
@@ -54,6 +36,4 @@ PLATFORMS
 DEPENDENCIES
   jekyll
   jekyll-less
-  jekyll-ultraviolet!
   therubyracer
-  ultraviolet!
