@@ -279,7 +279,7 @@ group: navigation
   </div>
   <div class="row-fluid">
     <div class="span6">
-      <h2>Isotope Layout</h2>
+      <h2>Isotope Engine</h2>
       <p>
         The Isotope engine packs assets vertically based on the column a user 
         places them in. In this layout, a user can move an asset's location 
@@ -339,7 +339,7 @@ group: navigation
   </div>
   <div class="row-fluid">
     <div class="span6">
-      <h2>Columnizer Layout</h2>
+      <h2>Columnizer Engine</h2>
       <p>
         The Columnizer engine arranges assets in columns and rows. As a user adds 
         assets to a row, the engine will push on new columns and resize existing 
@@ -350,6 +350,21 @@ group: navigation
         <pre class="prettyprint linenums lang-html">{% raw %}
 {{#region "columnizer" id="main-region" max_cols="3"}}
 {{/region}}{% endraw %}</pre>
+      <h3>Engine-Specific Options</h3>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Usage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>max_cols</code></td>
+            <td>Maximum number of assets in a row</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
     <div class="span6">
       <div class="anatomy-preview">
