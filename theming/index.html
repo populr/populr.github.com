@@ -14,6 +14,7 @@ group: navigation
     <li><a href="#theme-skeleton">The Theme Skeleton</a></li>
     <li><a href="#anatomy-of-a-theme">Anatomy of a Theme</a></li>
     <li><a href="#regions">Regions</a></li>
+    <li><a href="#assets">Assets</a></li>
   </ul>
 </div>
 <section id="getting-started">
@@ -252,7 +253,8 @@ group: navigation
         Regions are intelligent layout containers for assets. Defining a region 
         is done by using the <code>{% raw %}{{#region}}{% endraw %}</code> 
         handlebars.js block helper. Every region you define will become an area 
-        users can place assets in the Pop editor.
+        users can place assets in the Pop editor. Regions are rendered as html5 
+        <code>section</code> elements.
       </p>
     </div>
     <div class="span8">
@@ -269,17 +271,55 @@ group: navigation
           </div>
           <div class="tab-pane" id="region-code-1-compiled">
             <pre class="prettyprint linenums lang-handlebars">{% raw %}
-&lt;div class=&quot;region isotope-region&quot; id=&quot;main-region&quot; data-region-type=&quot;isotope&quot; data-region-id=&quot;0&quot;&gt;
-&lt;/div&gt;
-{% endraw %}</pre>
+&lt;section class=&quot;region isotope-region&quot; id=&quot;main-region&quot; 
+         data-region-type=&quot;isotope&quot; data-region-id=&quot;0&quot;&gt;&lt;/section&gt;{% endraw %}</pre>
           </div>
         </div>
       </div>    
     </div>
   </div>
   <div class="row-fluid">
+    <div class="span12">
+      <p>
+        There are a few settings that every region should have.
+      </p>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Usage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>id</code></td>
+            <td>The id of the region</td>
+          </tr>
+          <tr>
+            <td><code>max_auto_assets</code></td>
+            <td>
+              <p>
+                The maximum number of assets Populr will automatically place in 
+                this region when a user switches to your theme. When automatically 
+                placing assets, Populr will work through your regions in source 
+                order. If it finds a region that doesn't define 
+                <code>max_auto_assets</code>, or if the value is <code>0</code>, 
+                it will add all of the remaining assets to that region. 
+              </p>
+              <p>
+                <span class="label label-info">Heads up!</span> You should always 
+                have at least one region available as a catch-all for any remaining 
+                assets. <span class="muted">This setting is optional.</span>
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row-fluid">
     <div class="span6">
-      <h2>Isotope Engine</h2>
+      <h2>Isotope Layout Engine</h2>
       <p>
         The Isotope engine packs assets vertically based on the column a user 
         places them in. In this layout, a user can move an asset's location 
@@ -290,7 +330,7 @@ group: navigation
         <pre class="prettyprint linenums lang-html">{% raw %}
 {{#region "isotope" id="main-region" column_width="120" gutter_width="10"}}
 {{/region}}{% endraw %}</pre>
-      <h3>Engine-Specific Options</h3>
+      <h3>Engine-Specific Settings</h3>
       <table class="table table-bordered table-striped">
         <thead>
           <tr>
@@ -301,14 +341,42 @@ group: navigation
         <tbody>
           <tr>
             <td><code>column_width</code></td>
-            <td>The width of the smallest asset size</td>
+            <td>
+              <p>The width of the smallest asset size</p>
+              <p><strong>Example:</strong> <code>column_width="300"</code></p>
+            </td>
           </tr>
           <tr>
             <td><code>gutter_width</code></td>
-            <td>The amount of space between assets</td>
+            <td>
+              <p>The amount of space between assets</p>
+              <p><strong>Example:</strong> <code>gutter_width="20"</code></p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>sizes</code></td>
+            <td>
+              <p>
+                The asset sizes available. Must be a <em>comma-delimited</em> 
+                list and can contain one or more of the following sizes:
+              </p>
+              <ul>
+                <li><code>s</code> (small)</li>
+                <li><code>m</code> (medium)</li>
+                <li><code>l</code> (large)</li>
+              </ul>
+              <p><strong>Example:</strong> <code>sizes="s,m,l"</code></p>
+            </td>
           </tr>
         </tbody>
       </table>
+      <h3>Asset Sizing</h3>
+      <p>
+        Asset sizes are determined by the user in isotope regions. There are three 
+        sizes that a user can select: <code>s, m, or l</code>. You must define 
+        the available sizes in the <code>sizes</code> setting on the region 
+        block helper.
+      </p>
     </div>
     <div class="span6">
       <div class="anatomy-preview">
@@ -337,9 +405,10 @@ group: navigation
       </div>
     </div>
   </div>
+  <hr>
   <div class="row-fluid">
     <div class="span6">
-      <h2>Columnizer Engine</h2>
+      <h2>Columnizer Layout Engine</h2>
       <p>
         The Columnizer engine arranges assets in columns and rows. As a user adds 
         assets to a row, the engine will push on new columns and resize existing 
@@ -347,10 +416,10 @@ group: navigation
         number of columns per row.
       </p>
       <h3>Helper</h3>
-        <pre class="prettyprint linenums lang-html">{% raw %}
+      <pre class="prettyprint linenums lang-html">{% raw %}
 {{#region "columnizer" id="main-region" max_cols="3"}}
 {{/region}}{% endraw %}</pre>
-      <h3>Engine-Specific Options</h3>
+      <h3>Engine-Specific Settings</h3>
       <table class="table table-bordered table-striped">
         <thead>
           <tr>
@@ -361,10 +430,22 @@ group: navigation
         <tbody>
           <tr>
             <td><code>max_cols</code></td>
-            <td>Maximum number of assets in a row</td>
+            <td>
+              <p>The maximum number of columns (assets) in a row</p>
+              <p><strong>Example:</strong> <code>max_cols="3"</code></p>
+            </td>
           </tr>
         </tbody>
       </table>
+      <h3>Asset Sizing</h3>
+      <p>
+        Asset sizes are determined by the number of columns in the columnizer 
+        region. As the number of columns change, so does each asset size in the 
+        row. For example, if you have one asset in a row, then that asset's size 
+        is <code>1</code> and it's class will be <code>asset-size-1</code>. If 
+        you have two assets in a row, each asset receives a size of <code>2</code> 
+        and their classes will be <code>asset-size-2</code>.
+      </p>
     </div>
     <div class="span6">
       <div class="anatomy-preview">
@@ -389,6 +470,93 @@ group: navigation
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="assets">
+  <div class="page-header">
+    <h1>Assets</h1>
+  </div>
+  <div class="row-fluid">
+    <div class="span4">
+      <p>
+        Assets are the actual content a user places in Pop. Each type of asset 
+        has unique properties that you can access when creating your theme. 
+        Defining an asset is done by using the <code>{% raw %}{{#asset}}{% endraw %}</code> 
+        handlebars.js block helper. Assets are rendered as <code>div</code> elements.
+      </p>
+    </div>
+    <div class="span8">
+      <div class="tabbable tabs-top">
+        <ul class="nav nav-pills">
+          <li class="active"><a href="#asset-code-1-template" data-toggle="tab">Template Code</a></li>
+          <li><a href="#asset-code-1-compiled" data-toggle="tab">Compiled Output</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="asset-code-1-template">
+            <pre class="prettyprint linenums lang-html">{% raw %}
+{{#asset "text" size="m"}}
+  &lt;div class=&quot;title-wrapper&quot;&gt;
+    {{{title}}}
+  &lt;/div&gt;
+  &lt;div class=&quot;content-wrapper&quot;&gt;
+    {{{contents}}}
+  &lt;/div&gt;
+{{/asset}}{% endraw %}</pre>
+          </div>
+          <div class="tab-pane" id="asset-code-1-compiled">
+            <pre class="prettyprint linenums lang-handlebars">{% raw %}
+&lt;div class=&quot;asset asset-type-text asset-size-m&quot; data-region-id=&quot;0&quot;&gt;
+  &lt;div class=&quot;asset-inner&quot;&gt;
+    &lt;div class=&quot;title-wrapper&quot;&gt;
+      &lt;h2 class=&quot;title&quot;&gt;Aenean Commodo Ligula&lt;/h2&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;content-wrapper&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+        &lt;p&gt;Lorem ipsum dolor sit amet, consectetuer adipiscing elit.&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;{% endraw %}</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span12">
+      <p>
+        <span class="label label-info">Heads Up</span> Asset templates 
+        <em>must</em> be nested inside of region definitions, and you 
+        <em>must</em> define asset templates for every asset type and every 
+        available asset size in each region.
+      </p>
+      <p>
+        There are a few settings that every asset template should have.
+      </p>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Usage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>size</code></td>
+            <td>The size this asset template is associated with.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="span12">
+      <div class="span6">
+        <h2>Text Asset Type</h2>
+        <p>
+          The text asset type is the most basic asset in Populr. It allows the 
+          user to enter a title and body content.
+        </p>
       </div>
     </div>
   </div>
