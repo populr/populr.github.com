@@ -6,6 +6,16 @@ Create and chmod a+x a post-commit hook with the code:
 
     #!/usr/bin/env bash
 
+    exec < /dev/tty
+    while true; do
+        read -p "Do you wish to publish this commit to the live docs site? (y or n) " yn
+        case $yn in
+            [Yy]* ) make install; break;;
+            [Nn]* ) exit;;
+            * ) echo "Please answer y or n.";;
+        esac
+    done
+
     # executables prefix
     _prefix="/usr/bin"
     # git executable
@@ -46,7 +56,6 @@ Create and chmod a+x a post-commit hook with the code:
         # return
         "$_git" checkout "$_origbranch"
     fi
-
 
 
 # Jekyll-Bootstrap
