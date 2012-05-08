@@ -550,14 +550,150 @@ group: navigation
         </tbody>
       </table>
     </div>
+  </div>
+  <hr>
+  <h2>Text Asset Type</h2>
+  <div class="row-fluid">
     <div class="span12">
-      <div class="span6">
-        <h2>Text Asset Type</h2>
-        <p>
-          The text asset type is the most basic asset in Populr. It allows the 
-          user to enter a title and body content.
-        </p>
-      </div>
+      <p>
+        The <code>text</code> asset type is the most basic asset in Populr. It 
+        allows the user to enter a title and body content.
+      </p>
+      <h3>Template Variables</h3>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Variable</th>
+            <th>Description</th>
+            <th>Contents</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>{% raw %}{{{title}}}{% endraw %}</code></td>
+            <td>Title of the asset</td>
+            <td>
+              <code class="prettyprint lang-html">
+                &lt;h2 class=&quot;title&quot;&gt;Lorem Ipsum&lt;/h2&gt;
+              </code>
+            </td>
+          </tr>
+          <tr>
+            <td><code>{% raw %}{{{body}}}{% endraw %}</code></td>
+            <td>Body content of the asset</td>
+            <td>
+              <code class="prettyprint lang-html">
+                &lt;div class=&quot;body content&quot;&gt;&lt;p&gt;Lorem ipsum dolor sit amet.&lt;/p&gt;&lt;/div&gt;
+              </code>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <hr>
+  <h2>ImageGroup Asset Type</h2>
+  <div class="row-fluid">
+    <div class="span12">
+      <p>
+        The <code>imagegroup</code> asset type is a container for one or more 
+        images selected by the user.
+      </p>
+      <h3>Template Variables</h3>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Variable</th>
+            <th>Description</th>
+            <th>Contents</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>{% raw %}{{{title}}}{% endraw %}</code></td>
+            <td>Title of the asset</td>
+            <td>
+              <code class="prettyprint lang-html">
+                &lt;h2 class=&quot;title&quot;&gt;Lorem Ipsum&lt;/h2&gt;
+              </code>
+            </td>
+          </tr>
+          <tr>
+            <td><code>{% raw %}{{{description}}}{% endraw %}</code></td>
+            <td>Description content of the asset</td>
+            <td>
+              <code class="prettyprint lang-html">
+                &lt;div class=&quot;description content&quot;&gt;&lt;p&gt;Lorem ipsum dolor sit amet.&lt;/p&gt;&lt;/div&gt;
+              </code>
+            </td>
+          </tr>
+          <tr>
+            <td><code>{% raw %}{{{contents}}}{% endraw %}</code></td>
+            <td>
+              Array of images in the <code>imagegroup</code>. You must further 
+              parse this variable in your template.
+            </td>
+            <td>
+              <code class="prettyprint lang-html">
+                &lt;h2 class=&quot;title&quot;&gt;Lorem Ipsum&lt;/h2&gt;
+              </code>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Templating {% raw %}{{{contents}}}{% endraw %}</h3>
+      <p>
+        The <code>{% raw %}{{{contents}}}{% endraw %}</code> variable is an 
+        array of individual images. You must use a helper to either loop through 
+        each item in the contents, or access a specific image in the array.
+      </p>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Variable</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>{% raw %}{{{title}}}{% endraw %}</code></td>
+            <td>Title of the image</td>
+          </tr>
+          <tr>
+            <td><code>{% raw %}{{{description}}}{% endraw %}</code></td>
+            <td>Description of the image</td>
+          </tr>
+          <tr>
+            <td><code>{% raw %}{{{original_url}}}{% endraw %}</code></td>
+            <td>
+              URL to image. <span class="label label-info">Heads Up</span> You 
+              should almost always pass this value into the 
+              <a href="#helpers">resize helper</a>.
+            </td>
+          </tr>
+          <tr>
+            <td><code>{% raw %}{{{width}}}{% endraw %}</code></td>
+            <td>Original image width</td>
+          </tr>
+          <tr>
+            <td><code>{% raw %}{{{height}}}{% endraw %}</code></td>
+            <td>Original image height</td>
+          </tr>
+          <tr>
+            <td><code>{% raw %}{{{source_file_name}}}{% endraw %}</code></td>
+            <td>Original filename</td>
+          </tr>
+          <tr>
+            <td><code>{% raw %}{{{source_file_size}}}{% endraw %}</code></td>
+            <td>Original filesize</td>
+          </tr>
+          <tr>
+            <td><code>{% raw %}{{{description}}}{% endraw %}</code></td>
+            <td>Description of the image</td>
+          </tr>
+        </tbody>
+        <!-- TODO: add info about palettes -->
+      </table>
     </div>
   </div>
 </section>
