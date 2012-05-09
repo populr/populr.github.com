@@ -10,7 +10,7 @@ Create and chmod a+x a post-commit hook with the code:
     while true; do
         read -p "Do you wish to publish this commit to the live docs site? (y or n) " yn
         case $yn in
-            [Yy]* ) make install; break;;
+            [Yy]* ) break;;
             [Nn]* ) exit;;
             * ) echo "Please answer y or n.";;
         esac
