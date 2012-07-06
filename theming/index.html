@@ -18,7 +18,7 @@ group: navigation
       <ul class="dropdown-menu">
         <li><a href="#regions">Regions Overview</a></li>
         <li class="divider"></li>
-        <li><a href="#isotope-regions">Isotope Layout Engine</a></li>
+        <li><a href="#packer-regions">Packer Layout Engine</a></li>
         <li><a href="#columnizer-regions">Columnizer Layout Engine</a></li>
       </ul>
     </li>
@@ -147,7 +147,7 @@ group: navigation
 &lt;body&gt;
   <span class="nocode pln">&lt;script id=&quot;theme&quot; type=&quot;text/x-handlebars-template&quot;&gt;</span>
     {{{title}}}
-    {{#region &quot;isotope&quot; id=&quot;main-region&quot; gutter_width=&quot;20&quot; dummy_content=&quot;I3,T,T,E,D4&quot;}}
+    {{#region &quot;packer&quot; id=&quot;main-region&quot; gutter_width=&quot;20&quot; dummy_content=&quot;I3,T,T,E,D4&quot;}}
       {{#asset &quot;text&quot; size=&quot;m&quot;}}
         &lt;h3&gt;{{title}}&lt;/h3&gt;
         &lt;div class=&quot;content&quot;&gt;
@@ -201,7 +201,7 @@ group: navigation
       </p>
       <ul>
         <li>Columnizer</li>
-        <li>Isotope</li>
+        <li>Packer</li>
       </ul>
     </div>
     <div class="span6">
@@ -301,13 +301,13 @@ group: navigation
         <div class="tab-content">
           <div class="tab-pane active" id="region-code-1-template">
             <pre class="prettyprint linenums language-html">{% raw %}
-{{#region "isotope" id="main-region" gutter_width="20"}}
+{{#region "packer" id="main-region" gutter_width="20"}}
 {{/region}}{% endraw %}</pre>
           </div>
           <div class="tab-pane" id="region-code-1-compiled">
             <pre class="prettyprint linenums language-html">{% raw %}
-&lt;section class=&quot;region isotope-region&quot; id=&quot;main-region&quot; 
-         data-region-type=&quot;isotope&quot; data-region-id=&quot;0&quot;&gt;&lt;/section&gt;{% endraw %}</pre>
+&lt;section class=&quot;region packer-region&quot; id=&quot;main-region&quot; 
+         data-region-type=&quot;packer&quot; data-region-id=&quot;0&quot;&gt;&lt;/section&gt;{% endraw %}</pre>
           </div>
         </div>
       </div>    
@@ -352,19 +352,19 @@ group: navigation
       </table>
     </div>
   </div>
-  <section id="isotope-regions">
+  <section id="packer-regions">
     <div class="row-fluid">
       <div class="span6">
-        <h2>Isotope Layout Engine</h2>
+        <h2>Packer Layout Engine</h2>
         <p>
-          The Isotope engine packs assets vertically based on the column a user 
+          The Packer engine packs assets vertically based on the column a user 
           places them in. In this layout, a user can move an asset's location 
           between any of the logical columns. The engine then moves all of the 
           assets in that column up. A gutter separates all of the assets and columns.
         </p>
         <h3>Helper</h3>
           <pre class="prettyprint linenums language-html">{% raw %}
-  {{#region "isotope" id="main-region" column_width="120" gutter_width="10"}}
+  {{#region "packer" id="main-region" column_width="120" gutter_width="10"}}
   {{/region}}{% endraw %}</pre>
         <h3>Engine-Specific Settings</h3>
         <table class="table table-bordered table-striped">
@@ -408,7 +408,7 @@ group: navigation
         </table>
         <h3>Asset Sizing</h3>
         <p>
-          Asset sizes are determined by the user in isotope regions. There are three 
+          Asset sizes are determined by the user in packer regions. There are three 
           sizes that a user can select: <code>s, m, or l</code>. You must define 
           the available sizes in the <code>sizes</code> setting on the region 
           block helper.
@@ -417,7 +417,7 @@ group: navigation
       <div class="span6">
         <div class="anatomy-preview">
           <div class="well">
-            <div class="region isotope-region" style="text-align: center;">
+            <div class="region packer-region" style="text-align: center;">
               <div class="asset asset-size-s" style="padding: 134px 4px;">asset</div>
               <div class="asset asset-size-s">asset</div>
               <div class="asset asset-size-s">asset</div>
@@ -432,7 +432,7 @@ group: navigation
           </div>
           <script>
             $(document).ready(function(){
-              $('#regions .anatomy-preview .isotope-region').masonry({
+              $('#regions .anatomy-preview .packer-region').masonry({
                 itemSelector: '.asset',
                 columnWidth: 140
               });  
