@@ -225,12 +225,12 @@ section {
   margin: 4px;
   padding: 4px;
 }
-#regions .anatomy-preview .isotope-region .asset.asset-size-s {
+#regions .anatomy-preview .packer-region .asset.asset-size-s {
   width: 124px;
 }
-#regions .anatomy-preview .isotope-region .asset.asset-size-m {
+#regions .anatomy-preview .packer-region .asset.asset-size-m {
   width: 264px;
 }
-#regions .anatomy-preview .isotope-region .asset.asset-size-l {
+#regions .anatomy-preview .packer-region .asset.asset-size-l {
   width: 404px;
 }
