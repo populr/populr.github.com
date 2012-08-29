@@ -73,7 +73,7 @@ group: navigation
         With this, you can define every piece of stucture and content you will 
         use in creating your theme.
       </p>
-      <h3>Example Asset Template <small>(don't worry about the sytax right now)</small></h3>
+      <h3>Example Asset Template <small>(don't worry about the syntax right now)</small></h3>
       <pre class="prettyprint linenums language-html">{% raw %}
 {{#asset &quot;text&quot; size=&quot;2&quot;}}
 &lt;h3 class=&quot;asset-title&quot;&gt;{{{title}}}&lt;/h3&gt;
@@ -114,10 +114,16 @@ group: navigation
             <li><a href="https://github.com/populr/populr-theme-skeleton"><i class="icon-globe"></i> View on Github</a></li>
           </ul>
         </div>
-        <hr />
         <p>
           The theme skeleton contains everything you need to get started with 
           your new theme.
+        </p>
+        <hr />
+        <a class="btn btn-large btn-primary" href="https://github.com/populr/themes">
+          <i class="icon-eye-open icon-white"></i> See Theme Source Code
+        </a>
+        <p style="margin-top: 5px;">
+          See the code for all of our themes on GitHub and find out how we work our magic.
         </p>
       </div>
     </div>
@@ -129,9 +135,9 @@ group: navigation
   </div>
   <p>
     Once you are comfortable with Handlebars.js and LESS, 
-    <a class="btn btn-mini btn-primary" href="https://github.com/populr/populr-theme-skeleton/zipball/master"><i class="icon-download-alt"></i> download the Populr Theme Skeleton</a> 
+    <a class="btn btn-mini btn-primary" href="https://github.com/populr/populr-theme-skeleton/zipball/master"><i class="icon-download-alt icon-white"></i> download the Populr Theme Skeleton</a> 
     to get started with your own theme. Populr themes are simple HTML5 websites 
-    with a few special hooks. Let's look at an simple theme to get a feel for the syntax:</p>
+    with a few special hooks. Let's look at a simple theme to get a feel for the syntax:</p>
   <h2>Sample Theme <small>index.html</small></h2>
   <pre class="prettyprint linenums language-html">{% raw %}
 &lt;!doctype html&gt;
@@ -144,18 +150,18 @@ group: navigation
   &lt;script src=&quot;/js/main.js&quot;&gt;&lt;/script&gt;
 &lt;/head&gt;
 &lt;body&gt;
-  <span class="nocode pln">&lt;script id=&quot;theme&quot; type=&quot;text/x-handlebars-template&quot;&gt;</span>
+  &lt;span class=&quot;nocode pln&quot;&gt;&lt;script id=&quot;theme&quot; type=&quot;text/x-handlebars-template&quot;&gt;&lt;/span&gt;
     {{{title}}}
-    {{#region &quot;packer&quot; id=&quot;main-region&quot; gutter_width=&quot;20&quot; dummy_content=&quot;I3,T,T,E,D4&quot;}}
+    {{#region &quot;packer&quot; id=&quot;main-region&quot; columns=&quot;1&quot; gutter_width=&quot;20&quot; max_auto_assets=&quot;0&quot; sizes=&quot;m&quot; default_size=&quot;m&quot; dummy_content=&quot;I-3-m,T-1-m,T-2-m,E-1-m,D-4-m&quot;}}
       {{#asset &quot;text&quot; size=&quot;m&quot;}}
-        &lt;h3&gt;{{title}}&lt;/h3&gt;
+        {{{title}}}
         &lt;div class=&quot;content&quot;&gt;
           {{{body}}}
         &lt;/div&gt;
       {{/asset}}
 
       {{#asset &quot;documentgroup&quot; size=&quot;m&quot;}}
-        &lt;h3&gt;{{title}}&lt;/h3&gt;
+        {{{title}}}
         &lt;div class=&quot;content&quot;&gt;
           &lt;ul&gt;
           {{#documents}}
@@ -163,23 +169,36 @@ group: navigation
           {{/documents}}
           &lt;/ul&gt;
         &lt;/div&gt;
+        {{{description}}}
       {{/asset}}
 
-      {{#asset &quot;embedgroup&quot; size=&quot;m&quot;}}
-        {{#embeds}}
-          &lt;div class=&quot;embed&quot;&gt;{{{html}}}&lt;/div&gt;
-        {{/embeds}}
+      {{#asset &quot;embedgroup&quot; size=&quot;m&quot; width=&quot;310&quot;}}
+        {{{title}}}
+        &lt;div class=&quot;content&quot;&gt;
+          {{#embeds}}
+            &lt;div class=&quot;embed&quot;&gt;{{{html}}}&lt;/div&gt;
+          {{/embeds}}
+        &lt;/div&gt;
+        {{{description}}}
       {{/asset}}
 
       {{#asset &quot;imagegroup&quot; size=&quot;m&quot;}}
-        {{{imageslider contents width=&quot;310&quot; height=&quot;232&quot;}}}
+        {{{title}}}
+          &lt;div class=&quot;content&quot;&gt;
+            {{{imageslider contents width=&quot;310&quot; height=&quot;232&quot;}}}
+          &lt;/div&gt;
+        {{{description}}}
       {{/asset}}
 
       {{#asset &quot;videogroup&quot; size=&quot;m&quot;}}
-        {{{videoplayer contents width=&quot;310&quot; height=&quot;232&quot; resolution=&quot;medium&quot;}}}
+        {{{title}}}
+          &lt;div class=&quot;content&quot;&gt;
+            {{{videoplayer contents width=&quot;310&quot; height=&quot;232&quot; resolution=&quot;medium&quot;}}}
+          &lt;/div&gt;
+        {{{description}}}
       {{/asset}}
     {{/region}}
-  <span class="nocode pln">&lt;/script&gt;</span>
+  &lt;span class=&quot;nocode pln&quot;&gt;&lt;/script&gt;&lt;/span&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 {% endraw %}</pre>
@@ -206,8 +225,7 @@ group: navigation
     <div class="span6">
       <h3>Assets</h3>
       <p>
-        Assets are the heart of Populr. Each item of content in a Pop is one of 
-        five asset types:
+        Assets are the heart of Populr. Each item of content a user adds to a pop is one of five asset types:
       </p>
       <ul>
         <li>Text</li>
@@ -284,14 +302,16 @@ group: navigation
   <div class="row-fluid">
     <div class="span4">
       <p>
-        Regions are intelligent layout containers for assets. Defining a region 
-        is done by using the <code>{% raw %}{{#region}}{% endraw %}</code> 
-        handlebars.js block helper. Every region you define will become an area 
-        users can place assets in the Pop editor. Regions are rendered as html5 
+        Regions are intelligent layout containers for assets. Every region you define will become an area users can place assets in the Pop editor.
+      </p>
+      <p>
+        Regions are defined with the <code>{% raw %}{{#region}}{% endraw %}</code> 
+        Handlebars.js block helper. They are rendered as HTML5 
         <code>section</code> elements.
       </p>
     </div>
-    <div class="span8">
+<!--     <div class="span1">&nbsp;</div>
+ -->    <div class="span8">
       <div class="tabbable tabs-top">
         <ul class="nav nav-pills">
           <li class="active"><a href="#region-code-1-template" data-toggle="tab">Template Code</a></li>
@@ -341,9 +361,8 @@ group: navigation
                 it will add all of the remaining assets to that region. 
               </p>
               <p>
-                <span class="label label-info">Heads up!</span> You should always 
-                have at least one region available as a catch-all for any remaining 
-                assets. <span class="muted">This setting is optional.</span>
+                <span class="label label-info">Heads up!</span> Every theme should have at least one region set up with <code>max_auto_assets="0"</code> to act as a catch-all for any remaining 
+                assets. <span class="muted">This setting is optional, though highly recommended.</span>
               </p>
             </td>
           </tr>
@@ -521,7 +540,7 @@ group: navigation
         Assets are the actual content a user places in Pop. Each type of asset 
         has unique properties that you can access when creating your theme. 
         Defining an asset is done by using the <code>{% raw %}{{#asset}}{% endraw %}</code> 
-        handlebars.js block helper. Assets are rendered as <code>div</code> elements.
+        Handlebars.js block helper. Assets are rendered as <code>div</code> elements.
       </p>
     </div>
     <div class="span8">
@@ -1090,7 +1109,7 @@ group: navigation
           <div class="tab-content">
             <div class="tab-pane active" id="asset-code-5-template">
               <pre class="prettyprint linenums language-html">{% raw %}
-{{#asset "embedgroup" size="m"}}
+{{#asset "embedgroup" size="m" width="640"}}
   {{{title}}}
   &lt;div class=&quot;embeds&quot;&gt;
   {{#embeds}}
@@ -1122,6 +1141,9 @@ group: navigation
 
     <div class="row-fluid">
       <div class="span12">
+        <p>
+          <span class="label label-info">Heads up!</span> Note that embeds are the only asset type for which the widths have to be specified in the <code>{% raw %}{{#asset}}{% endraw %}</code> block helper.
+        </p>
         <h3>Template Variables</h3>
         <table class="table table-bordered table-striped">
           <thead>
@@ -1210,7 +1232,7 @@ group: navigation
   <div class="row-fluid">
     <div class="span12">
       <p>
-        Populr provides several addition Handlebars.js helpers which will assist 
+        Populr provides several additional Handlebars.js helpers which will assist 
         you in creating your theme.
       </p>
     </div>
