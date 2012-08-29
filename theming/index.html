@@ -61,32 +61,35 @@ group: navigation
         reading intrepid explorer!
       </p>
       <p>
-        A Populr theme, like any (good) html/css breakdown, is separated into two 
+        A Populr theme, like any (good) HTML/CSS breakdown, is separated into two 
         layers &mdash; first semantic structure / content, and second, style.
       </p>
       <h2>Structure / Content</h2>
       <p>
         A theme's structure is built in <a href="http://handlebarsjs.com" title="Handlebars">Handlebars.js</a>, 
-        a javascript-based templating language. Although it may appear 
-        overwhelming at first, a handlebars template is simply centered around 
+        a Javascript-based templating language. Although it may appear 
+        overwhelming at first, a Handlebars.js template is simply centered around 
         one basic construct: the curly-brace <code>{% raw %}{ }{% endraw %}</code>. 
         With this, you can define every piece of stucture and content you will 
-        use in creating your theme.
+        use in creating your theme. The Handlebars.js elements of the asset return HTML, so they can be wrapped in <code>div</code> tags to apply styling.
       </p>
       <h3>Example Asset Template <small>(don't worry about the syntax right now)</small></h3>
       <pre class="prettyprint linenums language-html">{% raw %}
 {{#asset &quot;text&quot; size=&quot;2&quot;}}
-&lt;h3 class=&quot;asset-title&quot;&gt;{{{title}}}&lt;/h3&gt;
+&lt;div class=&quot;asset-title&quot;&gt;{{{title}}}&lt;/div&gt;
 &lt;div class=&quot;content&quot;&gt;
   {{{body}}}
 &lt;/div&gt;
 {{/asset}}{% endraw %}</pre>
+      <p>
+        Asset templates are comprised of 3 parts: a title, the content, and a description. (Text assets like the one shown above generally don't include a description, since the content is a block of text.) The content is the only mandatory component of the template; titles and descriptions are optional. These parts can be appear in any order within the asset template.
+      </p>
       <h2>Style</h2>
       <p>
         Stylesheets are built in <a href="http://lesscss.org/" title="LESS: The dynamic stylesheet language">LESS</a> 
-        css. If you are comfortable with css, you will be comfortable with LESS. 
+        CSS. If you are comfortable with CSS, you will be comfortable with LESS. 
         Populr uses LESS variables to allow users to change various settings in 
-        the Pop. Refer to the <code>header.less</code> file in the theme skeleton 
+        the Pop. Refer to the <code>variables.less</code> file in the theme skeleton 
         for more information.
       </p>
       <div class="alert alert-info">
@@ -95,7 +98,7 @@ group: navigation
           familiarize yourself with Handlebars.js and LESS before continuing, 
           you <strong>will</strong> have a difficult journey ahead. Seriously, 
           read up on these two technologies or we will be forced to flip a table 
-          &nbsp; <span class="nobr">(╯°□°）╯︵ ┻━┻</span> &nbsp; You don't want us to 
+          &nbsp; <span class="nobr">(╯°□°）╯︵┻━┻</span> &nbsp; You don't want us to 
           do that, do you?
         </p>
       </div>
@@ -207,12 +210,12 @@ group: navigation
   <div class="page-header">
     <h1>Anatomy of a Theme</h1>
   </div>
-  <p>A Populr theme is divided up into two main sections:</p>
-  <div class="row">
+  <div class="row anatomy-preview">
     <div class="span6">
+      <p>A Populr theme is basically made up of two things: regions and assets.</p>
       <h3>Regions</h3>
       <p>
-        At it's core, a region is simply a container for assets. The magic happens 
+        At its core, a region is simply a container for assets. The magic happens 
         when defining what type of <strong>layout engine</strong> a region uses 
         to display those assets. We'll talk more about this in a bit. The two 
         layout engines currently available are:
@@ -221,8 +224,6 @@ group: navigation
         <li>Columnizer</li>
         <li>Packer</li>
       </ul>
-    </div>
-    <div class="span6">
       <h3>Assets</h3>
       <p>
         Assets are the heart of Populr. Each item of content a user adds to a pop is one of five asset types:
@@ -239,14 +240,14 @@ group: navigation
         the region it resides in, as well as the size selected for the asset.
       </p>
     </div>
-  </div>
-  <div class="row anatomy-preview">
-    <div class="span12">
-      <h3>Structure</h3>
+    <div class="span6">
+      <h3>Sample Pop Layout</h3>
       <div class="well">
-        <div class="row-fluid">
-          <div class="span12">
-            <strong>Pop Title</strong>
+        <div class="row-fluid" style="margin-bottom:10px;">
+          <div class="span12 region">
+            <div class="row-fluid">
+              <div class="span12"><h4 class="region-title"><strong>Pop Title</strong></h4></div>
+            </div>
           </div>
         </div>
         <div class="row-fluid">
@@ -255,13 +256,10 @@ group: navigation
               <div class="span12"><h4 class="region-title"><strong>Region</strong></h4></div>
             </div>
             <div class="row-fluid">
-              <div class="span12"><div class="asset"><strong>asset</strong></div></div>
+              <div class="span12"><div class="asset">Asset</div></div>
             </div>
             <div class="row-fluid">
-              <div class="span12"><div class="asset"><strong>asset</strong></div></div>
-            </div>
-            <div class="row-fluid">
-              <div class="span12"><div class="asset"><strong>asset</strong></div></div>
+              <div class="span12"><div class="asset">Asset</div></div>
             </div>
           </div>
           <div class="span8 region">
@@ -269,28 +267,20 @@ group: navigation
               <div class="span12"><h4 class="region-title"><strong>Region</strong></h4></div>
             </div>
             <div class="row-fluid">
-              <div class="span6"><div class="asset"><strong>asset</strong></div></div>
-              <div class="span6"><div class="asset"><strong>asset</strong></div></div>
+              <div class="span6"><div class="asset">Asset</div></div>
+              <div class="span6"><div class="asset">Asset</div></div>
             </div>
             <div class="row-fluid">
-              <div class="span6"><div class="asset"><strong>asset</strong></div></div>
-              <div class="span6"><div class="asset"><strong>asset</strong></div></div>
+              <div class="span6"><div class="asset">Asset</div></div>
+              <div class="span6"><div class="asset">Asset</div></div>
             </div>
             <div class="row-fluid">
-              <div class="span6"><div class="asset"><strong>asset</strong></div></div>
-              <div class="span6"><div class="asset"><strong>asset</strong></div></div>
-            </div>
-            <div class="row-fluid">
-              <div class="span6"><div class="asset"><strong>asset</strong></div></div>
-              <div class="span6"><div class="asset"><strong>asset</strong></div></div>
-            </div>
-            <div class="row-fluid">
-              <div class="span6"><div class="asset"><strong>asset</strong></div></div>
-              <div class="span6"><div class="asset"><strong>asset</strong></div></div>
+              <div class="span6"><div class="asset">Asset</div></div>
+              <div class="span6"><div class="asset">Asset</div></div>
             </div>
           </div>
         </div>
-        <strong>Background Image</strong>
+        <em>Background Image</em>
       </div>
     </div>
   </div>
@@ -426,26 +416,27 @@ group: navigation
         </table>
         <h3>Asset Sizing</h3>
         <p>
-          Asset sizes are determined by the user in packer regions. There are three 
-          sizes that a user can select: <code>s, m, or l</code>. You must define 
+          Within packer regions, users can choose the size of each asset. You must define 
           the available sizes in the <code>sizes</code> setting on the region 
-          block helper.
+          block helper. You can make up to three sizes available: <code>s, m, and l</code>. So if a user sets an asset to, for example, the smallest size possible, that asset's size 
+          is <code>s</code> and it's assigned the class <code>asset-size-s</code>.
         </p>
       </div>
       <div class="span6">
         <div class="anatomy-preview">
           <div class="well">
             <div class="region packer-region" style="text-align: center;">
-              <div class="asset asset-size-s" style="padding: 134px 4px;">asset</div>
-              <div class="asset asset-size-s">asset</div>
-              <div class="asset asset-size-s">asset</div>
-              <div class="asset asset-size-s">asset</div>
-              <div class="asset asset-size-s">asset</div>
-              <div class="asset asset-size-m">asset</div>
-              <div class="asset asset-size-l">asset</div>
-              <div class="asset asset-size-s">asset</div>
-              <div class="asset asset-size-s">asset</div>
-              <div class="asset asset-size-s">asset</div>
+              <h4 class="region-title" style="text-align: left"><strong>Packer Region</strong></h4>
+              <div class="asset asset-size-s" style="padding: 134px 4px; margin-top: 28px;">Asset</div>
+              <div class="asset asset-size-s" style="margin-top: 28px;">Asset</div>
+              <div class="asset asset-size-s" style="margin-top: 28px;">Asset</div>
+              <div class="asset asset-size-s">Asset</div>
+              <div class="asset asset-size-s">Asset</div>
+              <div class="asset asset-size-m">Asset</div>
+              <div class="asset asset-size-l">Asset</div>
+              <div class="asset asset-size-s">Asset</div>
+              <div class="asset asset-size-s">Asset</div>
+              <div class="asset asset-size-s">Asset</div>
             </div>
           </div>
           <script>
@@ -465,10 +456,7 @@ group: navigation
       <div class="span6">
         <h2>Columnizer Layout Engine</h2>
         <p>
-          The Columnizer engine arranges assets in columns and rows. As a user adds 
-          assets to a row, the engine will push on new columns and resize existing 
-          columns to fit the width of the row. As the themer, you define the maximum 
-          number of columns per row.
+          The Columnizer engine arranges assets first into rows, then into columns. Each row spans the full width of the columnizer region. When a user adds an asset to a row, the engine automatically resizes other assets in that row to make room for the new asset. As the themer, you define the maximum number of columns per row.
         </p>
         <h3>Helper</h3>
         <pre class="prettyprint linenums language-html">{% raw %}
@@ -494,34 +482,31 @@ group: navigation
         </table>
         <h3>Asset Sizing</h3>
         <p>
-          Asset sizes are determined by the number of columns in the columnizer 
-          region. As the number of columns change, so does each asset size in the 
-          row. For example, if you have one asset in a row, then that asset's size 
+          Within columnizer regions, asset sizes are determined by the number of assets in the row. For example, if you have one asset in a row, then that asset's size 
           is <code>1</code> and it's class will be <code>asset-size-1</code>. If 
-          you have two assets in a row, each asset receives a size of <code>2</code> 
-          and their classes will be <code>asset-size-2</code>.
+          you have two assets in a row, each asset is a size <code>2</code> 
+          and they're each assigned the class <code>asset-size-2</code>.
         </p>
       </div>
       <div class="span6">
         <div class="anatomy-preview">
           <div class="well">
             <div class="region" style="text-align: center;">
-              <strong>One Asset</strong>
-              <div class="row-fluid">
-                <div class="span12"><div class="asset">asset</div></div>
+              <h4 class="region-title" style="text-align: left"><strong>Columnizer Region</strong></h4>
+              Row
+              <div class="row-fluid" style="border-bottom: 2px dashed #f5f5f5; padding: 0 0 10px 0;">
+                <div class="span12"><div class="asset">Asset</div></div>
               </div>
-              <hr />
-              <strong>Two Assets</strong>
-              <div class="row-fluid">
-                <div class="span6"><div class="asset">asset</div></div>
-                <div class="span6"><div class="asset">asset</div></div>
+              <div style="margin-top: 10px;">Row</div>
+              <div class="row-fluid" style="border-bottom: 2px dashed #f5f5f5; padding: 0 0 10px 0;">
+                <div class="span6"><div class="asset">Asset</div></div>
+                <div class="span6"><div class="asset">Asset</div></div>
               </div>
-              <hr />
-              <strong>Three Assets</strong>
+              <div style="margin-top: 10px;">Row</div>
               <div class="row-fluid">
-                <div class="span4"><div class="asset">asset</div></div>
-                <div class="span4"><div class="asset">asset</div></div>
-                <div class="span4"><div class="asset">asset</div></div>
+                <div class="span4"><div class="asset">Asset</div></div>
+                <div class="span4"><div class="asset">Asset</div></div>
+                <div class="span4"><div class="asset">Asset</div></div>
               </div>
             </div>
           </div>
@@ -840,7 +825,7 @@ group: navigation
         <p>
           <span class="label label-info">Heads up!</span> A special helper 
           <code>{% raw %}{{{videoplayer}}}{% endraw %}</code> is available to  
-          automatically create a html5/flash fallback player using 
+          automatically create a HTML5/Flash fallback player using 
           <a href="http://projekktor.com">Projekktor</a>. While you don't have 
           to use this helper, it makes things a lot easier on you. Check out 
           the <a href="#helpers">helpers</a> section to learn more.
@@ -1409,7 +1394,7 @@ group: navigation
       <div class="span6">
         <p>
           The <code>{% raw %}{{{videoplayer}}}{% endraw %}</code> helper creates a 
-          ready-made html5/flash fallback video player for <code>videogroup</code> 
+          ready-made HTML5/Flash fallback video player for <code>videogroup</code> 
           assets. The player uses the open-source 
           <a href="http://projekktor.com">Projekktor</a> project. If there are 
           multiple videos in a group, this helper will create a thumbnail playlist 
