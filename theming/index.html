@@ -153,7 +153,7 @@ group: navigation
   &lt;script src=&quot;/js/main.js&quot;&gt;&lt;/script&gt;
 &lt;/head&gt;
 &lt;body&gt;
-  &lt;span class=&quot;nocode pln&quot;&gt;&lt;script id=&quot;theme&quot; type=&quot;text/x-handlebars-template&quot;&gt;&lt;/span&gt;
+  <span class="nocode pln">&lt;script id=&quot;theme&quot; type=&quot;text/x-handlebars-template&quot;&gt;</span>
     {{{title}}}
     {{#region &quot;packer&quot; id=&quot;main-region&quot; columns=&quot;1&quot; gutter_width=&quot;20&quot; max_auto_assets=&quot;0&quot; sizes=&quot;m&quot; default_size=&quot;m&quot; dummy_content=&quot;I-3-m,T-1-m,T-2-m,E-1-m,D-4-m&quot;}}
       {{#asset &quot;text&quot; size=&quot;m&quot;}}
@@ -201,7 +201,7 @@ group: navigation
         {{{description}}}
       {{/asset}}
     {{/region}}
-  &lt;span class=&quot;nocode pln&quot;&gt;&lt;/script&gt;&lt;/span&gt;
+  <span class="nocode pln">&lt;/script&gt;</span>
 &lt;/body&gt;
 &lt;/html&gt;
 {% endraw %}</pre>
@@ -221,8 +221,8 @@ group: navigation
         layout engines currently available are:
       </p>
       <ul>
-        <li>Columnizer</li>
         <li>Packer</li>
+        <li>Columnizer</li>
       </ul>
       <h3>Assets</h3>
       <p>
@@ -310,13 +310,14 @@ group: navigation
         <div class="tab-content">
           <div class="tab-pane active" id="region-code-1-template">
             <pre class="prettyprint linenums language-html">{% raw %}
-{{#region "packer" id="main-region" gutter_width="20"}}
+{{#region "packer" id="main-region" max_auto_assets="0" columns="2" column_width="300" gutter_width="20" sizes="m,l"}}
 {{/region}}{% endraw %}</pre>
           </div>
           <div class="tab-pane" id="region-code-1-compiled">
             <pre class="prettyprint linenums language-html">{% raw %}
 &lt;section class=&quot;region packer-region&quot; id=&quot;main-region&quot; 
-         data-region-type=&quot;packer&quot; data-region-id=&quot;0&quot;&gt;&lt;/section&gt;{% endraw %}</pre>
+         data-region-type=&quot;packer&quot; data-region-id=&quot;0&quot; data-gutter_width=&quot;20&quot;&gt;
+&lt;/section&gt;{% endraw %}</pre>
           </div>
         </div>
       </div>    
@@ -325,7 +326,7 @@ group: navigation
   <div class="row-fluid">
     <div class="span12">
       <p>
-        There are a few settings that every region should have.
+        There are a few settings that should be defined for every region.
       </p>
       <table class="table table-bordered table-striped">
         <thead>
@@ -337,7 +338,7 @@ group: navigation
         <tbody>
           <tr>
             <td><code>id</code></td>
-            <td>The id of the region</td>
+            <td>The ID of the region</td>
           </tr>
           <tr>
             <td><code>max_auto_assets</code></td>
@@ -351,8 +352,7 @@ group: navigation
                 it will add all of the remaining assets to that region. 
               </p>
               <p>
-                <span class="label label-info">Heads up!</span> Every theme should have at least one region set up with <code>max_auto_assets="0"</code> to act as a catch-all for any remaining 
-                assets. <span class="muted">This setting is optional, though highly recommended.</span>
+                <span class="label label-info">Heads up!</span> Every theme should have at least one region set up with <code>max_auto_assets="0"</code> to act as a catch-all for any remaining assets. This setup is optional, but highly recommended.
               </p>
             </td>
           </tr>
@@ -372,8 +372,8 @@ group: navigation
         </p>
         <h3>Helper</h3>
           <pre class="prettyprint linenums language-html">{% raw %}
-  {{#region "packer" id="main-region" column_width="120" gutter_width="10"}}
-  {{/region}}{% endraw %}</pre>
+{{#region "packer" id="main-region" columns="3" column_width="120" gutter_width="10" sizes="s,m,l"}}
+{{/region}}{% endraw %}</pre>
         <h3>Engine-Specific Settings</h3>
         <table class="table table-bordered table-striped">
           <thead>
@@ -384,16 +384,23 @@ group: navigation
           </thead>
           <tbody>
             <tr>
+              <td><code>columns</code></td>
+              <td>
+                <p>The number of columns in the region</p>
+                <p><strong>Example:</strong> <code>columns="2"</code></p>
+              </td>
+            </tr>
+            <tr>
               <td><code>column_width</code></td>
               <td>
-                <p>The width of the smallest asset size</p>
+                <p>The width of the smallest asset size in pixels</p>
                 <p><strong>Example:</strong> <code>column_width="300"</code></p>
               </td>
             </tr>
             <tr>
               <td><code>gutter_width</code></td>
               <td>
-                <p>The amount of space between assets</p>
+                <p>The amount of space between assets in pixels</p>
                 <p><strong>Example:</strong> <code>gutter_width="20"</code></p>
               </td>
             </tr>
@@ -416,10 +423,11 @@ group: navigation
         </table>
         <h3>Asset Sizing</h3>
         <p>
-          Within packer regions, users can choose the size of each asset. You must define 
-          the available sizes in the <code>sizes</code> setting on the region 
-          block helper. You can make up to three sizes available: <code>s, m, and l</code>. So if a user sets an asset to, for example, the smallest size possible, that asset's size 
+          Within Packer regions, users can choose the size for each asset. So if a user sets an asset to, for example, the smallest size possible, that asset's size 
           is <code>s</code> and it's assigned the class <code>asset-size-s</code>.
+        </p>
+        <p>
+          The valid sizes are specified in the <code>sizes</code> setting on the <code>{% raw %}{{#region}}{% endraw %}</code> block helper. You can make up to three sizes available: <code>s, m, and l</code>.
         </p>
       </div>
       <div class="span6">
@@ -456,7 +464,7 @@ group: navigation
       <div class="span6">
         <h2>Columnizer Layout Engine</h2>
         <p>
-          The Columnizer engine arranges assets first into rows, then into columns. Each row spans the full width of the columnizer region. When a user adds an asset to a row, the engine automatically resizes other assets in that row to make room for the new asset. As the themer, you define the maximum number of columns per row.
+          The Columnizer engine arranges assets first into rows, then into columns. Each row spans the full width of the region. When a user adds an asset to a row, the engine automatically resizes other assets in that row to make room for the new asset. As the themer, you define the maximum number of columns per row.
         </p>
         <h3>Helper</h3>
         <pre class="prettyprint linenums language-html">{% raw %}
@@ -482,9 +490,9 @@ group: navigation
         </table>
         <h3>Asset Sizing</h3>
         <p>
-          Within columnizer regions, asset sizes are determined by the number of assets in the row. For example, if you have one asset in a row, then that asset's size 
-          is <code>1</code> and it's class will be <code>asset-size-1</code>. If 
-          you have two assets in a row, each asset is a size <code>2</code> 
+          Within Columnizer regions, asset sizes are determined by the number of assets in the row. For example, if a row contains just one asset, then that asset's size 
+          is <code>1</code> and it's assigned the class <code>asset-size-1</code>. If 
+          a row contains two assets, each asset is a size <code>2</code> 
           and they're each assigned the class <code>asset-size-2</code>.
         </p>
       </div>
@@ -524,8 +532,14 @@ group: navigation
       <p>
         Assets are the actual content a user places in Pop. Each type of asset 
         has unique properties that you can access when creating your theme. 
-        Defining an asset is done by using the <code>{% raw %}{{#asset}}{% endraw %}</code> 
-        Handlebars.js block helper. Assets are rendered as <code>div</code> elements.
+        Assets are defined with the <code>{% raw %}{{#asset}}{% endraw %}</code> 
+        Handlebars.js block helper, and are rendered as <code>div</code> elements.
+      </p>
+      <p>
+        <span class="label label-info">Heads up!</span> Asset templates 
+        <em>must</em> be nested inside of region definitions, and you 
+        <em>must</em> define asset templates for every asset type and every 
+        available asset size in each region.
       </p>
     </div>
     <div class="span8">
@@ -568,13 +582,7 @@ group: navigation
   <div class="row-fluid">
     <div class="span12">
       <p>
-        <span class="label label-info">Heads up!</span> Asset templates 
-        <em>must</em> be nested inside of region definitions, and you 
-        <em>must</em> define asset templates for every asset type and every 
-        available asset size in each region.
-      </p>
-      <p>
-        There are a few settings that every asset template should have.
+        The <code>size</code> setting must be defined for every asset template.
       </p>
       <table class="table table-bordered table-striped">
         <thead>
@@ -586,7 +594,15 @@ group: navigation
         <tbody>
           <tr>
             <td><code>size</code></td>
-            <td>The size this asset template is associated with.</td>
+            <td>
+              <p>The size this asset template is associated with.</p>
+              <p>
+                For a Packer region, the available asset sizes are <code>s, m, and l</code>, and the asset sizes valid for the region are specified in the <code>{{#region}}</code> helper.<br><strong>Packer example:</strong> <code>size="m"</code>
+              </p>
+              <p>
+                For a Columnizer region, the available asset sizes are <code>1, 2, 3, ...</code> and so on.<br><strong>Columnizer example:</strong> <code>size="2"</code>
+              </p>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -718,8 +734,8 @@ group: navigation
         <h3>Templating {% raw %}{{{images}}}{% endraw %}</h3>
         <p>
           The <code>{% raw %}{{{images}}}{% endraw %}</code> variable is an 
-          array of individual images. You must use a helper to either loop through 
-          each item in the contents, or access a specific image in the array.
+          array of individual images. Even when there is only one piece of content in the asset, that piece of content is stored as the first element in the array. To display the asset contents, you must use a helper either to loop through 
+          each piece of content or to access a specific image in the array.
         </p>
         <table class="table table-bordered table-striped">
           <thead>
@@ -740,7 +756,7 @@ group: navigation
             <tr>
               <td><code>{% raw %}{{{original_url}}}{% endraw %}</code></td>
               <td>
-                URL to image. <span class="label label-info">Heads up!</span> You 
+                URL for the image<br><span class="label label-info">Heads up!</span> You 
                 should almost always pass this value into the 
                 <a href="#helpers">resize helper</a>.
               </td>
@@ -752,7 +768,7 @@ group: navigation
             <tr>
               <td><code>{% raw %}{{{source_file_size}}}{% endraw %}</code></td>
               <td>
-                Original filesize, in bytes. 
+                Original filesize, in bytes<br> 
                 <span class="label label-info">Heads up!</span> You can use the 
                 <code>{% raw %}{{{format_file_size}}}{% endraw %}</code> helper 
                 to automatically display the filesize in an easy-to-read format.
