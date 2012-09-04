@@ -47,8 +47,30 @@ group: navigation
         <li><a href="#videoplayer-helper">Video Player Helper</a></li>
       </ul>
     </li>
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Styling<b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><a href="#Styling">Styling Overview</a></li>
+        <li class="divider"></li>
+        <li><a href="#main-less">Main.less</a></li>
+        <li><a href="#variables-less">Variables.less</a></li>
+        <li><a href="#preboot-less">Preboot.less</a></li>
+        <li class="divider"></li>
+        <li><a href="#system-classes">System-Generated Classes</a></li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Building Locally<b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><a href="#building-locally">Building Locally Overview</a></li>
+        <li class="divider"></li>
+        <li><a href="#dummy-content">Dummy Content</a></li>
+        <li><a href="#python-command">Simple Python HTTP Server</a></li>
+      </ul>
+    </li>
   </ul>
 </div>
+
 <section id="getting-started">
   <div class="page-header">
     <h1>Getting Started</h1>
@@ -608,7 +630,7 @@ group: navigation
                 For a Packer region, the available asset sizes are <code>s, m, and l</code>, and the asset sizes valid for the region are specified in the <code>{{#region}}</code> helper.<br><strong>Packer example:</strong> <code>size="m"</code>
               </p>
               <p>
-                For a Columnizer region, the available asset sizes are <code>1, 2, 3, ...</code> and so on.<br><strong>Columnizer example:</strong> <code>size="2"</code>
+                For a Columnizer region, the available asset sizes are <code>1, 2, 3,</code> and so on.<br><strong>Columnizer example:</strong> <code>size="2"</code>
               </p>
             </td>
           </tr>
@@ -1485,7 +1507,7 @@ group: navigation
   <div class="row-fluid">
     <div class="span12">
       <p>
-        The CSS styling for Populr themes is stored in 3 LESS files: main.less, variables.less, and preboot.less.
+        The CSS styling for Populr themes is generally stored in 3 LESS files: main.less, variables.less, and preboot.less.
       </p>
     </div>
   </div>
@@ -1494,7 +1516,7 @@ group: navigation
     <div class="row-fluid">
       <div class="span12">
         <p>
-          Main.less is where the majority of your CSS should be stored.
+          Main.less is where the majority of your CSS should be stored. It contains calls to import variables.less and preboot.less at the beginning of the file.
         </p>
       </div>
     </div>
@@ -1515,17 +1537,27 @@ group: navigation
           </thead>
           <tbody>
             <tr>
-              <td><code>@base-url</code></td>
+              <td width="20%"><code>@base-url</code></td>
+              <td>
                 <p>
-                  
+                  The pop's base URL
                 </p>
                 <p>
-                  This value can be overridden by the user with the Font drop-down menu.
+                  This variable is used to set relative links within a theme definition. For example, the background image for a page element can be set via CSS like this:
                 </p>
+                <code>{% raw %}background: transparent url("@{base-url}/images/region-bg.png") no-repeat;{% endraw %}</code>
+              </td>
             </tr>
             <tr>
               <td><code>@accent-color</code></td>
-              <td></td>
+              <td>
+                <p>
+                  The accent color used in the pop. This variable is frequently used in Populr's most basic themes to set the color of text links, but it can be used to set the color of any theme element.
+                </p>
+                <p>
+                  This value can be overridden by the user with the Color drop-down menu.
+                </p>
+              </td>
             </tr>
             <tr>
               <td><code>@background-color</code></td>
@@ -1534,14 +1566,14 @@ group: navigation
                   The background color used when this page is first rendered
                 </p>
                 <p>
-                  Populr recalculates this data ever
+                  Once a user sets a background image for their pop, Populr will calculate the average color of the image and store that value in <code>@background-color</code>. When someone opens the pop, Populr will display this color as the pop background while the background image is being loaded. This technique creates a less abrupt transition when the background image is finally loaded and displayed.
               </td>
             </tr>
             <tr>
               <td><code>@headline-font-family</code></td>
               <td>
                 <p>
-                  The default font face for the pop title and asset titles when the theme is selected
+                  The default font family for the pop title and asset titles when the theme is selected
                 </p>
                 <p>
                   This value can be overridden by the user with the Font drop-down menu.
@@ -1550,12 +1582,14 @@ group: navigation
             </tr>
             <tr>
               <td><code>@headline-font-weight</code></td>
+              <td>
                 <p>
                   The default font weight for the pop title and asset titles when the theme is selected
                 </p>
                 <p>
                   This value can be overridden by the user with the text formatting bar.
                 </p>
+              </td>
             </tr>
             <tr>
               <td><code>@text-color</code></td>
@@ -1573,7 +1607,167 @@ group: navigation
         <p>
           Preboot.less is, to quote its creator Mark Otto, "a super awesome pack of mixins and variables to be used in conjunction with LESS, a CSS preprocessor for faster and easier web development." <a href="http://markdotto.com/bootstrap/" target="_blank">Read about Preboot.less</a> on Mark's website.
         </p>
+        <p>
+          We use Preboot.less to speed up the development of our themes. You're welcome to use it or not as you see fit.
+        </p>
       </div>
     </div>
   </section>
+  <section id="system-classes">
+    <h2>System-Generated Classes</h2>
+    <div class="row-fluid">
+      <div class="span12">
+        <p>
+          Populr's theming engine automatically applies system-generated classes to certain page elements. Here are a few that will be especially valuable for building unique behaviors into your theme, such as applying styling variations based on content location, size, etc.
+        </p>
+      </div>
+    </div>
+    <h3>Rows in Columnizer Regions</h3>
+    <div class="row-fluid">
+      <div class="span12">
+        <p>
+          Each columnizer row will automatically have both of the following classes applied.
+          <ul>
+            <li><code>columnizer-row</code></li>
+            <li><code>columnizer-cols#</code>, where <code>#</code> is the number of assets contained in the row</li>
+          </ul>
+        </p>
+      </div>
+    </div>
+    <p>&nbsp;</p>
+    <h3>Assets in Columnizer Regions</h3>
+    <div class="row-fluid">
+      <div class="span12">
+        <p>
+          Each asset in a columnizer row is assigned to a class according to its index in the row.
+          <ul>
+            <li><code>columnizer-col#</code>, where <code>#</code> is the index number of the asset in the row. The first asset has an index of <code>1</code>, the second an index of <code>2</code>, and so on.</li>
+          </ul>
+        </p>
+      </div>
+    </div>
+    <p>&nbsp;</p>
+    <h3>Asset Types</h3>
+    <div class="row-fluid">
+      <div class="span12">
+        <p>
+          Every asset is assigned to a class according to its type. Only one of the following classes is applied per asset.
+          <ul>
+            <li><code>asset-type-text</code></li>
+            <li><code>asset-type-imagegroup</code></li>
+            <li><code>asset-type-videogroup</code></li>
+            <li><code>asset-type-documentgroup</code></li>
+            <li><code>asset-type-embedgroup</code></li>
+          </ul>
+        </p>
+      </div>
+    </div>
+    <p>&nbsp;</p>
+    <h3>Asset Size</h3>
+    <div class="row-fluid">
+      <div class="span12">
+        <p>
+          Every asset is assigned to a class according to its size. Only one of the following classes is applied per asset.
+        </p>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span3">
+        <p><strong>Assets in Packer Regions</strong></p>
+        <ul>
+          <li><code>asset-size-s</code></li>
+          <li><code>asset-size-m</code></li>
+          <li><code>asset-size-l</code></li>
+        </ul>
+      </div>
+      <div class="span3">
+        <p><strong>Assets in Columnizer Regions</strong></p>
+        <ul>
+          <li><code>asset-size-1</code></li>
+          <li><code>asset-size-2</code></li>
+          <li><code>asset-size-3</code></li>
+          <li>...and so on</li>
+        </ul>
+      </div>
+      <div class="span6"> </div>
+    </div>
+  </section>
 </section>
+
+<section id="building-locally">
+  <div class="page-header">
+    <h1>Building Locally</h1>
+  </div>
+  <div class="row-fluid">
+    <div class="span12">
+      <p>
+        The Populr theming engine was developed to enable talented designers and developers like you to work on your theme locally before uploading it to Populr. To illustrate theme behavior outside of the pop editor interface, a theme can be loaded with dummy content from Populr's servers. The theme can then be run locally on your machine using a simple HTTP server, such as the one built into Python.
+      </p>
+    </div>
+  </div>
+
+  <section id="dummy-content">
+    <h2>Loading Your Theme with Dummy Content</h2>
+    <div class="row-fluid">
+      <div class="span12">
+        <p>
+          Dummy content is generic asset content that's displayed in your theme when you run your theme locally in your browser. The text is <a href="http://en.wikipedia.org/wiki/Lorem_ipsum" target="_blank">lorum ipsum</a> text, the images are from <a href="http://lorempixel.com/" target="_blank">lorumpixel</a>, the embed is one of the <a href="http://www.youtube.com/watch?v=YE7VzlLtp-4" target="_blank">world's greatest short films</a>, etc.
+        </p>
+        <p>
+          Dummy content is defined as an attribute of the <code>{% raw %}{{region}}{% endraw %}</code> Handlebars.js helper. You might have noticed this earlier while reviewing the <a href="#theme-skeleton">sample theme</a>. Here it is again:
+        </p>
+        <pre class="prettyprint linenums language-html">{% raw %}
+{{#region "packer" id="main-region" columns="1" gutter_width="20" max_auto_assets="0" sizes="m" default_size="m" dummy_content="I-3-m,T-1-m,T-2-m,E-1-m,D-4-m"}}{% endraw %}</pre>
+        <p>
+          Each comma-separated string of the dummy content represents a single asset. The syntax for each string is as follows:<br><code>[asset type]-[# of items]-[asset size]</code>
+        </p>
+        <p>
+          <code>[asset type]</code> can have the following values:
+          <ul>
+            <li><code>T</code> for text assets</li>
+            <li><code>I</code> for image assets</li>
+            <li><code>V</code> for video recording assets</li>
+            <li><code>D</code> for document assets</li>
+            <li><code>E</code> for embed assets</li>
+          </ul>
+        </p>
+        <p>
+          <code>[# of items]</code> represents something different based on the asset type.
+          <ul>
+            <li>For text assets, it represents the number of paragraphs of lorum ipsum text that will be generated.</li>
+            <li>For all other assets, it represents the number of items that are contained within the asset. For example, a piece of dummy content defined as <code>I-3</code> represents an image asset containing 3 images.</li>
+          </ul>
+        </p>
+        <p>
+          Dummy content is defined slightly differently for Packer regions and Columnizer regions.
+        </p>
+        <h3>Packer Dummy Content</h3>
+        <p>
+          Dummy content for Packer regions must specify a size for each asset. The available values are <code>s, m, and l</code>.
+        </p>
+        <h3>Columnizer Dummy Content</h3>
+        <p>
+          Dummy content for columnizer regions does not specify a size. Instead, the <code>|</code> (pipe) character is used to specify the end of a row, and asset sizes are determined based on the number of assets in a row. For example, dummy content defined as <code>"T-1,T-1|I-3</code> represents two text assets in the first row, each with a size of <code>2</code> and containing a single paragraph of lorum ipsum text, and single image asset in the next row with a size of <code>1</code> and containing 3 images.
+        </p>
+      </div>
+    </div>
+  </section>
+
+</section>
+
+<section id="ready">
+  <div class="page-header">
+    <h1>Ready to get poppin'?</h1>
+  </div>
+  <div class="row-fluid">
+    <div class="span12">
+      <p>
+        Congratulations! You made it to the end of the Populr documentation page. What a thorough and industrious developer you must be :).
+      </p>
+      <p>
+        If you still have questions about this stuff, get in touch with us: send an email to John at <a href="mailto:john@populr.me">john@populr.me</a> and he'll get you sorted right out.
+      </p>
+      <p>Pop pop!</p>
+    </div>
+  </div>
+
