@@ -50,7 +50,7 @@ group: navigation
     <li class="dropdown">
       <a class="dropdown-toggle" data-toggle="dropdown" href="#">Styling<b class="caret"></b></a>
       <ul class="dropdown-menu">
-        <li><a href="#Styling">Styling Overview</a></li>
+        <li><a href="#styling">Styling Overview</a></li>
         <li class="divider"></li>
         <li><a href="#main-less">Main.less</a></li>
         <li><a href="#variables-less">Variables.less</a></li>
@@ -1608,7 +1608,7 @@ group: navigation
           Preboot.less is, to quote its creator Mark Otto, "a super awesome pack of mixins and variables to be used in conjunction with LESS, a CSS preprocessor for faster and easier web development." <a href="http://markdotto.com/bootstrap/" target="_blank">Read about Preboot.less</a> on Mark's website.
         </p>
         <p>
-          We use Preboot.less to speed up the development of our themes. You're welcome to use it or not as you see fit.
+          Preboot is not mandatory to include with your theme. We used Preboot because it helped us put together some of our themes faster. You're welcome to use it or not as you see fit.
         </p>
       </div>
     </div>
@@ -1748,6 +1748,27 @@ group: navigation
         <h3>Columnizer Dummy Content</h3>
         <p>
           Dummy content for columnizer regions does not specify a size. Instead, the <code>|</code> (pipe) character is used to specify the end of a row, and asset sizes are determined based on the number of assets in a row. For example, dummy content defined as <code>"T-1,T-1|I-3</code> represents two text assets in the first row, each with a size of <code>2</code> and containing a single paragraph of lorum ipsum text, and single image asset in the next row with a size of <code>1</code> and containing 3 images.
+        </p>
+      </div>
+    </div>
+  </section>
+
+</section>
+
+  <section id="python-command">
+    <h2>Running Your Theme Using a Simple Python HTTP Server</h2>
+    <div class="row-fluid">
+      <div class="span12">
+        <p>
+          To see how your theme looks when it's populated with your dummy content, run an HTTP server locally on your machine and use it to host your theme. The Populr team uses Python to create a server, since it comes with a simple HTTP server built right in.  
+        </p>
+        <p>
+          To run a server on your Mac using Python, open Terminal, then use the <code>cd</code> command to change to your theme's directory. Once you're there, use this command to start your server:
+        </p>
+        <pre class="prettyprint linenums language-html">{% raw %}
+python -m SimpleHTTPServer 8080</pre>
+        <p>
+          You can then check out your theme by opening a browser and entering the URL <code>http://localhost:8080</code>.
         </p>
       </div>
     </div>
