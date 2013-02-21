@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <title>Theming</title>
-    <meta name="description" content="Creating your own Populr theme is piece of cake, once you get to know the system. This guide will help you learn the fundamentals of theming.">
+    <meta name="description" content="Creating your own Populr theme is piece of cake once you get to know the system. This guide will help you learn the fundamentals of theming.">
     <meta name="author" content="Populr.me">
 
     <!--[if lt IE 9]>
@@ -92,7 +92,7 @@
   <div class="hero-unit">
     <h1>Theming</h1>
     <p></p>
-    <p>Creating your own Populr theme is piece of cake, once you get to know the system. This guide will help you learn the fundamentals of theming.</p>
+    <p>Creating your own Populr theme is piece of cake once you get to know the system. This guide will help you learn the fundamentals of theming.</p>
   </div>
 </header>
 
@@ -103,8 +103,8 @@
 <div class="subnav">
   <ul class="nav nav-pills">
     <li><a href="#getting-started">Getting Started</a></li>
-    <li><a href="#theme-skeleton">The Theme Skeleton</a></li>
-    <li><a href="#anatomy-of-a-theme">Anatomy of a Theme</a></li>
+    <li><a href="#theme-skeleton">Theme Skeleton</a></li>
+    <li><a href="#anatomy-of-a-theme">Anatomy</a></li>
     <li class="dropdown">
       <a class="dropdown-toggle" data-toggle="dropdown" href="#">Regions<b class="caret"></b></a>
       <ul class="dropdown-menu">
@@ -147,7 +147,7 @@
         <li class="divider"></li>
         <li><a href="#main-less">Main.less</a></li>
         <li><a href="#variables-less">Variables.less</a></li>
-        <li><a href="#preboot-less">Preboot.less</a></li>
+        <li><a href="#less-mixins">LESS Mixin Libraries</a></li>
         <li class="divider"></li>
         <li><a href="#system-classes">System-Generated Classes</a></li>
       </ul>
@@ -158,15 +158,32 @@
         <li><a href="#building-locally">Building Locally Overview</a></li>
         <li class="divider"></li>
         <li><a href="#dummy-content">Dummy Content</a></li>
-        <li><a href="#python-command">Simple Python HTTP Server</a></li>
+        <li><a href="#python-command">Running Locally</a></li>
       </ul>
     </li>
+    <li><a href="#recommended-process">Recommended Process</a></li>
   </ul>
 </div>
 
 <section id="getting-started">
   <div class="page-header">
     <h1>Getting Started</h1>
+  </div>
+  <div class="row">
+    <div class="span5">
+      <p>
+        First thing's first, watch this brief video to get an overview of the most important concepts for designing and building a Populr theme.
+      </p>
+    </div>
+    <div class="span7">
+      <iframe src="http://player.vimeo.com/video/57961498?title=0&amp;byline=0&amp;portrait=0" width="500" height="375" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span12">
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+    </div>
   </div>
   <div class="row">
     <div class="span8">
@@ -179,9 +196,9 @@
       </p>
       <p>
         A Populr theme, like any (good) HTML/CSS breakdown, is separated into two 
-        layers &mdash; first semantic structure / content, and second, style.
+        layers: semantic structure/content, and style.
       </p>
-      <h2>Structure / Content</h2>
+      <h2>Structure/Content</h2>
       <p>
         A theme's structure is built in <a href="http://handlebarsjs.com" title="Handlebars">Handlebars.js</a>, 
         a JavaScript-based templating language. Although it may appear 
@@ -193,7 +210,7 @@
       <h3>Example Asset Template <small>(don't worry about the syntax right now)</small></h3>
       <pre class="prettyprint linenums language-html">
 {{#asset &quot;text&quot; size=&quot;2&quot;}}
-&lt;div class=&quot;asset-title&quot;&gt;{{{title}}}&lt;/div&gt;
+{{{title}}}
 &lt;div class=&quot;content&quot;&gt;
   {{{body}}}
 &lt;/div&gt;
@@ -207,7 +224,7 @@
         CSS. If you are comfortable with CSS, you will be comfortable with LESS. 
         Populr uses LESS variables to allow users to change various settings in 
         the Pop. Refer to the <code>variables.less</code> file in the theme skeleton 
-        for more information.
+        for more information.<br>&nbsp;
       </p>
       <div class="alert alert-info">
         <p>
@@ -228,43 +245,41 @@
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li><a href="https://github.com/populr/populr-theme-skeleton/zipball/master"><i class="icon-download-alt"></i> Download Zip</a></li>
-            <li><a href="https://github.com/populr/populr-theme-skeleton/tarball/master"><i class="icon-download-alt"></i> Download Tarball</a></li>
-            <li class="divider"></li>
-            <li><a href="https://github.com/populr/populr-theme-skeleton"><i class="icon-globe"></i> View on Github</a></li>
+            <li><a href="https://github.com/populr-themes/columnizer_skeleton"><i class="icon-globe"></i> View on Github</a></li>
+            <li><a href="../assets/themes/columnizer_skeleton.zip"><i class="icon-download-alt"></i> Download Zip</a></li>
           </ul>
         </div>
         <p>
-          The theme skeleton contains everything you need to get started with 
-          your new theme.
+          The theme skeleton contains the bare minimum you need to build a new theme:<br>
+          a single columnizer region with 3 columns
         </p>
-        <hr />
+<!--        <hr />
         <a class="btn btn-large btn-primary" href="https://github.com/populr/themes">
           <i class="icon-eye-open icon-white"></i> See Theme Source Code
         </a>
         <p style="margin-top: 5px;">
           See the code for all of our themes on GitHub and find out how we work our magic.
-        </p>
+        </p> -->
       </div>
     </div>
   </div>
 </section>
 <section id="theme-skeleton">
   <div class="page-header">
-    <h1>The Theme Skeleton</h1>
+    <h1>A Simple Theme</h1>
   </div>
   <div class="row">
     <div class="span8">
       <p>
-        Once you are comfortable with Handlebars.js and LESS, 
-        <a class="btn btn-mini btn-primary" href="https://github.com/populr/populr-theme-skeleton/zipball/master"><i class="icon-download-alt icon-white"></i> download the Populr Theme Skeleton</a> 
-        to get started with your own theme. Populr themes are simple HTML5 websites 
-        with a few special hooks. Let's look at a simple theme to get a feel for the syntax.
+        Populr themes are simple HTML5 websites with a few special hooks. Once you're comfortable with Handlebars.js, the code below should make sense to you. This is the index.html file for a very simple theme containing just one region. Look it over to get a feel for the syntax.
+      </p>
+      <p>
+        You can also <a class="btn btn-mini btn-primary" href="https://github.com/populr-themes/columnizer_skeleton"><i class="icon-download-alt icon-white"></i> download the Populr Theme Skeleton</a> to get started with your own theme.
       </p>
     </div>
     <div class="span4"> </div>
   </div>
-  <h2>Sample Theme <small>index.html</small></h2>
+  <h2>index.html</h2>
   <pre class="prettyprint linenums language-html">
 &lt;!doctype html&gt;
 &lt;html&gt;
@@ -278,51 +293,43 @@
 &lt;body&gt;
   <span class="nocode pln">&lt;script id=&quot;theme&quot; type=&quot;text/x-handlebars-template&quot;&gt;</span>
     {{{title}}}
-    {{#region &quot;packer&quot; id=&quot;main-region&quot; columns=&quot;1&quot; gutter_width=&quot;20&quot; max_auto_assets=&quot;0&quot; sizes=&quot;m&quot; default_size=&quot;m&quot; dummy_content=&quot;I-3-m,T-1-m,T-2-m,E-1-m,D-4-m&quot;}}
-      {{#asset &quot;text&quot; size=&quot;m&quot;}}
+    {{#region &quot;columnizer&quot; id=&quot;main-region&quot; max_cols=&quot;3&quot; max_auto_assets=&quot;0&quot; dummy_content=&quot;T-1|I-3|V-3|D-3|E-3&quot;}}
+
+      {{#asset &quot;text&quot; size=&quot;1&quot;}}
         {{{title}}}
-        &lt;div class=&quot;content&quot;&gt;
-          {{{body}}}
-        &lt;/div&gt;
+        {{{body}}}
       {{/asset}}
 
-      {{#asset &quot;documentgroup&quot; size=&quot;m&quot;}}
+      {{#asset &quot;imagegroup&quot; size=&quot;1&quot;}}
+        {{{imageslider images width=&quot;400&quot; height=&quot;300&quot;}}}
         {{{title}}}
-        &lt;div class=&quot;content&quot;&gt;
-          &lt;ul&gt;
+        {{{description}}}
+      {{/asset}}
+ 
+      {{#asset &quot;videogroup&quot; size=&quot;1&quot;}}
+        {{{videoplayer videos width=&quot;400&quot; height=&quot;300&quot; resolution=&quot;medium&quot;}}}
+        {{{title}}}
+        {{{description}}}
+      {{/asset}}
+
+      {{#asset &quot;documentgroup&quot; size=&quot;1&quot;}}
+        {{{title}}}
+        {{{description}}}
+        &lt;ul&gt;
           {{#documents}}
-            &lt;li&gt;&lt;a href=&quot;{{original_url}}&quot;&gt;{{source_file_name}}&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;{{original_url}}&quot;&gt;{{title}}&lt;/a&gt;&lt;/li&gt;
           {{/documents}}
-          &lt;/ul&gt;
-        &lt;/div&gt;
+        &lt;/ul&gt;
+      {{/asset}}
+ 
+      {{#asset &quot;embedgroup&quot; size=&quot;1&quot; width=&quot;400&quot;}}
+        {{#embeds}}
+          &lt;div class=&quot;embed&quot;&gt;{{{html}}}&lt;/div&gt;
+        {{/embeds}}
+        {{{title}}}
         {{{description}}}
       {{/asset}}
 
-      {{#asset &quot;embedgroup&quot; size=&quot;m&quot; width=&quot;310&quot;}}
-        {{{title}}}
-        &lt;div class=&quot;content&quot;&gt;
-          {{#embeds}}
-            &lt;div class=&quot;embed&quot;&gt;{{{html}}}&lt;/div&gt;
-          {{/embeds}}
-        &lt;/div&gt;
-        {{{description}}}
-      {{/asset}}
-
-      {{#asset &quot;imagegroup&quot; size=&quot;m&quot;}}
-        {{{title}}}
-          &lt;div class=&quot;content&quot;&gt;
-            {{{imageslider contents width=&quot;310&quot; height=&quot;232&quot;}}}
-          &lt;/div&gt;
-        {{{description}}}
-      {{/asset}}
-
-      {{#asset &quot;videogroup&quot; size=&quot;m&quot;}}
-        {{{title}}}
-          &lt;div class=&quot;content&quot;&gt;
-            {{{videoplayer contents width=&quot;310&quot; height=&quot;232&quot; resolution=&quot;medium&quot;}}}
-          &lt;/div&gt;
-        {{{description}}}
-      {{/asset}}
     {{/region}}
   <span class="nocode pln">&lt;/script&gt;</span>
 &lt;/body&gt;
@@ -433,13 +440,13 @@
         <div class="tab-content">
           <div class="tab-pane active" id="region-code-1-template">
             <pre class="prettyprint linenums language-html">
-{{#region "packer" id="main-region" max_auto_assets="0" columns="2" column_width="300" gutter_width="20" sizes="m,l"}}
+{{#region "packer" id="main-region" max_auto_assets="0" columns="2" column_width="300" gutter_width="20" sizes="m,l" default_size="m"}}
 {{/region}}</pre>
           </div>
           <div class="tab-pane" id="region-code-1-compiled">
             <pre class="prettyprint linenums language-html">
 &lt;section class=&quot;region packer-region&quot; id=&quot;main-region&quot; 
-         data-region-type=&quot;packer&quot; data-region-id=&quot;0&quot; data-gutter_width=&quot;20&quot;&gt;
+         data-region-type=&quot;packer&quot; data-region-id=&quot;0&quot; data-gutter-width=&quot;20&quot;&gt;
 &lt;/section&gt;</pre>
           </div>
         </div>
@@ -468,14 +475,14 @@
             <td>
               <p>
                 The maximum number of assets Populr will automatically place in 
-                this region when a user switches to your theme. When automatically 
+                this region when a user applies your theme to their pop. When automatically 
                 placing assets, Populr will work through your regions in source 
                 order. If it finds a region that doesn't define 
                 <code>max_auto_assets</code>, or if the value is <code>0</code>, 
-                it will add all of the remaining assets to that region. <span class="muted">This setting is optional, but recommended.</span>
+                it will add all of the remaining assets to that region. <i>This setting is optional, but recommended.</i>
               </p>
               <p>
-                <span class="label label-info">Heads up!</span> Every theme should have at least one region set up with <code>max_auto_assets="0"</code> to act as a catch-all for any remaining assets.
+                <span class="label label-info">Heads up!</span> Every theme should have at least one region set up with <code>max_auto_assets="0"</code>, usually the main content region.
               </p>
             </td>
           </tr>
@@ -488,14 +495,13 @@
       <div class="span6">
         <h2>Packer Layout Engine</h2>
         <p>
-          The Packer engine packs assets vertically based on the column a user 
-          places them in. In this layout, a user can move an asset's location 
-          between any of the logical columns. The engine then moves all of the 
-          assets in that column up. A gutter separates all of the assets and columns.
+          The Packer engine stacks assets vertically based on the column a user 
+          places them in. Users have manual control over the width of each asset, and the engine packs each asset 
+          as close to the top of the page as possible.
         </p>
         <h3>Helper</h3>
           <pre class="prettyprint linenums language-html">
-{{#region "packer" id="main-region" columns="3" column_width="120" gutter_width="10" sizes="s,m,l"}}
+{{#region "packer" id="main-region" max_auto_assets="0" columns="3" column_width="120" gutter_width="10" sizes="s,m,l" default_size="s"}}
 {{/region}}</pre>
         <h3>Engine-Specific Settings</h3>
         <table class="table table-bordered table-striped">
@@ -540,6 +546,15 @@
                   <li><code>l</code> (large)</li>
                 </ul>
                 <p><strong>Example:</strong> <code>sizes="s,m,l"</code></p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>default_size</code></td>
+              <td>
+                <p>
+                  The default size at which an asset will appear when dragged into the region. We recommend you set this to the smallest possible size.
+                </p>
+                <p><strong>Example:</strong> <code>default_size="s"</code></p>
               </td>
             </tr>
           </tbody>
@@ -591,7 +606,7 @@
         </p>
         <h3>Helper</h3>
         <pre class="prettyprint linenums language-html">
-  {{#region "columnizer" id="main-region" max_cols="3"}}
+  {{#region "columnizer" id="main-region" max_auto_assets="0" max_cols="3"}}
   {{/region}}</pre>
         <h3>Engine-Specific Settings</h3>
         <table class="table table-bordered table-striped">
@@ -1353,7 +1368,7 @@
           Each region must contain asset templates for every combination of asset type and size that can appear in the region. This provides an opportunity to apply different layouts and styling to assets depending on parent region, asset type, or size. Furthermore, the <code>{{{if_many}}}</code> helper can be used to apply layout and style variations depending on how many items are contained in an asset - see the <a href="#ifmany-helper">{{{if_many}}} helper documentation</a> for details.
         </p>
         <p>
-          Get creative! The most successful Populr themes are the ones that give users a range of stylistic variations. Add a region at the top of the theme for a hero image or video. Vary your typography depending on the size of the asset. Change your image slider parameters for the body and footer regions. Mix things up a bit and you'll have a beautiful theme on your hands in no time.
+          Get creative! The most successful Populr themes are the ones that give users a range of stylistic variations. Add a region at the top of the theme for a hero image or video. Vary your typography depending on the size of the asset. Change your image slider parameters for the body and footer regions. Mix things up a bit and you'll have a beautiful theme in no time.
         </p>
       </div>
     </div>
@@ -1600,7 +1615,7 @@
   <div class="row-fluid">
     <div class="span12">
       <p>
-        The CSS styling for Populr themes is generally stored in 3 LESS files: main.less, variables.less, and preboot.less.
+        The CSS styling for Populr themes is generally stored in 2 LESS files: main.less and variables.less.
       </p>
     </div>
   </div>
@@ -1609,7 +1624,7 @@
     <div class="row-fluid">
       <div class="span12">
         <p>
-          Main.less is where the majority of your CSS should be stored. It contains calls to import variables.less and preboot.less at the beginning of the file.
+          Main.less is where the majority of your CSS should be stored. It contains calls to import variables.less and any other necessary LESS files.
         </p>
       </div>
     </div>
@@ -1693,15 +1708,17 @@
       </div>
     </div>
   </section>
-  <section id="preboot-less">
-    <h2>Preboot.less</h2>
+  <section id="less-mixins">
+    <h2>LESS Mixin Libraries</h2>
     <div class="row-fluid">
       <div class="span12">
         <p>
-          Preboot.less is, to quote its creator Mark Otto, "a super awesome pack of mixins and variables to be used in conjunction with LESS, a CSS preprocessor for faster and easier web development." <a href="http://markdotto.com/bootstrap/" target="_blank">Read about Preboot.less</a> on Mark's website.
-        </p>
-        <p>
-          Preboot is not mandatory to include with your theme. We used Preboot because it helped us put together some of our themes faster. You're welcome to use it or not as you see fit.
+          At Populr, we often find it helpful to use LESS mixin libraries when creating a theme. These libraries provide a quick way to add cross-browser compatibility or some functional or stylistic coolness. Our favorites are:
+          <ul>
+            <li><a href="http://markdotto.com/bootstrap/" target="_blank">Preboot.less</a></li>
+            <li><a href="http://lesselements.com/" target="_blank">LESS Elements</a></li>
+            <li><a href="http://lesshat.com/" target="_blank">LESSHat</a></li>
+          </ul>
         </p>
       </div>
     </div>
@@ -1800,7 +1817,7 @@
   </div>
 
   <section id="dummy-content">
-    <h2>Loading Your Theme with Dummy Content</h2>
+    <h2>Using Dummy Content to Test Your Regions</h2>
     <div class="row-fluid">
       <div class="span12">
         <p>
@@ -1832,24 +1849,22 @@
           </ul>
         </p>
         <p>
-          Dummy content is defined slightly differently for Packer regions and Columnizer regions.
+          <code>[asset-size]</code> only has to be specified for Packer regions. Read on for more detail.
         </p>
-        <h3>Packer Dummy Content</h3>
+        <h3>Packer Dummy Content Sizes</h3>
         <p>
           Dummy content for Packer regions must specify a size for each asset. The available values are <code>s, m, and l</code>.
         </p>
-        <h3>Columnizer Dummy Content</h3>
+        <h3>Columnizer Dummy Content Sizes</h3>
         <p>
-          Dummy content for columnizer regions does not specify a size. Instead, the <code>|</code> (pipe) character is used to specify the end of a row, and asset sizes are determined based on the number of assets in a row. For example, dummy content defined as <code>"T-1,T-1|I-3</code> represents two text assets in the first row, each with a size of <code>2</code> and containing a single paragraph of lorum ipsum text, and single image asset in the next row with a size of <code>1</code> and containing 3 images.
+          Dummy content for columnizer regions does not specify a size. Instead, the <code>|</code> (pipe) character is used to specify the end of a columnizer row, and asset sizes are determined based on the number of assets in a row. For example, dummy content defined as <code>T-1,T-1|I-3</code> represents two text assets in the first row, each with a size of <code>2</code> and containing a single paragraph of lorum ipsum text, and single image asset in the next row with a size of <code>1</code> and containing 3 images.
         </p>
       </div>
     </div>
   </section>
 
-</section>
-
   <section id="python-command">
-    <h2>Running Your Theme Using a Simple Python HTTP Server</h2>
+    <h2>Running Your Theme Locally Using a Simple Python HTTP Server</h2>
     <div class="row-fluid">
       <div class="span12">
         <p>
@@ -1866,6 +1881,99 @@ python -m SimpleHTTPServer 8080</pre>
       </div>
     </div>
   </section>
+</section>
+
+<section id="recommended-process">
+  <div class="page-header">
+    <h1>Recommended Theme Build Process</h1>
+  </div>
+  <div class="row-fluid">
+    <div class="span12">
+      <p>
+        Now that you've seen the nuts and bolts of a Populr theme, read through our recommended process for taking your theme from concept to finished product. This'll save you some time, some effort, and at least a few headaches.
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="span7">
+
+      <h2>Step 1: Design</h2>
+        <p>
+          Designing up front will shorten your development time. Keep these pointers in mind while designing.
+        </p>
+        <h3>Pick a concept</h3>
+          <p>
+            First, get an idea of what your theme is "about." Themes turn out best when built around a purpose. What's the aesthetic: vintage, modern, playful? You could also think in terms of how it will be used. Will this theme be useful for newsletters, event invitations, or something else entirely?
+          </p>
+        <h3>Plan your regions</h3>
+          <p>
+            Next, plan your theme's regions. For your first theme, we recommend designing for two regions to keep it simple. Maybe you want a large region for the users' primary content and a footer region with different styling at the bottom. Maybe a hero region at the top for an eye-catching image or headline, and the page body underneath.
+          </p>
+        <h3>Sketch your asset styles</h3>
+          <p>
+            With your theme's purpose in mind, sketch out how your assets will look in each region. While some people jump straight into building, those people often run into design issues that they hadn't initially considered. Planning your design first will keep your CSS cleaner & shorter. Download this <a href="https://www.dropbox.com/s/qm7fd7yzc6g7wco/kincannon.psd">design spec PSD for our Kincannon theme</a> (or the <a href="https://www.dropbox.com/s/1hf8nbr0d3tixs9/kincannon.png">PNG version</a>) to see an example of how to use mockups to plan your theme design. Basically, you want to plan the styling for all combinations of asset type and size.
+          </p>
+          <p>
+            <b>Remember that you'll have to define and style all 5 assets for every size that you allow in each region.</b>
+          </p>
+        <h3>Design for compatibility</h3>
+          <p>
+            Finally, keep in mind that we require all of our themes to be compatible with Chrome, Safari, Firefox, and Internet Explorer all the way back to IE7. Your theme doesn't have to be pixel-perfect in all browsers, but when it does fail it should fail elegantly.
+          </p>
+        <h2>Step 2: Build</h2>
+        <p>
+          With your design in mind, you're ready to start coding. Follow these tips for a smooth build.
+        </p>
+        <h3>Check the issue log first</h3>
+          <p>
+            Before you build, check our <a href="http://tips.populr.me/theme-issues" target="_blank">theme issue log</a>. There are a handful of issues that all themers should know about.
+          </p>
+        <h3>Start with our skeletons</h3>
+          <p>
+            Start your theme with one of our theme skeletons. These are clean, basic regions with just enough code written to run as stand-alone themes.
+          </p>
+        <h3>Test as you go</h3>
+          <p>
+            Use dummy content well and test as you work. If you set up your dummy content to test all available asset types and sizes in each region, you'll save time by catching design bugs early. Review the <a href="#dummy-content">dummy content documentation</a> earlier on this page if you've forgotten how it works.
+          </p>
+      <h2>Step 3: Test</h2>
+        <p>
+          There's only so much testing you can do using dummy content. You'll have to test your theme out in the live system to make sure it's ready for showtime.
+        </p>
+        <h3>Sync your theme with GitHub</h3>
+          <p>
+            You can use GitHub to load your theme into Populr. Follow the instructions in this pop titled "<a href="http://playground.populr.me/theme-upload" target="_blank">Loading Your Theme Into Populr</a>" and you'll have it working in no time. Once your theme is loaded, it will appear in the pop editor's Themes dropdown with a red border around it. The red border indicates that your theme is in beta.
+          </p>
+        <h3>Test in the editor</h3>
+          <p>
+            Create a new pop and apply your theme to test it in Populr's editor. Keep an eye out for strange behavior or layout issues.
+          </p>
+          <p>
+            The QA team at Populr uses this <b><a href="http://checkvist.com/checklists/167228">theme QA checklist</a></b> to make sure everything's behaving the way it should. Follow those steps and you'll catch any remaining errors in your theme.
+          </p>
+      <h2>Step 4: Publish</h2>
+        <p>
+          Once your theme is bug-free, it's ready to be published. Publishing your theme will allow you to distribute it to others.
+        </p>
+        <h3>Publish from the "My account" screen</h3>
+          <p>
+            Go to the "My account" page and open the Themes tab. Click the Publish link for your theme. It will now appear in the editor in your Themes dropdown without the red border.
+          </p>
+        <h3>Share with others</h3>
+          <p>
+            Once published, you can <b>share your theme with others by clicking on the Grant Access link</b> of the Themes tab in the "My account" page. Just send that link to anyone with a Populr account. When they click the link, your theme will be added to their account.
+          </p>
+    </div>
+    <div class="span5">
+      <p>
+        &nbsp;<br>&nbsp;<br>
+        <i>The Kincannon theme design was fleshed out in a PSD before any code was written.</i><br>
+        <a href="../assets/images/theming/kincannon.psd">Download the full Kincannon PSD</a>
+      </p>
+      <a href="../assets/images/theming/kincannon.psd"><img src="../assets/images/theming/kincannon_top.png" style="border: 1px solid #ccc" /></a>
+    </div>
+  </div>
 
 </section>
 
@@ -1884,6 +1992,9 @@ python -m SimpleHTTPServer 8080</pre>
       <p>Pop pop!</p>
     </div>
   </div>
+
+</section>
+
 
   </div>
 </div>
