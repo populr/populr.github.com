@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Hello Populr Developers
-tagline: Time to Get Poppin'
+title: Populr Developer Center
+tagline: Time to Get Poppin'!
 ---
 {% include JB/setup %}
 

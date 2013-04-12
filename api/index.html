@@ -2,14 +2,14 @@
 layout: page
 title: "API"
 tagline: ""
-description: "Integrating with Populr via the API allows you to automatically generate and publish pops, manage assets, domains, and more."
+icon: /assets/images/api_bug.png
+description: "Integrating with Populr's REST API makes it easy to automatically generate and publish pops, manage assets, domains, and more."
 group: navigation
 ---
 {% include JB/setup %}
 <div class="subnav">
   <ul class="nav nav-pills">
-    <li><a href="#authentication">Authentication</a></li>
-    <li><a href="#responses">Responses</a></li>
+    <li><a href="#start">Getting Started</a></li>
     <li><a href="#creating-pops">Creating and Publishing Pops</a></li>
     <li><a href="#tracers">Tracers & Analaytics</a></li>
     <li><a href="#assets">Assets</a></li>
@@ -134,8 +134,10 @@ pre code {
 }
 </style>
 
-<section id="authentication">
-<h2>Authentication</h2>
+<section id="start">
+  <h2>Getting Started</h2>
+
+<h3>Authentication</h3>
 <hr />
 
 <p>The Populr.me API allows you to automate the creation and distribution of pops within your account.  You authenticate to the Populr.me API by providing one of your API keys in the request. You can manage your API keys from your account. You can have multiple API keys active at one time. Your API keys carry many privileges, so be sure to keep them secret!
@@ -145,8 +147,22 @@ Authentication to the API occurs via HTTP Basic Auth. Provide your API key as th
 
 </section>
 
+
+<section id="libraries">
+<h3>Libraries</h3>
+<hr />
+We've written adapters for popular languages that make it easy to use Populr's REST API within your application. Click the links below for more information:
+
+<ul>
+  <li><a href="http://www.github.com/populr/populr_api_dotnet">Populr API .NET on GitHub</a></li>
+  <li><a href="http://www.github.com/populr/populr_api_js">Populr API NodeJS on GitHub</a></li>
+</ul>
+
+Need an adapter for a language you don't see here? You can use the REST API below from virtually any language, and we're working to create more native libraries. Reach out to Populr support and let us know what you need.
+</section>
+
 <section id="responses">
-<h2>Common Responses</h2>
+<h3>Common Responses</h3>
 <hr />
 
 <p>Populr.me uses conventional HTTP response codes to indicate success or failure of an API request. In general, codes in the 2xx range indicate success, codes in the 4xx range indicate an error that resulted from the provided information (e.g. a required parameter was missing, a charge failed, etc.), and codes in the 5xx range indicate an error with Populr.</p>
@@ -219,8 +235,10 @@ Authentication to the API occurs via HTTP Basic Auth. Provide your API key as th
 
 <p><br><br></p>
 
-<h2>Pop Model</h2>
+<h3>Pop Model</h3>
 
+Throughout the REST API, the structure below is used to represent a pop. An example is shown below, along with an explanation of what each key in the JSON is used for.
+<br>
 <pre><code>{
     "_id": "0abcde12bcda1", 
     "template_id": "12qwef",
@@ -603,4 +621,3 @@ Authentication to the API occurs via HTTP Basic Auth. Provide your API key as th
 
 <p><code>file_upload_required</code>: "You must submit a multi-part form POST with a 'file' key to create an asset."</p>
 </section>
-</div>
