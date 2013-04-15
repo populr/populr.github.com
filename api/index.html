@@ -1,0 +1,744 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>API</title>
+    <meta name="description" content="Integrating with Populr's REST API makes it easy to automatically generate and publish pops, manage assets, domains, and more.">
+    <meta name="author" content="Populr.me">
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="/assets/themes/twitter/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/twitter/bootstrap/css/prettify.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <script src="/assets/themes/twitter/bootstrap/js/jquery-1.7.2.min.js"></script>
+    <script src="/assets/themes/twitter/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/themes/twitter/bootstrap/js/prettify.js"></script>
+    <script src="/assets/js/jquery.masonry.min.js"></script>
+    <script src="/assets/themes/twitter/bootstrap/js/main.js"></script>
+
+  </head>
+
+  <body data-spy="scroll" data-target=".subnav" data-offset="50" data-twttr-rendered="true">
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">Populr Developers</a>
+          <ul class="nav">
+            
+            
+            
+
+
+  
+    
+      
+      	
+      	<li class="active"><a href="/api/index.html" class="active">API</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/theming/index.html">Theming</a></li>
+      	
+      
+    
+  
+
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        
+<header>
+  <div class="hero-unit">
+    <img style="float:left; padding-right:20px;" height="135" src="/assets/images/api_bug.png"/>
+    <h1>API</h1>
+    <p></p>
+    <p>Integrating with Populr's REST API makes it easy to automatically generate and publish pops, manage assets, domains, and more.</p>
+  </div>
+</header>
+
+<div class="row">
+  <div class="span12">
+    
+<div class="subnav">
+  <ul class="nav nav-pills">
+    <li><a href="#start">Getting Started</a></li>
+    <li><a href="#creating-pops">Creating and Publishing Pops</a></li>
+    <li><a href="#tracers">Tracers & Analaytics</a></li>
+    <li><a href="#assets">Assets</a></li>
+    <li><a href="#domains">Domains</a></li>
+    <li><a href="#errors">Errors</a></li>
+  </ul>
+</div>
+<br><br><br>
+
+<style>
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote {
+    margin: 0;
+    padding: 0;
+}
+a {
+    color: #0069d6;
+}
+a:hover {
+    color: #0050a3;
+    text-decoration: none;
+}
+a img {
+    border: none;
+}
+p {
+    margin-bottom: 9px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #404040;
+    line-height: 36px;
+}
+h1 {
+    margin-bottom: 18px;
+    font-size: 30px;
+}
+h2 {
+    font-size: 24px;
+}
+h3 {
+    font-size: 18px;
+}
+h4 {
+    font-size: 16px;
+}
+h5 {
+    font-size: 14px;
+}
+h6 {
+    font-size: 13px;
+}
+hr {
+    margin: 0 0 19px;
+    border: 0;
+    border-bottom: 1px solid #ccc;
+}
+blockquote {
+    padding: 13px 13px 21px 15px;
+    margin-bottom: 18px;
+    font-family:georgia,serif;
+    font-style: italic;
+}
+blockquote:before {
+    content:"\201C";
+    font-size:40px;
+    margin-left:-10px;
+    font-family:georgia,serif;
+    color:#eee;
+}
+blockquote p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 18px;
+    margin-bottom: 0;
+    font-style: italic;
+}
+code, pre {
+    font-family: Monaco, Andale Mono, Courier New, monospace;
+}
+code {
+    background-color: #fee9cc;
+    color: rgba(0, 0, 0, 0.75);
+    padding: 1px 3px;
+    font-size: 12px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+pre {
+    display: block;
+    padding: 14px;
+    margin: 0 0 18px;
+    line-height: 16px;
+    font-size: 11px;
+    border: 1px solid #d9d9d9;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+pre code {
+    color:#737373;
+    font-size: 11px;
+    padding: 0;
+}
+@media print {
+  body,code,pre code,h1,h2,h3,h4,h5,h6 {
+    color: black;
+  }
+  table, pre {
+    page-break-inside: avoid;
+  }
+}
+</style>
+
+<section id="start">
+  <h2>Getting Started</h2>
+
+<h3>Authentication</h3>
+<hr />
+
+<p>The Populr.me API allows you to automate the creation and distribution of pops within your account.  You authenticate to the Populr.me API by providing one of your API keys in the request. You can manage your API keys from your account. You can have multiple API keys active at one time. Your API keys carry many privileges, so be sure to keep them secret!
+Authentication to the API occurs via HTTP Basic Auth. Provide your API key as the basic auth username. You do not need to provide a password. All API requests must be made over HTTPS. Calls made over plain HTTP will fail. You must authenticate for all requests.</p>
+
+<p><strong>Note: The API is not designed to enable the creation of third-party applications which authenticate as Populr.me users on their behalf. </strong></p>
+
+</section>
+
+
+<section id="libraries">
+<h3>Libraries</h3>
+<hr />
+We've written adapters for popular languages that make it easy to use Populr's REST API within your application. Click the links below for more information:
+
+<ul>
+  <li><a href="http://www.github.com/populr/populr_api_dotnet">Populr API .NET on GitHub</a></li>
+  <li><a href="http://www.github.com/populr/populr_api_js">Populr API NodeJS on GitHub</a></li>
+</ul>
+
+Need an adapter for a language you don't see here? You can use the REST API below from virtually any language, and we're working to create more native libraries. Reach out to Populr support and let us know what you need.
+</section>
+
+<section id="responses">
+<h3>Common Responses</h3>
+<hr />
+
+<p>Populr.me uses conventional HTTP response codes to indicate success or failure of an API request. In general, codes in the 2xx range indicate success, codes in the 4xx range indicate an error that resulted from the provided information (e.g. a required parameter was missing, a charge failed, etc.), and codes in the 5xx range indicate an error with Populr.</p>
+
+<pre><code>200 OK - Everything worked as expected.
+
+400 Bad Request - Often missing a required parameter.
+
+401 Unauthorized - No valid API key provided.
+
+402 Request Failed - Parameters were valid but request failed.
+
+404 Not Found - The requested item doesn't exist.
+
+500, 502, 503, 504 Server errors - something went wrong on Stripe's end.
+</code></pre>
+
+<p>Each error includes a standard set of attributes, including an <code>error_type</code> and a human-readable <code>error</code> string. These are designed to make debugging easier and allow for differentiated handling of scenarios that produce the same HTTP status code.</p>
+
+<p>If you request an endpoint that does not exist, you will receive:</p>
+
+<pre><code>Status 404: Not Found
+
+{"error":"You have reached the Populr.me API, but we do not understand how to service your request.","error_type":"request.not_found_api"}
+</code></pre>
+
+<p>If you reach the API  but your request cannot be completed due to a validation error, missing parameter, or other command-specific problem, you will receive:</p>
+
+<pre><code>Status 400
+
+{"error":"You must provide a pop_id","error_type":"request.validation"}
+</code></pre>
+
+<p><em>See the bottom of this document for a list of <code>error_types</code> that can be returned and a list of the associated error messages</em>
+<br>
+<br>
+<br></p>
+
+</section>
+<section id="creating-pops">
+  <h2>Creating and Publishing Pops</h2>
+
+<hr />
+
+<p>Using the Populr API, you can create and publish pops based on templates you've set up in your account. It's important to note that you cannot create arbitrary pops - Populr provides best-in-class tools for designing one-pagers, and we've decided not to expose an API for that design process. Using our template system, your business can define beautiful one-pagers that you can programatically fill with content and deliver. The templates are defined on the Populr.me website, making it easy for non-technical members of your team to update the visual style of your pops.</p>
+
+<p><strong>Creating a Pop API Template</strong></p>
+
+<ol>
+<li><p>Go to Populr.me and sign in to your account.</p></li>
+<li><p>Visit the Group Settings page for your team and enable API Access.</p></li>
+<li><p>Create a new pop.</p></li>
+<li><p>Add content and design the pop to match your needs.</p></li>
+<li><p>Return to your pops page and turn your new pop into an API template by clicking the pop's name and selecting 'Make API Template.'</p></li>
+<li><p>Type [property] anywhere to define a variable you can replace from the API.</p></li>
+<li><p>Edit an asset region and check the "API Region" checkbox to add images or documents from the API.</p></li>
+</ol>
+
+
+<p><strong>Using a Pop API Template</strong></p>
+
+<ol>
+<li><p>Submit one or more POST requests to upload documents, images, etc…</p></li>
+<li><p>Submit a POST request to create a new pop based on your template</p></li>
+<li><p>Submit a POST request to publish the pop.</p></li>
+</ol>
+
+
+<p><em>You can create a variety of Pop templates to meet the needs of your business. Need a more flexible solution? Contact Populr.me sales at sales@populr.me</em></p>
+
+<p><br><br></p>
+
+<h3>Pop Model</h3>
+
+Throughout the REST API, the structure below is used to represent a pop. An example is shown below, along with an explanation of what each key in the JSON is used for.
+<br>
+<pre><code>{
+    "_id": "0abcde12bcda1", 
+    "template_id": "12qwef",
+    "name": "Pop Name",
+    "title": "Pop Page Title",
+    "label_names": ["label_a", "label_b"],
+    "password": "1234",
+    "tracers": [{
+        &lt;tracer models&gt;
+    }],
+    "published_pop_url": "http://account-name.populr.me/page-slug",
+    "domain": "generic",
+    "password": nil,
+    "created_at": '2013-02-05T22:57:00Z',
+    "unpopulated_api_tags": [ 'TITLE', 'ipsum' ],
+    "unpopulated_api_regions": [ 'image_region', 'hjkhkjhjk123' ] },
+
+}
+</code></pre>
+
+<p><code>name</code>: The name of the pop that appears on the pops list page.</p>
+
+<p><code>title</code>: The title of the published pop web page. This generally appears at the top of the pop, but some themes remove the title region.</p>
+
+<p><code>label_names</code>: An array of string labels which can be used to filter pops on the pops list.</p>
+
+<p><code>password</code>: A password that is required for users to view the published pop.</p>
+
+<p><code>tracers</code>: Custom links to the pop that allow views, clicks, and other metrics to be tracked on a more granular basis. Must be created using one of the tracer API calls.</p>
+
+<p><code>published_pop_url</code>: The URL of the published pop, or null if the pop has not been published.</p>
+
+<p><code>domain</code>: The domain where the pop is hosted. When assigning a domain, you must choose one that has already been setup within your Populr.me account.</p>
+
+<p><code>unpopulated_api_tags</code>: An array of API tags that were defined in the pop template and have not been populated with content.</p>
+
+<p><code>unpopulated_api_regions</code>: An array of API regions which are currently empty in the pop and can be populated with assets.</p>
+
+<p><br></p>
+
+<h2>API Calls</h2>
+
+<hr />
+
+<h4>POST http://api.populr.me/v1/pops</h4>
+
+<p>Creates a new, unpublished pop based on the template with ID <code>template_id</code>. Populates the tags <code>[first_name]</code> and <code>[last_name]</code> with the content provided, and places two image assets in the region called <code>image_region_a</code>.</p>
+
+<pre><code>{
+  "pop": {
+    "template_id": "12qwef",
+    "name": "Node Pop",
+    "title": "My New Pop",
+    "label_names": ["a", "b", "c"],
+    "password": "1234"
+  },
+
+  "populate_tags": {
+    "first_name": "Ben",
+    "last_name": "Gotow"
+  },
+
+  "populate_regions": {
+    "image_region_a": [&lt;Image Asset ID&gt;, &lt;Image Asset ID&gt;],
+    "document_region_a": &lt;Document Asset ID&gt;,
+  }
+}
+</code></pre>
+
+<p>Response:</p>
+
+<pre><code>{ 
+  _id: '51536c6add02dc42d9000005',
+  title: 'My New Pop',
+  created_at: '2013-03-27T22:02:18Z',
+  domain: null,
+  name: 'Node Pop',
+  password: '1234',
+  published_pop_url: '' ,
+  label_names: ["a", "b", "c"],
+  unpopulated_api_tags: ["city"],
+  unpopulated_api_regions: ["document_region_b"]
+}
+</code></pre>
+
+<h4>PUT http://api.populr.me/v1/pops/:id</h4>
+
+<p>Updates the pop with a new title, fills in the <code>[city]</code> tag, and adds a document to <code>document_region_b</code>.</p>
+
+<pre><code>{
+  "pop": {
+    "title": "New Title",
+  },
+
+  "populate_tags": {
+    "city": "Blacksburg"
+  },
+
+  "populate_regions": {
+    "document_region_b": "12346",
+  }
+}
+</code></pre>
+
+<p>Failed Response:</p>
+
+<pre><code>{
+  "error_type":"request.validation",
+  "error": "You must pass a valid asset ID for each asset you plan to populate (evaluating '12346' for document_region_b)"
+}
+</code></pre>
+
+<p>Successful Response:</p>
+
+<pre><code>{ 
+  _id: '51536c6add02dc42d9000005',
+  title: 'New Title',
+  created_at: '2013-03-27T22:02:18Z',
+  domain: null,
+  name: 'Node Pop',
+  password: '1234',
+  published_pop_url: '' ,
+  label_names: ["a", "b", "c"],
+  unpopulated_api_tags: [],
+  unpopulated_api_regions: []
+}
+</code></pre>
+
+<h4>DELETE http://api.populr.me/v1/pops/:id</h4>
+
+<p>Deletes the pop permanently. This action cannot be undone.</p>
+
+<h4>POST http://api.populr.me/v1/pops/:id/publish</h4>
+
+<p>Publishes the pop, making it available on the web. Returns the pop JSON, with <code>published_pop_url</code> defined.</p>
+
+<h4>POST http://api.populr.me/v1/pops/:id/unpublish</h4>
+
+<p>Unpublishes the pop, taking down the page from the web immediately and rendering tracers unusable. Returns the pop JSON.</p>
+
+<p><br><br></p>
+
+</section>
+<section id="tracers">
+  <h2>Tracers &amp; Analaytics</h2>
+
+<hr />
+
+<p>Tracers allow you to track interactions with a published pop. Each pop can have multiple tracers, and each tracer has a code which must be appended to the pop URL.</p>
+
+<h3>Tracer Model</h3>
+
+<pre><code>{
+    "code": "tc",
+    "name": "Twitter",
+    "notify_on_open": true,
+    "notify_webhook": "http://api.mysite.com/pop_was_opened/%{pop-id}",
+    "analytics":
+            "views": 6,
+            "clicks": 24,
+            "links": {
+                "http://www.populr.me/": {
+                    "clicks":4
+                }
+            },
+            "assets": {
+                "unnamed_region_0": {
+                    "132213ae12bc1312": {
+                        "clicks": 10
+                    },
+                }
+                "my_image_region": {
+                    "132213ae21f4812f": {
+                        "clicks": 10
+                    },
+                    "f48121f48121f421": {
+                        "clicks": 3,
+                    }
+                }
+            }
+        }
+}
+</code></pre>
+
+<p><code>name</code>: The name of the tracer that appears on the tracer list page. Tracers with email addresses as names will automatically be categorized under the email section of the Populr analytics dashboard.</p>
+
+<p><code>code</code>: An autogenerated code that is appended to the pop URL</p>
+
+<p><code>analytics</code>: Data collected as users interact with the published pop. Allows you to retrieve information about clicks on particular assets or links. Items which have not been clicked do not appear.</p>
+
+<p><code>notify_on_open</code>: Set to true to enable the webhook.</p>
+
+<p><code>notify_webhook</code>: A URL that Populr will POST to when the tracer URL is viewed. You can include the arguments <code>%{pop-id}</code> and <code>%{tracer-id}</code> in the URL. The URL will be hit 15 minutes after the first view and hit again hourly as long as the pop continues to be viewed. The trigger is deactivated once it has been fired more than a dozen times. The following JSON is posted:</p>
+
+<pre><code>"group": {
+    "id": &lt;Your Populr Group's ID&gt;,
+    "name": &lt;Your Populr Group's Name&gt;
+},
+"pop": {
+    "id": &lt;Pop ID&gt;,
+     "name": &lt;Pop Name&gt;,
+     "title": &lt;Pop Title&gt;,
+     "slug": &lt;Pop Slug&gt;,
+     "domain": &lt;Pop Domain&gt;,
+     "published_pop_url": &lt;URL&gt;,
+     "created_at": &lt;Timestamp&gt;,
+},
+"tracer": {
+    "name": "Twitter"
+    "code": "tc",
+    "analytics": {
+        "views": 6,
+        "clicks": 24,
+        "links": {
+            "http://www.populr.me/": {
+                "clicks":4
+            }
+        },
+        "assets": {
+            "unnamed_region_0": {
+                "132213ae12bc1312": {
+                    "clicks": 10
+                },
+            }
+            "my_image_region": {
+                "132213ae21f4812f": {
+                    "clicks": 10
+                },
+                "f48121f48121f421": {
+                    "clicks": 3,
+                }
+            }
+        }
+    }
+}
+</code></pre>
+
+<p><br></p>
+
+<h4>POST http://api.populr.me/v1/pops/:id/tracers</h4>
+
+<pre><code>{
+    "name": "tracer_for_recipient_1",
+    "notify_on_open": true,
+    "notify_webhook": "http://www.mysite.com/pop_opened/%{pop-id}"
+}
+</code></pre>
+
+<p>Response:</p>
+
+<pre><code>{
+    "_id": '51536c6add02dc42d9000005',
+    "name": "tracer_for_recipient_1",
+    "notify_on_open": true,
+    "notify_webhook": "http://www.mysite.com/pop_opened/%{pop-id}",
+    "analytics": {
+        "views": 0,
+        "clicks": 0
+    }
+}
+</code></pre>
+
+<h4>GET http://api.populr.me/v1/pops/:id/tracers/:tracer_id</h4>
+
+<pre><code>{
+}
+</code></pre>
+
+<p>Response:</p>
+
+<pre><code>{
+    "_id": '51536c6add02dc42d9000005',
+    "name": "tracer_for_recipient_1",
+    "notify_on_open": true,
+    "notify_webhook": "http://www.mysite.com/pop_opened/%{pop-id}",
+    "analytics": {
+        "views": 6,
+        "clicks": 2
+    }
+}
+</code></pre>
+
+<p><br>
+<br></p>
+
+</section>
+<section id="assets">
+  <h2>Assets</h2>
+
+<hr />
+
+<p>You can add assets to your API templates directly on the Populr website. However, many uses of the API require adding custom documents and images to each pop that is generated. Attaching an asset to a pop is a two-step process. First, upload the asset using one of the POST methods below. Then create (or update) a pop with the new asset's id in the assets hash.</p>
+
+<h3>Asset Model</h3>
+
+<pre><code>{
+    _id: '51536582dd02dcccf9000004',
+    description: null,
+    link: null,
+    title: '',
+    asset_id: '51536582dd02dcccf9000004',
+    thumbnail_url: '//d2l5dw7ow11yzt.cloudfront.net/210/150/-/....',
+    small_thumbnail_url: '//d2l5dw7ow11yzt.cloudfront.net/105/75/-/...',
+    tiny_url: '//d2l5dw7ow11yzt.cloudfront.net/32/32/-/...',
+    original_url: '//d2l5dw7ow11yzt.cloudfront.net/0/0/...',
+    upload_identifier: null
+} 
+</code></pre>
+
+<h4>POST http://api.populr.me/v1/documents</h4>
+
+<h4>POST http://api.populr.me/v1/images</h4>
+
+<p>To upload a new asset, make a multi-part/form POST with the following keys:</p>
+
+<p><code>file</code>: An image or document file attached to the form post.</p>
+
+<p><code>title</code>: (Optional) The title that should be displayed within the pop)</p>
+
+<p><code>link</code>: (Optional) For images, an optional href for the image once placed in a pop.</p>
+
+<p><br></p>
+
+<h4>DELETE http://api.populr.me/v1/documents/:id</h4>
+
+<h4>DELETE http://api.populr.me/v1/images/:id</h4>
+
+<p><br>
+<br></p>
+
+</section>
+<section id="domains">
+  <h2>Domains</h2>
+
+<hr />
+
+<p>You can attach one or more domains to your Populr account. By default, published pops are available at a subdomain of populr.me, such as http://myaccount.populr.me/my-page. By pointing a domain at Populr and registering it with your account, you can publish pops to that domain as well.</p>
+
+<p>For more information about setting up custom domains, check out the <a href="http://help.populr.me/customer/portal/articles/669446-custom-domains">Populr.me documentation</a>.</p>
+
+<h4>GET http://api.populr.me/v1/domains</h4>
+
+<p>A list of the domains attached to your Populr.me account. The list always includes at least one item, which is the default domain.</p>
+
+<pre><code>[
+   "mygroup.populr.me",
+   "www.apple.com"
+]
+</code></pre>
+
+<h4>POST http://api.populr.me/v1/domains</h4>
+
+<p><code>domain</code>: The domain to add to your account, such as www.mysite.com, pops.mysite.com, or mysite.com. The domain should already be pointing at Populr's IP address. If the domain is not mis-formatted, not pointing at Populr, or already in use within another Populr group, you'll receive a 400 response with an error.</p>
+
+<h4>DELETE http://api.populr.me/v1/domains</h4>
+
+<p><code>domain</code>: The domain to delete from your account. Must match one of the options returned from the listing request.</p>
+
+</section>
+<section id="errors">
+  <h2>Request Error Types</h2>
+
+<hr />
+
+<p><strong>General</strong></p>
+
+<p><code>illegial_asset_type</code>: You attempted to place an invalid asset of type %{value} within a pop. Acceptable types are %{extra}.</p>
+
+<p><code>domain_not_available</code>: The domain %{value} is not attached to your account. Available options are %{extra}.</p>
+
+<p><code>missing_param</code>: "Please provide a value for %{value}."</p>
+
+<p><code>region_not_found</code>: "The region %{value} could not be found in the pop. Available regions are: %{extra}"</p>
+
+<p><code>tag_not_found</code>: "The tag %{value} could not be found in the pop. Available tags are: %{extra}"</p>
+
+<p><code>not_fully_populated</code>: "The pop you are trying to publish contains unfilled %{value}: %{extra}."</p>
+
+<p><code>invalid_webhook_url</code>: "The webhook URL you provided (%{value}) cannot be used. It must be a valid URL, and the only allowed arguments are 'id' (or 'pop-id') and 'tracer-id'"</p>
+
+<p><code>file_upload_required</code>: "You must submit a multi-part form POST with a 'file' key to create an asset."</p>
+</section>
+
+  </div>
+</div>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; Populr.me 2012 
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+  </body>
+</html>
+
