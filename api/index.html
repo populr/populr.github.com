@@ -217,7 +217,7 @@ Need an adapter for a language you don't see here? You can use the REST API belo
 <li><p>Create a new pop.</p></li>
 <li><p>Add content and design the pop to match your needs.</p></li>
 <li><p>Return to your pops page and turn your new pop into an API template by clicking the pop's name and selecting 'Make API Template.'</p></li>
-<li><p>Type [property] anywhere to define a variable you can replace from the API.</p></li>
+<li><p>Type {{property}} anywhere to define a variable you can replace from the API.</p></li>
 <li><p>Edit an asset region and check the "API Region" checkbox to add images or documents from the API.</p></li>
 </ol>
 
@@ -285,7 +285,7 @@ Throughout the REST API, the structure below is used to represent a pop. An exam
 
 <h4>POST http://api.populr.me/v1/pops</h4>
 
-<p>Creates a new, unpublished pop based on the template with ID <code>template_id</code>. Populates the tags <code>[first_name]</code> and <code>[last_name]</code> with the content provided, and places two image assets in the region called <code>image_region_a</code>.</p>
+<p>Creates a new, unpublished pop based on the template with ID <code>template_id</code>. Populates the tags <code>{{first_name}}</code> and <code>{{last_name}}</code> with the content provided, and places two image assets in the region called <code>image_region_a</code>.</p>
 
 <pre><code>{
   "pop": {
@@ -326,7 +326,7 @@ Throughout the REST API, the structure below is used to represent a pop. An exam
 
 <h4>PUT http://api.populr.me/v1/pops/:id</h4>
 
-<p>Updates the pop with a new title, fills in the <code>[city]</code> tag, and adds a document to <code>document_region_b</code>.</p>
+<p>Updates the pop with a new title, fills in the <code>{{city}}</code> tag, and adds a document to <code>document_region_b</code>.</p>
 
 <pre><code>{
   "pop": {
