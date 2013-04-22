@@ -254,8 +254,10 @@ Throughout the REST API, the structure below is used to represent a pop. An exam
     "password": nil,
     "created_at": '2013-02-05T22:57:00Z',
     "unpopulated_api_tags": [ 'TITLE', 'ipsum' ],
-    "unpopulated_api_regions": [ 'image_region', 'hjkhkjhjk123' ] },
-
+    "unpopulated_api_regions": {
+      "profile_picture_region": {"type":"image"},
+      "venue_map_region": {"type":"embed"}
+    }
 }
 </code></pre>
 
@@ -275,7 +277,7 @@ Throughout the REST API, the structure below is used to represent a pop. An exam
 
 <p><code>unpopulated_api_tags</code>: An array of API tags that were defined in the pop template and have not been populated with content.</p>
 
-<p><code>unpopulated_api_regions</code>: An array of API regions which are currently empty in the pop and can be populated with assets.</p>
+<p><code>unpopulated_api_regions</code>: A hash of API regions which are currently empty in the pop and can be populated with assets. Each key is a region ID. The <code>type</code> property associated with each key is important. Regions may only be filled with assets of the expected type.</p>
 
 <p><br></p>
 
@@ -335,7 +337,7 @@ Throughout the REST API, the structure below is used to represent a pop. An exam
   published_pop_url: '' ,
   label_names: ["a", "b", "c"],
   unpopulated_api_tags: ["city"],
-  unpopulated_api_regions: ["document_region_b"]
+  unpopulated_api_regions: {"document_region_b": {"type":"embed"}}
 }
 </code></pre>
 
@@ -378,7 +380,7 @@ Throughout the REST API, the structure below is used to represent a pop. An exam
   published_pop_url: '' ,
   label_names: ["a", "b", "c"],
   unpopulated_api_tags: [],
-  unpopulated_api_regions: []
+  unpopulated_api_regions: {}
 }
 </code></pre>
 
