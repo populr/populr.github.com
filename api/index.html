@@ -283,6 +283,21 @@ Throughout the REST API, the structure below is used to represent a pop. An exam
 
 <hr />
 
+<h4>GET http://api.populr.me/v1/templates<span style="color:#777;">?count=50&offset=100</span></h4>
+
+<p>Fetch a list of the templates you've created on Populr.me. Using a template_id, you can instantiate new pops.</p>
+
+
+<h4>GET http://api.populr.me/v1/templates/:id/pops<span style="color:#777;">?count=50&offset=100</span></h4>
+
+<p>Fetch a list of the pops created from a particular template.</p>
+
+
+<h4>GET http://api.populr.me/v1/pops<span style="color:#777;">?count=50&offset=100</span></h4>
+
+<p>Fetch a set of existing pops from your account. Note that this endpoints returns all the pops in your account.
+  To fetch the pops created with a specific template, use <code>/templates/:id/pops</code>.
+
 <h4>POST http://api.populr.me/v1/pops</h4>
 
 <p>Creates a new, unpublished pop based on the template with ID <code>template_id</code>. Populates the tags <code>{{first_name}}</code> and <code>{{last_name}}</code> with the content provided, and places two image assets in the region called <code>image_region_a</code>.</p>
@@ -540,31 +555,40 @@ Throughout the REST API, the structure below is used to represent a pop. An exam
     link: null,
     title: '',
     asset_id: '51536582dd02dcccf9000004',
-    thumbnail_url: '//d2l5dw7ow11yzt.cloudfront.net/210/150/-/....',
-    small_thumbnail_url: '//d2l5dw7ow11yzt.cloudfront.net/105/75/-/...',
-    tiny_url: '//d2l5dw7ow11yzt.cloudfront.net/32/32/-/...',
-    original_url: '//d2l5dw7ow11yzt.cloudfront.net/0/0/...',
-    upload_identifier: null
-} 
+    upload_identifier: null,
+    source_html: '...only in embeds...'
+}
 </code></pre>
 
 <h4>POST http://api.populr.me/v1/documents</h4>
 
 <h4>POST http://api.populr.me/v1/images</h4>
 
-<p>To upload a new asset, make a multi-part/form POST with the following keys:</p>
+<h4>POST http://api.populr.me/v1/embeds</h4>
+
+<p>To upload a new image or document asset, make a multi-part/form POST with the following keys:</p>
 
 <p><code>file</code>: An image or document file attached to the form post.</p>
 
-<p><code>title</code>: (Optional) The title that should be displayed within the pop)</p>
+<p><code>title</code>: (Optional) The title that should be displayed within the asset list.</p>
 
 <p><code>link</code>: (Optional) For images, an optional href for the image once placed in a pop.</p>
+
+<p>To upload a new embed asset, make a JSON POST with the following keys:</p>
+
+<p><code>source_html</code>: HTML that you want to display within the pop. For best results, use HTML that has a flexible width, or both a fixed width and height.</p>
+
+<p><code>title</code>: (Optional) The embed title that should be displayed when viewing the embed in the asset list.</p>
+
+<p><code>description</code>: (Optional) A description that is displayed in the editor.</p>
 
 <p><br></p>
 
 <h4>DELETE http://api.populr.me/v1/documents/:id</h4>
 
 <h4>DELETE http://api.populr.me/v1/images/:id</h4>
+
+<h4>DELETE http://api.populr.me/v1/embeds/:id</h4>
 
 <p><br>
 <br></p>
