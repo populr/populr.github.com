@@ -318,7 +318,7 @@ Need an adapter for a language you don't see here? You can use the REST API belo
 <li><p>Create a new pop.</p></li>
 <li><p>Add content and design the pop to match your needs.</p></li>
 <li><p>Return to your pops page and turn your new pop into an API template by clicking the pop's name and selecting 'Make API Template.'</p></li>
-<li><p>Type [property] anywhere to define a variable you can replace from the API.</p></li>
+<li><p>Type  anywhere to define a variable you can replace from the API.</p></li>
 <li><p>Edit an asset region and check the "API Region" checkbox to add images or documents from the API.</p></li>
 </ol>
 
@@ -355,8 +355,10 @@ Throughout the REST API, the structure below is used to represent a pop. An exam
     "password": nil,
     "created_at": '2013-02-05T22:57:00Z',
     "unpopulated_api_tags": [ 'TITLE', 'ipsum' ],
-    "unpopulated_api_regions": [ 'image_region', 'hjkhkjhjk123' ] },
-
+    "unpopulated_api_regions": {
+      "profile_picture_region": {"type":"image"},
+      "venue_map_region": {"type":"embed"}
+    }
 }
 </code></pre>
 
@@ -376,7 +378,7 @@ Throughout the REST API, the structure below is used to represent a pop. An exam
 
 <p><code>unpopulated_api_tags</code>: An array of API tags that were defined in the pop template and have not been populated with content.</p>
 
-<p><code>unpopulated_api_regions</code>: An array of API regions which are currently empty in the pop and can be populated with assets.</p>
+<p><code>unpopulated_api_regions</code>: A hash of API regions which are currently empty in the pop and can be populated with assets. Each key is a region ID. The <code>type</code> property associated with each key is important. Regions may only be filled with assets of the expected type.</p>
 
 <p><br></p>
 
@@ -384,9 +386,24 @@ Throughout the REST API, the structure below is used to represent a pop. An exam
 
 <hr />
 
+<h4>GET http://api.populr.me/v1/templates<span style="color:#777;">?count=50&offset=100</span></h4>
+
+<p>Fetch a list of the templates you've created on Populr.me. Using a template_id, you can instantiate new pops.</p>
+
+
+<h4>GET http://api.populr.me/v1/templates/:id/pops<span style="color:#777;">?count=50&offset=100</span></h4>
+
+<p>Fetch a list of the pops created from a particular template.</p>
+
+
+<h4>GET http://api.populr.me/v1/pops<span style="color:#777;">?count=50&offset=100</span></h4>
+
+<p>Fetch a set of existing pops from your account. Note that this endpoints returns all the pops in your account.
+  To fetch the pops created with a specific template, use <code>/templates/:id/pops</code>.
+
 <h4>POST http://api.populr.me/v1/pops</h4>
 
-<p>Creates a new, unpublished pop based on the template with ID <code>template_id</code>. Populates the tags <code>[first_name]</code> and <code>[last_name]</code> with the content provided, and places two image assets in the region called <code>image_region_a</code>.</p>
+<p>Creates a new, unpublished pop based on the template with ID <code>template_id</code>. Populates the tags <code></code> and <code></code> with the content provided, and places two image assets in the region called <code>image_region_a</code>.</p>
 
 <pre><code>{
   "pop": {
@@ -421,13 +438,13 @@ Throughout the REST API, the structure below is used to represent a pop. An exam
   published_pop_url: '' ,
   label_names: ["a", "b", "c"],
   unpopulated_api_tags: ["city"],
-  unpopulated_api_regions: ["document_region_b"]
+  unpopulated_api_regions: {"document_region_b": {"type":"embed"}}
 }
 </code></pre>
 
 <h4>PUT http://api.populr.me/v1/pops/:id</h4>
 
-<p>Updates the pop with a new title, fills in the <code>[city]</code> tag, and adds a document to <code>document_region_b</code>.</p>
+<p>Updates the pop with a new title, fills in the <code></code> tag, and adds a document to <code>document_region_b</code>.</p>
 
 <pre><code>{
   "pop": {
@@ -464,7 +481,7 @@ Throughout the REST API, the structure below is used to represent a pop. An exam
   published_pop_url: '' ,
   label_names: ["a", "b", "c"],
   unpopulated_api_tags: [],
-  unpopulated_api_regions: []
+  unpopulated_api_regions: {}
 }
 </code></pre>
 
@@ -497,30 +514,30 @@ Throughout the REST API, the structure below is used to represent a pop. An exam
     "name": "Twitter",
     "notify_on_open": true,
     "notify_webhook": "http://api.mysite.com/pop_was_opened/%{pop-id}",
-    "analytics":
-            "views": 6,
-            "clicks": 24,
-            "links": {
-                "http://www.populr.me/": {
-                    "clicks":4
+    "analytics": {
+        "views": 6,
+        "clicks": 24,
+        "links": {
+            "http://www.populr.me/": {
+                "clicks": 4
+            }
+        },
+        "assets": {
+            "unnamed_region_0": {
+                "132213ae12bc1312": {
+                    "clicks": 10
                 }
             },
-            "assets": {
-                "unnamed_region_0": {
-                    "132213ae12bc1312": {
-                        "clicks": 10
-                    },
-                }
-                "my_image_region": {
-                    "132213ae21f4812f": {
-                        "clicks": 10
-                    },
-                    "f48121f48121f421": {
-                        "clicks": 3,
-                    }
+            "my_image_region": {
+                "132213ae21f4812f": {
+                    "clicks": 10
+                },
+                "f48121f48121f421": {
+                    "clicks": 3
                 }
             }
         }
+    }
 }
 </code></pre>
 
@@ -641,31 +658,40 @@ Throughout the REST API, the structure below is used to represent a pop. An exam
     link: null,
     title: '',
     asset_id: '51536582dd02dcccf9000004',
-    thumbnail_url: '//d2l5dw7ow11yzt.cloudfront.net/210/150/-/....',
-    small_thumbnail_url: '//d2l5dw7ow11yzt.cloudfront.net/105/75/-/...',
-    tiny_url: '//d2l5dw7ow11yzt.cloudfront.net/32/32/-/...',
-    original_url: '//d2l5dw7ow11yzt.cloudfront.net/0/0/...',
-    upload_identifier: null
-} 
+    upload_identifier: null,
+    source_html: '...only in embeds...'
+}
 </code></pre>
 
 <h4>POST http://api.populr.me/v1/documents</h4>
 
 <h4>POST http://api.populr.me/v1/images</h4>
 
-<p>To upload a new asset, make a multi-part/form POST with the following keys:</p>
+<h4>POST http://api.populr.me/v1/embeds</h4>
+
+<p>To upload a new image or document asset, make a multi-part/form POST with the following keys:</p>
 
 <p><code>file</code>: An image or document file attached to the form post.</p>
 
-<p><code>title</code>: (Optional) The title that should be displayed within the pop)</p>
+<p><code>title</code>: (Optional) The title that should be displayed within the asset list.</p>
 
 <p><code>link</code>: (Optional) For images, an optional href for the image once placed in a pop.</p>
+
+<p>To upload a new embed asset, make a JSON POST with the following keys:</p>
+
+<p><code>source_html</code>: HTML that you want to display within the pop. For best results, use HTML that has a flexible width, or both a fixed width and height.</p>
+
+<p><code>title</code>: (Optional) The embed title that should be displayed when viewing the embed in the asset list.</p>
+
+<p><code>description</code>: (Optional) A description that is displayed in the editor.</p>
 
 <p><br></p>
 
 <h4>DELETE http://api.populr.me/v1/documents/:id</h4>
 
 <h4>DELETE http://api.populr.me/v1/images/:id</h4>
+
+<h4>DELETE http://api.populr.me/v1/embeds/:id</h4>
 
 <p><br>
 <br></p>
