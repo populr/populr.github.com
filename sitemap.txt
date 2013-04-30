@@ -1,12 +1,13 @@
 
-http://populr.github.com/atom.xml
-http://populr.github.com/blog/archive.html
-http://populr.github.com/blog/categories.html
-http://populr.github.com/blog/index.html
-http://populr.github.com/blog/pages.html
-http://populr.github.com/blog/tags.html
-http://populr.github.com/index.html
-http://populr.github.com/sitemap.txt
-http://populr.github.com/theming/index.html
+http://developers.populr.me/api/index.html
+http://developers.populr.me/atom.xml
+http://developers.populr.me/blog/archive.html
+http://developers.populr.me/blog/categories.html
+http://developers.populr.me/blog/index.html
+http://developers.populr.me/blog/pages.html
+http://developers.populr.me/blog/tags.html
+http://developers.populr.me/index.html
+http://developers.populr.me/sitemap.txt
+http://developers.populr.me/theming/index.html
 
-http://populr.github.com/lessons/2011/12/29/jekyll-introduction
+http://developers.populr.me/lessons/2011/12/29/jekyll-introduction

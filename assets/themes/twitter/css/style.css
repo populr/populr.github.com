@@ -1,7 +1,7 @@
 /* Override some defaults */
 html,
 body {
-  background-color: #eee;
+  background: url(/assets/images/background_developers_repeating.gif) top left repeat;
 }
 body {
   padding-top: 40px;
@@ -27,9 +27,9 @@ body {
   -webkit-border-radius: 0 0 6px 6px;
   -moz-border-radius: 0 0 6px 6px;
   border-radius: 0 0 6px 6px;
-  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
-  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
 }
 /* Page header tweaks */
 /*.page-header {
@@ -225,12 +225,12 @@ section {
   margin: 4px;
   padding: 4px;
 }
-#regions .anatomy-preview .isotope-region .asset.asset-size-s {
+#regions .anatomy-preview .packer-region .asset.asset-size-s {
   width: 124px;
 }
-#regions .anatomy-preview .isotope-region .asset.asset-size-m {
+#regions .anatomy-preview .packer-region .asset.asset-size-m {
   width: 264px;
 }
-#regions .anatomy-preview .isotope-region .asset.asset-size-l {
+#regions .anatomy-preview .packer-region .asset.asset-size-l {
   width: 404px;
 }
