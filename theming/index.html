@@ -17,8 +17,8 @@ group: navigation
       <ul class="dropdown-menu">
         <li><a href="#regions">Regions Overview</a></li>
         <li class="divider"></li>
-        <li><a href="#packer-regions">Packer Layout Engine</a></li>
         <li><a href="#columnizer-regions">Columnizer Layout Engine</a></li>
+        <li><a href="#packer-regions">Packer Layout Engine</a></li>
       </ul>
     </li>
     <li class="dropdown">
@@ -28,7 +28,6 @@ group: navigation
         <li class="divider"></li>
         <li><a href="#text-assets">Text Assets</a></li>
         <li><a href="#imagegroup-assets">ImageGroup Assets</a></li>
-        <li><a href="#videogroup-assets">VideoGroup Assets</a></li>
         <li><a href="#documentgroup-assets">DocumentGroup Assets</a></li>
         <li><a href="#embedgroup-assets">EmbedGroup Assets</a></li>
         <li class="divider"></li>
@@ -44,7 +43,6 @@ group: navigation
         <li><a href="#ifmany-helper">If Many Helper</a></li>
         <li><a href="#formatfilesize-helper">Format File Size Helper</a></li>
         <li><a href="#imageslider-helper">Image Slider Helper</a></li>
-        <li><a href="#videoplayer-helper">Video Player Helper</a></li>
       </ul>
     </li>
     <li class="dropdown">
@@ -117,10 +115,8 @@ group: navigation
       <h3>Example Asset Template <small>(don't worry about the syntax right now)</small></h3>
       <pre class="prettyprint linenums language-html">{% raw %}
 {{#asset &quot;text&quot; size=&quot;2&quot;}}
-{{{title}}}
-&lt;div class=&quot;content&quot;&gt;
+  {{{title}}}
   {{{body}}}
-&lt;/div&gt;
 {{/asset}}{% endraw %}</pre>
       <p>
         Asset templates are comprised of 3 parts: a title, the content, and a description. (Text assets like the one shown above generally don't include a description, since the content is a block of text.) The content is the only mandatory component of the template; titles and descriptions are optional. These parts can be appear in any order within the asset template.
@@ -152,21 +148,14 @@ group: navigation
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li><a href="https://github.com/populr-themes/columnizer_base"><i class="icon-globe"></i> View on Github</a></li>
-            <li><a href="../assets/themes/columnizer_skeleton.zip"><i class="icon-download-alt"></i> Download Zip</a></li>
+            <li><a href="https://github.com/populr-themes/columnizer_base"><i class="icon-globe"></i> View on GitHub</a></li>
+            <li><a href="https://github.com/populr-themes/columnizer_base/archive/master.zip"><i class="icon-download-alt"></i> Download ZIP</a></li>
           </ul>
         </div>
         <p>
           The base theme contains the bare minimum you need to build a new theme:<br>
           a single columnizer region with 3 columns
         </p>
-<!--        <hr />
-        <a class="btn btn-large btn-primary" href="https://github.com/populr/themes">
-          <i class="icon-eye-open icon-white"></i> See Theme Source Code
-        </a>
-        <p style="margin-top: 5px;">
-          See the code for all of our themes on GitHub and find out how we work our magic.
-        </p> -->
       </div>
     </div>
   </div>
@@ -193,6 +182,8 @@ group: navigation
 &lt;head&gt;
   &lt;meta charset=&quot;utf-8&quot;&gt;
   &lt;title&gt;My New Theme&lt;/title&gt;
+  &lt;meta itemprop=&quot;dummyImageCategory&quot; content=&quot;All&quot;&gt;
+  &lt;meta itemprop=&quot;dummyContentLength&quot; content=&quot;medium&quot;&gt;
   &lt;link rel=&quot;stylesheet/less&quot; type=&quot;text/css&quot; href=&quot;/styles/main.less&quot;&gt;
   &lt;script src=&quot;http://populr.me/assets/developers/themer.js&quot;&gt;&lt;/script&gt; 
   &lt;script src=&quot;/js/main.js&quot;&gt;&lt;/script&gt;
@@ -208,17 +199,11 @@ group: navigation
       {{/asset}}
 
       {{#asset &quot;imagegroup&quot; size=&quot;1&quot;}}
-        {{{imageslider images width=&quot;400&quot; height=&quot;300&quot;}}}
         {{{title}}}
+        {{{imageslider images width=&quot;400&quot; height=&quot;300&quot;}}}
         {{{description}}}
       {{/asset}}
  
-      {{#asset &quot;videogroup&quot; size=&quot;1&quot;}}
-        {{{videoplayer videos width=&quot;400&quot; height=&quot;300&quot; resolution=&quot;medium&quot;}}}
-        {{{title}}}
-        {{{description}}}
-      {{/asset}}
-
       {{#asset &quot;documentgroup&quot; size=&quot;1&quot;}}
         {{{title}}}
         {{{description}}}
@@ -230,10 +215,10 @@ group: navigation
       {{/asset}}
  
       {{#asset &quot;embedgroup&quot; size=&quot;1&quot; width=&quot;400&quot;}}
+        {{{title}}}
         {{#embeds}}
           &lt;div class=&quot;embed&quot;&gt;{{{html}}}&lt;/div&gt;
         {{/embeds}}
-        {{{title}}}
         {{{description}}}
       {{/asset}}
 
@@ -263,14 +248,14 @@ group: navigation
       </ul>
       <h3>Assets</h3>
       <p>
-        Assets are the heart of Populr. Each item of content a user adds to a pop is one of five asset types:
+        Assets are the heart of Populr. Users can add 5 types of content to Populr:
       </p>
       <ul>
         <li>Text</li>
         <li>Image(s)</li>
-        <li>Recorded Video(s)</li>
         <li>Document(s)</li>
         <li>Embed(s)</li>
+        <li>Recorded video(s), which are treated as embeds</li>
       </ul>
       <p>
         Each asset is contained inside of a region, and is rendered according to 
@@ -397,6 +382,69 @@ group: navigation
       </table>
     </div>
   </div>
+  <section id="columnizer-regions">
+    <div class="row-fluid">
+      <div class="span6">
+        <h2>Columnizer Layout Engine</h2>
+        <p>
+          The Columnizer engine arranges assets first into rows, then into columns. Each row spans the full width of the region. When a user adds an asset to a row, the engine automatically resizes other assets in that row to make room for the new asset. As the themer, you define the maximum number of columns per row.
+        </p>
+        <h3>Helper</h3>
+        <pre class="prettyprint linenums language-html">{% raw %}
+  {{#region "columnizer" id="main-region" max_auto_assets="0" max_cols="3"}}
+  {{/region}}{% endraw %}</pre>
+        <h3>Engine-Specific Settings</h3>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Usage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>max_cols</code></td>
+              <td>
+                <p>The maximum number of columns (assets) in a row</p>
+                <p><strong>Example:</strong> <code>max_cols="3"</code></p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>Asset Sizing</h3>
+        <p>
+          Within Columnizer regions, asset sizes are determined by the number of assets in the row. For example, if a row contains just one asset, then that asset's size 
+          is <code>1</code> and it's assigned the class <code>asset-size-1</code>. If 
+          a row contains two assets, each asset is a size <code>2</code> 
+          and they're each assigned the class <code>asset-size-2</code>.
+        </p>
+      </div>
+      <div class="span6">
+        <div class="anatomy-preview">
+          <div class="well">
+            <div class="region" style="text-align: center;">
+              <h4 class="region-title" style="text-align: left"><strong>Columnizer Region</strong></h4>
+              Row
+              <div class="row-fluid" style="border-bottom: 2px dashed #f5f5f5; padding: 0 0 10px 0;">
+                <div class="span12"><div class="asset">Asset<br><span class="muted"><i>size 1</i></span></div></div>
+              </div>
+              <div style="margin-top: 10px;">Row</div>
+              <div class="row-fluid" style="border-bottom: 2px dashed #f5f5f5; padding: 0 0 10px 0;">
+                <div class="span6"><div class="asset">Asset<br><span class="muted"><i>size 2</i></span></div></div>
+                <div class="span6"><div class="asset">Asset<br><span class="muted"><i>size 2</i></span></div></div>
+              </div>
+              <div style="margin-top: 10px;">Row</div>
+              <div class="row-fluid">
+                <div class="span4"><div class="asset">Asset<br><span class="muted"><i>size 3</i></span></div></div>
+                <div class="span4"><div class="asset">Asset<br><span class="muted"><i>size 3</i></span></div></div>
+                <div class="span4"><div class="asset">Asset<br><span class="muted"><i>size 3</i></span></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
   <section id="packer-regions">
     <div class="row-fluid">
       <div class="span6">
@@ -480,16 +528,13 @@ group: navigation
           <div class="well">
             <div class="region packer-region" style="text-align: center;">
               <h4 class="region-title" style="text-align: left"><strong>Packer Region</strong></h4>
-              <div class="asset asset-size-s" style="padding: 134px 4px; margin-top: 28px;">Asset</div>
-              <div class="asset asset-size-s" style="margin-top: 28px;">Asset</div>
-              <div class="asset asset-size-s" style="margin-top: 28px;">Asset</div>
-              <div class="asset asset-size-s">Asset</div>
-              <div class="asset asset-size-s">Asset</div>
-              <div class="asset asset-size-m">Asset</div>
-              <div class="asset asset-size-l">Asset</div>
-              <div class="asset asset-size-s">Asset</div>
-              <div class="asset asset-size-s">Asset</div>
-              <div class="asset asset-size-s">Asset</div>
+              <div class="asset asset-size-s" style="padding: 134px 4px; margin-top: 28px;">Asset<br><span class="muted"><i>size S</i></span></div>
+              <div class="asset asset-size-s" style="margin-top: 28px;">Asset<br><span class="muted"><i>size S</i></span></div>
+              <div class="asset asset-size-s" style="margin-top: 28px;">Asset<br><span class="muted"><i>size S</i></span></div>
+              <div class="asset asset-size-s">Asset<br><span class="muted"><i>size S</i></span></div>
+              <div class="asset asset-size-s">Asset<br><span class="muted"><i>size S</i></span></div>
+              <div class="asset asset-size-m">Asset<br><span class="muted"><i>size M</i></span></div>
+              <div class="asset asset-size-l">Asset<br><span class="muted"><i>size L</i></span></div>
             </div>
           </div>
           <script>
@@ -500,69 +545,6 @@ group: navigation
               });  
             });
           </script>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section id="columnizer-regions">
-    <div class="row-fluid">
-      <div class="span6">
-        <h2>Columnizer Layout Engine</h2>
-        <p>
-          The Columnizer engine arranges assets first into rows, then into columns. Each row spans the full width of the region. When a user adds an asset to a row, the engine automatically resizes other assets in that row to make room for the new asset. As the themer, you define the maximum number of columns per row.
-        </p>
-        <h3>Helper</h3>
-        <pre class="prettyprint linenums language-html">{% raw %}
-  {{#region "columnizer" id="main-region" max_auto_assets="0" max_cols="3"}}
-  {{/region}}{% endraw %}</pre>
-        <h3>Engine-Specific Settings</h3>
-        <table class="table table-bordered table-striped">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Usage</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>max_cols</code></td>
-              <td>
-                <p>The maximum number of columns (assets) in a row</p>
-                <p><strong>Example:</strong> <code>max_cols="3"</code></p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <h3>Asset Sizing</h3>
-        <p>
-          Within Columnizer regions, asset sizes are determined by the number of assets in the row. For example, if a row contains just one asset, then that asset's size 
-          is <code>1</code> and it's assigned the class <code>asset-size-1</code>. If 
-          a row contains two assets, each asset is a size <code>2</code> 
-          and they're each assigned the class <code>asset-size-2</code>.
-        </p>
-      </div>
-      <div class="span6">
-        <div class="anatomy-preview">
-          <div class="well">
-            <div class="region" style="text-align: center;">
-              <h4 class="region-title" style="text-align: left"><strong>Columnizer Region</strong></h4>
-              Row
-              <div class="row-fluid" style="border-bottom: 2px dashed #f5f5f5; padding: 0 0 10px 0;">
-                <div class="span12"><div class="asset">Asset</div></div>
-              </div>
-              <div style="margin-top: 10px;">Row</div>
-              <div class="row-fluid" style="border-bottom: 2px dashed #f5f5f5; padding: 0 0 10px 0;">
-                <div class="span6"><div class="asset">Asset</div></div>
-                <div class="span6"><div class="asset">Asset</div></div>
-              </div>
-              <div style="margin-top: 10px;">Row</div>
-              <div class="row-fluid">
-                <div class="span4"><div class="asset">Asset</div></div>
-                <div class="span4"><div class="asset">Asset</div></div>
-                <div class="span4"><div class="asset">Asset</div></div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -596,7 +578,7 @@ group: navigation
         <div class="tab-content">
           <div class="tab-pane active" id="asset-code-1-template">
             <pre class="prettyprint linenums language-html">{% raw %}
-{{#asset "text" size="m"}}
+{{#asset "text" size="2"}}
   &lt;div class=&quot;title-wrapper&quot;&gt;
     {{{title}}}
   &lt;/div&gt;
@@ -607,7 +589,7 @@ group: navigation
           </div>
           <div class="tab-pane" id="asset-code-1-compiled">
             <pre class="prettyprint linenums language-html">{% raw %}
-&lt;div class=&quot;asset asset-type-text asset-size-m&quot; data-region-id=&quot;0&quot;&gt;
+&lt;div class=&quot;asset asset-type-text asset-size-2&quot; data-region-id=&quot;0&quot;&gt;
   &lt;div class=&quot;asset-inner&quot;&gt;
     &lt;div class=&quot;title-wrapper&quot;&gt;
       &lt;h2 class=&quot;title&quot;&gt;Aenean Commodo Ligula&lt;/h2&gt;
@@ -642,10 +624,10 @@ group: navigation
             <td>
               <p>The size this asset template is associated with.</p>
               <p>
-                For a Packer region, the available asset sizes are <code>s, m, and l</code>, and the asset sizes valid for the region are specified in the <code>{{#region}}</code> helper.<br><strong>Packer example:</strong> <code>size="m"</code>
+                For a Columnizer region, the available asset sizes are <code>1, 2, 3...</code> and so on.<br><strong>Columnizer example:</strong> <code>size="2"</code>
               </p>
               <p>
-                For a Columnizer region, the available asset sizes are <code>1, 2, 3,</code> and so on.<br><strong>Columnizer example:</strong> <code>size="2"</code>
+                For a Packer region, the available asset sizes are <code>s, m, l</code>, and the asset sizes valid for the region are specified in the <code>{{#region}}</code> helper.<br><strong>Packer example:</strong> <code>size="m"</code>
               </p>
             </td>
           </tr>
@@ -828,167 +810,6 @@ group: navigation
               <td>Original image height</td>
             </tr>
             <!-- TODO: add info about palettes -->
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-  <section id="videogroup-assets">
-    <h2>VideoGroup Asset Type</h2>
-    <div class="row-fluid">
-      <div class="span12">
-        <p>
-          The <code>videogroup</code> asset type is a container for one or more 
-          videos recorded/uploaded by the user.
-        </p>
-        <div class="tabbable tabs-top">
-          <ul class="nav nav-pills">
-            <li class="active"><a href="#asset-code-3-template" data-toggle="tab">Template Code</a></li>
-            <li><a href="#asset-code-3-compiled" data-toggle="tab">Compiled Output</a></li>
-          </ul>
-          <div class="tab-content">
-            <div class="tab-pane active" id="asset-code-3-template">
-              <pre class="prettyprint linenums language-html">{% raw %}
-{{#asset "videogroup" size="m"}}
-  {{{title}}}
-  &lt;ul class=&quot;videos&quot;&gt;
-  {{#videos}}
-    &lt;li&gt;
-      &lt;video controls=&quot;&quot; preload=&quot;auto&quot; width=&quot;640&quot; height=&quot;480&quot; poster=&quot;{{{resize still_url width=640 height=480}}}&quot;&gt;
-        &lt;source src=&quot;{{{urls.webm.medium}}}&quot; type=&quot;video/webm&quot;&gt;
-        &lt;source src=&quot;{{{urls.mp4.medium}}}&quot; type=&quot;video/mp4&quot;&gt;
-        &lt;source src=&quot;{{{urls.flv.medium}}}&quot; type=&quot;video/x-flv&quot;&gt;
-      &lt;/video&gt;
-    &lt;/li&gt;
-  {{/videos}}
-  &lt;/ul&gt;
-{{/asset}}{% endraw %}</pre>
-            </div>
-            <div class="tab-pane" id="asset-code-3-compiled">
-              <pre class="prettyprint linenums language-html">{% raw %}
-&lt;div class=&quot;asset asset-type-videogroup asset-size-m&quot; data-region-id=&quot;0&quot;&gt;
-  &lt;div class=&quot;asset-inner&quot;&gt;
-    &lt;h2 class=&quot;title&quot;&gt;Aenean Commodo Ligula&lt;/h2&gt;
-    &lt;ul class=&quot;videos&quot;&gt;
-      &lt;li&gt;
-        &lt;video controls=&quot;&quot; preload=&quot;auto&quot; width=&quot;640&quot; height=&quot;480&quot; poster=&quot;https://i.populr.me/640/480/http://s3.amazonaws.com/images.populr.me/assets/theming_sample_still.jpg&quot;&gt;
-          &lt;source src=&quot;http://video.populr.me/assets/theming_sample_medium.webm&quot; type=&quot;video/webm&quot;&gt;
-          &lt;source src=&quot;http://video.populr.me/assets/theming_sample_medium.mp4&quot; type=&quot;video/mp4&quot;&gt;
-          &lt;source src=&quot;http://video.populr.me/assets/theming_sample_medium.flv&quot; type=&quot;video/x-flv&quot;&gt;
-        &lt;/video&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/div&gt;
-&lt;/div&gt;{% endraw %}</pre>
-            </div>
-          </div>
-        </div>
-        <p>
-          <span class="label label-info">Heads up!</span> A special helper 
-          <code>{% raw %}{{{videoplayer}}}{% endraw %}</code> is available to  
-          automatically create a HTML5/Flash fallback player using 
-          <a href="http://projekktor.com">Projekktor</a>. While you don't have 
-          to use this helper, it makes things a lot easier on you. Check out 
-          the <a href="#helpers">helpers</a> section to learn more.
-        </p>
-      </div>
-    </div>
-
-    <div class="row-fluid">
-      <div class="span12">
-        <h3>Template Variables</h3>
-        <table class="table table-bordered table-striped">
-          <thead>
-            <tr>
-              <th>Variable</th>
-              <th>Description</th>
-              <th>Contents</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>{% raw %}{{{title}}}{% endraw %}</code></td>
-              <td>Title of the asset</td>
-              <td>
-                <code class="prettyprint language-html">
-                  &lt;h2 class=&quot;title&quot;&gt;Lorem Ipsum&lt;/h2&gt;
-                </code>
-              </td>
-            </tr>
-            <tr>
-              <td><code>{% raw %}{{{description}}}{% endraw %}</code></td>
-              <td>Description content of the asset</td>
-              <td>
-                <code class="prettyprint language-html">
-                  &lt;div class=&quot;description&quot;&gt;&lt;p&gt;Lorem ipsum dolor sit amet.&lt;/p&gt;&lt;/div&gt;
-                </code>
-              </td>
-            </tr>
-            <tr>
-              <td><code>{% raw %}{{{videos}}}{% endraw %}</code></td>
-              <td>
-                Array of videos in the <code>videogroup</code>
-              </td>
-              <td>
-                <code>[videos]</code>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <h3>Templating {% raw %}{{{videos}}}{% endraw %}</h3>
-        <p>
-          The <code>{% raw %}{{{videos}}}{% endraw %}</code> variable is an 
-          array of individual user-recorded videos. Even when there is only one video in the asset, that video is stored as an element of the array. To display the asset contents, you must use a helper either to loop through 
-          each video or to access a specific video in the array.
-        </p>
-        <table class="table table-bordered table-striped">
-          <thead>
-            <tr>
-              <th>Variable</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>{% raw %}{{{title}}}{% endraw %}</code></td>
-              <td>Title of the video</td>
-            </tr>
-            <tr>
-              <td><code>{% raw %}{{{description}}}{% endraw %}</code></td>
-              <td>Description of the video</td>
-            </tr>
-            <tr>
-              <td><code>{% raw %}{{{urls}}}{% endraw %}</code></td>
-              <td>
-                List of available urls, grouped by video type <pre class="prettyprint language-javascript">
-{
-  flv: {
-    small: "http://video.populr.me/assets/theming_sample_small.flv"
-    medium: "http://video.populr.me/assets/theming_sample_medium.flv"
-    large: "http://video.populr.me/assets/theming_sample_large.flv"
-  },
-  mp4: {
-    small: "http://video.populr.me/assets/theming_sample_small.mp4"
-    medium: "http://video.populr.me/assets/theming_sample_medium.mp4"
-    large: "http://video.populr.me/assets/theming_sample_large.mp4"
-  },
-  webm: {
-    small: "http://video.populr.me/assets/theming_sample_small.webm"
-    medium: "http://video.populr.me/assets/theming_sample_medium.webm"
-    large: "http://video.populr.me/assets/theming_sample_large.webm"
-  }
-}
-</pre>
-              </td>
-            </tr>
-            <tr>
-              <td><code>{% raw %}{{{still_url}}}{% endraw %}</code></td>
-              <td>URL of still image (good for poster on video tags)</td>
-            </tr>
-            <tr>
-              <td><code>{% raw %}{{{duration}}}{% endraw %}</code></td>
-              <td>Duration, in seconds</td>
-            </tr>
           </tbody>
         </table>
       </div>
@@ -1323,11 +1144,11 @@ group: navigation
           <tbody>
             <tr>
               <td><code>width</code></td>
-              <td>Target width <span class="muted">optional</span></td>
+              <td>Target width <span class="muted">(optional)</span></td>
             </tr>
             <tr>
               <td><code>height</code></td>
-              <td>Target height <span class="muted">optional</span></td>
+              <td>Target height <span class="muted">(optional)</span></td>
             </tr>
           </tbody>
         </table>
@@ -1464,55 +1285,6 @@ group: navigation
       </div>
     </div>
   </section>
-  <section id="videoplayer-helper">
-    <h2>Video Player</h2>
-    <div class="row-fluid">
-      <div class="span6">
-        <p>
-          The <code>{% raw %}{{{videoplayer}}}{% endraw %}</code> helper creates a 
-          ready-made HTML5/Flash fallback video player for <code>videogroup</code> 
-          assets. The player uses the open-source 
-          <a href="http://projekktor.com">Projekktor</a> project. If there are 
-          multiple videos in a group, this helper will create a thumbnail playlist 
-          below the player.
-        </p>
-        <h3>Helper</h3>
-        <pre class="prettyprint linenums language-html">{% raw %}
-  {{{videoplayer videos width=640 height=480 resolution="medium}}}
-  {% endraw %}</pre>
-      </div>
-      <div class="span6">
-        <h3>Settings</h3>
-        <table class="table table-bordered table-striped">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Usage</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>width</code></td>
-              <td>Target width</td>
-            </tr>
-            <tr>
-              <td><code>height</code></td>
-              <td>Target height</td>
-            </tr>
-            <tr>
-              <td><code>resolution</code></td>
-              <td>
-                The resolution category the player should use. Can one of the 
-                following: <code>small, medium, large</code>. The value should 
-                generally reflect the relative size of the asset you are templating. 
-                <span class="muted">(optional, default is <code>medium</code>)</span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
 </section>
 
 <section id="styling">
@@ -1541,7 +1313,7 @@ group: navigation
     <div class="row-fluid">
       <div class="span12">
         <p>
-          Variables.less stores LESS variables that can be changed by the user through Populr's pop editing interface, or that are changed by the pop rendering engine when the page loads.
+          Variables.less stores LESS variables that can be changed by the user through Populr's pop editing interface, or that are updated by the pop rendering engine when the page loads.
         </p>
         <table class="table table-bordered table-striped">
           <thead>
@@ -1555,7 +1327,7 @@ group: navigation
               <td width="20%"><code>@base-url</code></td>
               <td>
                 <p>
-                  The pop's base URL
+                  The pop's base URL. Should be set to the value <code>'..'</code>. Do not change this value; the system uses this variable to generate paths to the theme's file.
                 </p>
                 <p>
                   This variable is used to set relative links within a theme definition. For example, the background image for a page element can be set via CSS like this:
@@ -1567,10 +1339,10 @@ group: navigation
               <td><code>@accent-color</code></td>
               <td>
                 <p>
-                  The accent color used in the pop. This variable is frequently used in Populr's most basic themes to set the color of text links, but it can be used to set the color of any theme element.
+                  The accent color used in the pop. This variable is used in some of Populr's themes to set the color of text links or other layout elements.
                 </p>
                 <p>
-                  This value can be overridden by the user with the Color drop-down menu.
+                  If a theme includes the "Custom" style, this variable can be overridden by the user through a color picker that will appear in the Style menu.
                 </p>
               </td>
             </tr>
@@ -1606,10 +1378,6 @@ group: navigation
                 </p>
               </td>
             </tr>
-            <tr>
-              <td><code>@text-color</code></td>
-              <td>The color of body text</td>
-            </tr>
           </tbody>
         </table>
       </div>
@@ -1626,6 +1394,19 @@ group: navigation
             <li><a href="http://lesselements.com/" target="_blank">LESS Elements</a></li>
             <li><a href="http://lesshat.com/" target="_blank">LESSHat</a></li>
           </ul>
+        </p>
+      </div>
+    </div>
+  </section>
+  <section id="theme-styles">
+    <h2>Theme Styles</h2>
+    <div class="row-fluid">
+      <div class="span12">
+        <p>
+          Styles are variations on a theme. Styles are most commonly used to present Populr's users with a choice of settings for a single variable of the theme designer's choosing.
+        </p>
+        <p>
+          For example, the theme Norway presents users with a choice of color variations for the background of the title and footer. Users can choose from 4 colors selected by the designer who built the theme.
         </p>
       </div>
     </div>
@@ -1672,7 +1453,6 @@ group: navigation
           <ul>
             <li><code>asset-type-text</code></li>
             <li><code>asset-type-imagegroup</code></li>
-            <li><code>asset-type-videogroup</code></li>
             <li><code>asset-type-documentgroup</code></li>
             <li><code>asset-type-embedgroup</code></li>
           </ul>
@@ -1728,22 +1508,23 @@ group: navigation
     <div class="row-fluid">
       <div class="span12">
         <p>
-          Dummy content is generic asset content that's displayed in your theme when you run your theme locally in your browser. The text is <a href="http://en.wikipedia.org/wiki/Lorem_ipsum" target="_blank">lorum ipsum</a> text, the images are from <a href="http://lorempixel.com/" target="_blank">lorumpixel</a>, the embed is one of the <a href="http://www.youtube.com/watch?v=YE7VzlLtp-4" target="_blank">world's greatest short films</a>, etc.
+          Dummy content is generic asset content that's displayed in your theme when you run your theme locally in your browser. The text is <a href="http://en.wikipedia.org/wiki/Lorem_ipsum" target="_blank">lorum ipsum</a> text, the images are from <a href="http://500px.com/" target="_blank">500px</a>, the embed is one of the <a href="http://www.youtube.com/watch?v=YE7VzlLtp-4" target="_blank">world's greatest short films</a>, etc.
         </p>
         <p>
           Dummy content is defined as an attribute of the <code>{% raw %}{{region}}{% endraw %}</code> Handlebars.js helper. You might have noticed this earlier while reviewing the <a href="#theme-skeleton">sample theme</a>. Here it is again:
         </p>
         <pre class="prettyprint linenums language-html">{% raw %}
-{{#region "packer" id="main-region" columns="1" gutter_width="20" max_auto_assets="0" sizes="m" default_size="m" dummy_content="I-3-m,T-1-m,T-2-m,E-1-m,D-4-m"}}{% endraw %}</pre>
+{{#region "columnizer" id="main-region" max_cols="3" max_auto_assets="0" dummy_content="I-3,T-1|T-2,E-1,D-4"}}{% endraw %}</pre>
+        <h3>Columnizer Dummy Content Sizes</h3>
         <p>
-          Each comma-separated string of the dummy content represents a single asset. The syntax for each string is as follows:<br><code>[asset type]-[# of items]-[asset size]</code>
+          Each comma-separated string of the dummy content represents a single asset. The syntax for each asset is as follows:<br><code>[asset type]-[# of items]</code>
         </p>
         <p>
           <code>[asset type]</code> can have the following values:
           <ul>
             <li><code>T</code> for text assets</li>
             <li><code>I</code> for image assets</li>
-            <li><code>V</code> for video recording assets</li>
+            <li><code>V</code> for video recordings (which are treated by Populr as embed assets)</li>
             <li><code>D</code> for document assets</li>
             <li><code>E</code> for embed assets</li>
           </ul>
@@ -1755,17 +1536,76 @@ group: navigation
             <li>For all other assets, it represents the number of items that are contained within the asset. For example, a piece of dummy content defined as <code>I-3</code> represents an image asset containing 3 images.</li>
           </ul>
         </p>
-        <p>
-          <code>[asset-size]</code> only has to be specified for Packer regions. Read on for more detail.
-        </p>
-        <h3>Packer Dummy Content Sizes</h3>
-        <p>
-          Dummy content for Packer regions must specify a size for each asset. The available values are <code>s, m, and l</code>.
-        </p>
-        <h3>Columnizer Dummy Content Sizes</h3>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span6">
         <p>
           Dummy content for columnizer regions does not specify a size. Instead, the <code>|</code> (pipe) character is used to specify the end of a columnizer row, and asset sizes are determined based on the number of assets in a row. For example, dummy content defined as <code>T-1,T-1|I-3</code> represents two text assets in the first row, each with a size of <code>2</code> and containing a single paragraph of lorum ipsum text, and single image asset in the next row with a size of <code>1</code> and containing 3 images.
         </p>
+      </div>
+      <div class="span6">
+        <div class="anatomy-preview">
+          <div class="well">
+            <div class="region" style="text-align: center;">
+              <h4 class="region-title" style="text-align: left"><strong>Columnizer Region where </strong><code>dummy-content="T-1,T-1|I-3"</code></h4>
+              <div class="row-fluid" style="padding: 0 0 10px 0;">
+                <div class="span6"><div class="asset">Text Asset<br></div></div>
+                <div class="span6"><div class="asset">Text Asset<br></div></div>
+              </div>
+              <div class="row-fluid" style="padding: 0 0 10px 0;">
+                <div class="span12"><div class="asset">Image Asset<br>containing 3 images</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span12">
+        <h3>Packer Dummy Content Sizes</h3>
+        <p>
+          Dummy content for packer regions works the same way it does for columnizers, with one important difference: each asset must have a size, making the syntax:<br><code>[asset type]-[# of items]-[asset size]</code>
+        </p>
+        <p>
+          The available asset size values are <code>s, m, l</code>.
+        </p>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span12">
+        <h3>Dummy Content Properties</h3>
+        <p>
+          The index.html file must contain the following <code>meta</code> tags inside the <code>head</code> tag in order for dummy content to render properly.
+        </p>
+        <pre class="prettyprint linenums language-html">{% raw %}
+&lt;head&gt;
+  &lt;meta itemprop=&quot;dummyImageCategory&quot; content=&quot;All&quot;&gt;
+  &lt;meta itemprop=&quot;dummyContentLength&quot; content=&quot;medium&quot;&gt;
+  ...{% endraw %}</pre>
+      <h4>dummyImageCategory</h4>
+      <p>
+        Dummy images are pulled from the <a href="http://500px.com/" target="_blank">500px</a> photography site. The <code>content</code> property can be used to specify a search term that will filter the images from 500px. For example, setting <code>content="kitten"</code> will use pictures of adorable kittens for all dummy images.
+      </p>
+      <h4>dummyContentLength</h4>
+      <p>
+        This property specifies how much dummy text appears in the asset titles and descriptions of your dummy content.
+      </p>
+      <p>
+        <strong>We strongly recommend using <code>content="medium"</code> while building your theme</strong>, as this is the most efficient setting for catching style bugs. This setting will render all available text styles for your dummy asset titles and descriptions: bold, italic, underline, linked text, ordered lists, and unordered lists. (Lists will render only in asset descriptions.)
+      </p>
+      <p>
+        You can also use <code>content="short"</code> to use dummy content of a more typical length and style, and <code>content="long"</code> to ensure that lengthy pieces of text don't break your layouts.
+      </p>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span12">
+        <h3>Dummy Content Sets</h3>
+        <p>
+          We've typed up the following sets of dummy content to use when building your theme. Each set is defined to include all 5 types of content (text, image, video recording, document, embed) at all available sizes for a particular region. Copy the set you need for your region and paste it into the dummy_content property.
+        </p>
+        <script src="https://gist.github.com/johnhorstman/5601783.js"></script>
       </div>
     </div>
   </section>
@@ -1838,7 +1678,7 @@ python -m SimpleHTTPServer 8080</pre>
           </p>
         <h3>Start with our base theme</h3>
           <p>
-            Start your theme from our base theme. It's a clean, basic columnizer region with just enough code written to run as stand-alone theme.
+            Start your theme from our base theme (<a href="https://github.com/populr-themes/columnizer_base">GitHub repo</a> or <a href="https://github.com/populr-themes/columnizer_base/archive/master.zip" target="_blank">ZIP file</a>). It's a clean, basic columnizer region with just enough code written to run as stand-alone theme.
           </p>
         <h3>Test as you go</h3>
           <p>
