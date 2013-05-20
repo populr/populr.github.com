@@ -53,7 +53,7 @@ group: navigation
         <li><a href="#main-less">Main.less</a></li>
         <li><a href="#variables-less">Variables.less</a></li>
         <li><a href="#less-mixins">LESS Mixin Libraries</a></li>
-        <li class="divider"></li>
+        <li><a href="#theme-styles">Theme Styles</a></li>
         <li><a href="#system-classes">System-Generated Classes</a></li>
       </ul>
     </li>
@@ -837,9 +837,9 @@ group: navigation
   {{#documents}}
     &lt;li class=&quot;file-extension file-extension-{{{extension}}}&quot;&gt;
       {{#if title}}
-      &lt;a href=&quot;{{{original_url}}}&quot;&gt;{{{title}}}&lt;/a&gt;
+        &lt;a href=&quot;{{{original_url}}}&quot;&gt;{{{title}}}&lt;/a&gt;
       {{else}}
-      &lt;a href=&quot;{{{original_url}}}&quot;&gt;{{{source_file_name}}}&lt;/a&gt;
+        &lt;a href=&quot;{{{original_url}}}&quot;&gt;{{{source_file_name}}}&lt;/a&gt;
       {{/if}}
     &lt;/li&gt;
   {{/documents}}
@@ -1237,8 +1237,7 @@ group: navigation
         <h3>Helper</h3>
         <pre class="prettyprint linenums language-html">{% raw %}
   {{{imageslider images width=640 height=480}}}
-  {% endraw %}</pre>
-      </div>
+  {% endraw %}</pre></div>
       <div class="span6">
         <h3>Settings</h3>
         <table class="table table-bordered table-striped">
@@ -1336,13 +1335,10 @@ group: navigation
               </td>
             </tr>
             <tr>
-              <td><code>@accent-color</code></td>
+              <td><code>@custom-color</code></td>
               <td>
                 <p>
-                  The accent color used in the pop. This variable is used in some of Populr's themes to set the color of text links or other layout elements.
-                </p>
-                <p>
-                  If a theme includes the "Custom" style, this variable can be overridden by the user through a color picker that will appear in the Style menu.
+                  If a theme includes the "Custom" style, this variable can be overridden by the user through a color picker that will appear in the Style menu. <a href="#theme-styles">Learn more about styles and the custom color picker</a>
                 </p>
               </td>
             </tr>
@@ -1403,11 +1399,116 @@ group: navigation
     <div class="row-fluid">
       <div class="span12">
         <p>
-          Styles are variations on a theme. Styles are most commonly used to present Populr's users with a choice of settings for a single variable of the theme designer's choosing.
+          Put simply, theme styles are variations on a theme. Populr's UI gives end users the ability to customize their pop by choosing from a set of styles defined by the theme designer. Styles can represent a series of color palettes for a theme, a set of variations in the asset layout, or other While styles are optional, we encourage theme designers to create at least 2 styles for each theme. (One simple way to meet this request is to create a light and a dark style for your theme.)
         </p>
         <p>
-          For example, the theme Norway presents users with a choice of color variations for the background of the title and footer. Users can choose from 4 colors selected by the designer who built the theme.
+          For example, the theme Norway uses styles to give users a choice of color variations for the background of the title and footer. Users can choose from 4 colors selected by the designer who built the theme.
         </p>
+        <p>
+          Each theme style is defined in its own LESS file, located in the theme's styles directory. Every theme that uses more than one style must have the default style specified in a file named palette-default.less. Additional styles can be named whatever sematically makes sense. In the case of Norway, the additional styles have fun names based on the color they represent: palette-sulu.less, palette-tango.less, etc.
+        </p>
+        <p>
+          These theme style files are referenced from the theme's index.html file with the following syntax (using the theme Norway as an example):
+          <pre class="prettyprint linenums language-html">{% raw %}&lt;meta itemprop=&quot;palette&quot; content=&quot;palette-default&quot; title=&quot;Malibu&quot; data-preview=&quot;#66b5f2&quot;&gt;
+&lt;meta itemprop=&quot;palette&quot; content=&quot;palette-sulu&quot; title=&quot;Sulu&quot; data-preview=&quot;#bcf266&quot;&gt;
+&lt;meta itemprop=&quot;palette&quot; content=&quot;palette-tango&quot; title=&quot;Tango&quot; data-preview=&quot;#f36d24&quot;&gt;
+&lt;meta itemprop=&quot;palette&quot; content=&quot;palette-custom&quot; title=&quot;Custom&quot; data-preview=&quot;custom&quot;&gt;{% endraw %}</pre>
+        </p>
+        <p>
+          These attributes are used like this:
+        </p>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="20%"><code>itemprop</code></td>
+              <td>
+                <p>
+                  Should always be set to "palette"
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>content</code></td>
+              <td>
+                <p>
+                  The name of the LESS file containing the theme style's CSS. Do not include the ".less" file extension.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>title</code></td>
+              <td>
+                <p>
+                  The name of the theme style that will appear in the Styles dropdown menu of the pop editor. This is what the end user will see when choosing styles.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>data-preview</code></td>
+              <td>
+                <p>
+                  This attribute defines the color bars that act as a thumbnail for each style. Populr will turn each comma-separated hex value for this attribute into a vertical bar in the styles thumbnail box. (Thumbnail boxes appear in the Styles dropdown menu of the pop editor.) These thumbnail boxes give the end user a visual cue for each style.
+                </p>
+                <p>
+                  For example, let's look at the theme Center. The Styles dropdown menu for Center looks like this by default:<br>
+                  <img src="../assets/images/theming/Center-styles.png" />
+                </p>
+                <p>
+                  <br>
+                  Here are the meta tag definitions that result in these thumbnails.
+          <pre class="prettyprint linenums language-html">{% raw %}&lt;meta itemprop=&quot;palette&quot; content=&quot;palette-default&quot; title=&quot;Light&quot; data-preview=&quot;#cccccc&quot;&gt;
+&lt;meta itemprop=&quot;palette&quot; content=&quot;palette-dark&quot; title=&quot;Dark&quot; data-preview=&quot;#111111&quot;&gt;
+&lt;meta itemprop=&quot;palette&quot; content=&quot;palette-transparent&quot; title=&quot;Transparent&quot; data-preview=&quot;#888,#fff,#888,#fff,#888,#fff,#888,#fff,#888,#fff&quot;&gt;{% endraw %}</pre>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          The theme properties that vary across styles are defined in main.less with variables. Norway's main.less file specifies the background of the header area like this:
+          <pre class="prettyprint linenums language-less">{% raw %}// main.less in Norway
+background: @header-color url("@{base-url}/images/header-overlay.png") repeat bottom center;{% endraw %}</pre>
+        </p>
+        <p>
+          Note the use of <code>@header-color</code> to specify the background color. To set that color, each theme style assigns a unique value to <code>@header-color</code>. The theme's palette-default.less file contains this line of CSS:
+          <pre class="prettyprint linenums language-less">{% raw %}// palette-default.less in Norway
+@header-color: #66b5f2;{% endraw %}</pre>
+        </p>
+        <p>
+          By default, this theme will use the hex color #66b5f2 for the header's background color. A different style file for this theme (palette-sulu.less) contains this line:
+          <pre class="prettyprint linenums language-less">{% raw %}// palette-sulu.less in Norway
+@header-color: #bcf266;{% endraw %}</pre>
+        </p>
+        <p>
+          ...so an end user who selects the style "Sulu" is basically redefining the value of the <code>@header-color</code> LESS variable through Populr's UI.
+        </p>
+      </div>
+    </div>
+    <h3>Adding the Custom Color Picker</h3>
+    <div class="row-fluid">
+      <div class="span6">
+        <p>
+          Populr has a built-in way for the end user to specify a custom color for a theme. This is accomplished through a special theme style.
+        </p>
+        <p>
+          The custom color theme style file must be named palette-custom.less. Also, the style definition tag in the theme's index.html file must be set up as follows:
+          <pre class="prettyprint linenums language-html">{% raw %}&lt;!-- index.html in Norway --&gt;
+&lt;meta itemprop=&quot;palette&quot; content=&quot;palette-custom&quot; title=&quot;Custom&quot; data-preview=&quot;custom&quot;&gt;{% endraw %}</pre>
+        </p>
+        <p>
+          This will give the end users a color picker in the Style dropdown menu of the pop editor. The color selected by the user will be assigned to the less variable <code>@custom-color</code>. To continue to our example with the theme Norway, the custom style file contains this line of CSS:
+          <pre class="prettyprint linenums language-less">{% raw %}// palette-custom.less in Norway
+@header-color: @custom-color;{% endraw %}</pre>
+        </p>
+      </div>
+      <div class="span6">
+        <img src="../assets/images/theming/color-picker.png" />
       </div>
     </div>
   </section>
@@ -1524,7 +1625,7 @@ group: navigation
           <ul>
             <li><code>T</code> for text assets</li>
             <li><code>I</code> for image assets</li>
-            <li><code>V</code> for video recordings (which are treated by Populr as embed assets)</li>
+            <li><code>V</code> for video recordings (which are treated by Populr as embed assets even though they are listed separately in the pop editor UI)</li>
             <li><code>D</code> for document assets</li>
             <li><code>E</code> for embed assets</li>
           </ul>
