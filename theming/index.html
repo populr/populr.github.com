@@ -1620,6 +1620,13 @@ background: @header-color url("@{base-url}/images/header-overlay.png") repeat bo
       </p>
       <p>
         Also, testing your theme on smaller screens can only be <em>approximated</em> by narrowing your browser window. To ensure your theme is stable on mobile, use a good simulator, or test on the mobile devices you have on hand.
+      </p>
+      <p>
+        Note that the main.less file must contain the following import statement in order for the mobile mixin to work.
+      </p>
+      <h4>main.less</h4>
+      <pre class="prettyprint linenums language-css">{% raw %}@import 'http://populr.me/assets/developers/populr_mixins.less';
+{% endraw %}</pre>
     </div>
   </div>
 </section>
@@ -1725,11 +1732,22 @@ background: @header-color url("@{base-url}/images/header-overlay.png") repeat bo
         This property specifies how much dummy text appears in the asset titles and descriptions of your dummy content.
       </p>
       <p>
-        <strong>We strongly recommend using <code>content="medium"</code> while building your theme</strong>, as this is the most efficient setting for catching style bugs. This setting will render all available text styles for your dummy asset titles and descriptions: bold, italic, underline, linked text, ordered lists, and unordered lists. (Lists will render only in asset descriptions.)
+        <strong>We strongly recommend using <code>content="medium"</code> while building your theme</strong>, as this is the most efficient setting for catching bugs. This setting will render all available text styles for your dummy asset titles and descriptions: bold, italic, underline, linked text, ordered lists, and unordered lists. (Lists will render only in asset descriptions.)
       </p>
       <p>
         You can also use <code>content="short"</code> to use dummy content of a more typical length and style, and <code>content="long"</code> to ensure that lengthy pieces of text don't break your layouts.
       </p>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span12">
+        <h3>Dummy Content Mixin</h3>
+        <p>
+          The main.less file must contain the following import statement in order for dummy content to render properly.
+        </p>
+        <h4>main.less</h4>
+        <pre class="prettyprint linenums language-css">{% raw %}@import 'http://populr.me/assets/developers/populr_mixins.less';
+{% endraw %}</pre>
       </div>
     </div>
     <div class="row-fluid">
