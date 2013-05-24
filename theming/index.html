@@ -2,6 +2,7 @@
 layout: page
 title: "Theming"
 tagline: ""
+icon: /assets/images/theming_bug.png
 description: "Creating your own Populr theme is piece of cake once you get to know the system. This guide will help you learn the fundamentals of theming."
 group: navigation
 ---
@@ -46,6 +47,7 @@ group: navigation
         <li class="divider"></li>
         <li><a href="#resize-helper">Resize Helper</a></li>
         <li><a href="#ifmany-helper">If Many Helper</a></li>
+        <li><a href="#ifequal-helper">If Equal Helper</a></li>
         <li><a href="#formatfilesize-helper">Format File Size Helper</a></li>
         <li><a href="#imageslider-helper">Image Slider Helper</a></li>
       </ul>
@@ -249,8 +251,8 @@ group: navigation
         layout engines currently available are:
       </p>
       <ul>
-        <li>Packer</li>
         <li>Columnizer</li>
+        <li>Packer</li>
       </ul>
       <h3>Assets</h3>
       <p>
@@ -258,9 +260,9 @@ group: navigation
       </p>
       <ul>
         <li>Text</li>
-        <li>Image(s)</li>
-        <li>Document(s)</li>
-        <li>Embed(s)</li>
+        <li>Images</li>
+        <li>Files/documents</li>
+        <li>Embeds</li>
         <li>Recorded video(s), which are treated as embeds</li>
       </ul>
       <p>
@@ -338,13 +340,14 @@ group: navigation
         <div class="tab-content">
           <div class="tab-pane active" id="region-code-1-template">
             <pre class="prettyprint linenums language-html">{% raw %}
-{{#region "packer" id="main-region" max_auto_assets="0" columns="2" column_width="300" gutter_width="20" sizes="m,l" default_size="m"}}
+{{#region "columnizer" id="main-region" max_cols="3" max_auto_assets="0" dummy_content="T-1|I-3,D-2,E-1"}}
+  ...
 {{/region}}{% endraw %}</pre>
           </div>
           <div class="tab-pane" id="region-code-1-compiled">
             <pre class="prettyprint linenums language-html">{% raw %}
-&lt;section class=&quot;region packer-region&quot; id=&quot;main-region&quot; 
-         data-region-type=&quot;packer&quot; data-region-id=&quot;0&quot; data-gutter-width=&quot;20&quot;&gt;
+&lt;section class=&quot;region columnizer-region&quot; id=&quot;main-region&quot; 
+         data-region-type=&quot;columnizer&quot; data-region-id=&quot;0&quot;&gt;
 &lt;/section&gt;{% endraw %}</pre>
           </div>
         </div>
@@ -585,11 +588,9 @@ group: navigation
           <div class="tab-pane active" id="asset-code-1-template">
             <pre class="prettyprint linenums language-html">{% raw %}
 {{#asset "text" size="2"}}
-  &lt;div class=&quot;title-wrapper&quot;&gt;
-    {{{title}}}
-  &lt;/div&gt;
-  &lt;div class=&quot;content-wrapper&quot;&gt;
-    {{{contents}}}
+  {{{title}}}
+  &lt;div class=&quot;content&quot;&gt;
+    {{{body}}}
   &lt;/div&gt;
 {{/asset}}{% endraw %}</pre>
           </div>
@@ -597,13 +598,9 @@ group: navigation
             <pre class="prettyprint linenums language-html">{% raw %}
 &lt;div class=&quot;asset asset-type-text asset-size-2&quot; data-region-id=&quot;0&quot;&gt;
   &lt;div class=&quot;asset-inner&quot;&gt;
-    &lt;div class=&quot;title-wrapper&quot;&gt;
-      &lt;h2 class=&quot;title&quot;&gt;Aenean Commodo Ligula&lt;/h2&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;content-wrapper&quot;&gt;
-      &lt;div class=&quot;content&quot;&gt;
-        &lt;p&gt;Lorem ipsum dolor sit amet, consectetuer adipiscing elit.&lt;/p&gt;
-      &lt;/div&gt;
+    &lt;h2 class=&quot;title&quot;&gt;Aenean Commodo Ligula&lt;/h2&gt;
+    &lt;div class=&quot;content&quot;&gt;
+      &lt;div class=&quot;body&quot;&gt;Lorem ipsum dolor sit amet.&lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;{% endraw %}</pre>
@@ -633,7 +630,7 @@ group: navigation
                 For a Columnizer region, the available asset sizes are <code>1, 2, 3...</code> and so on.<br><strong>Columnizer example:</strong> <code>size="2"</code>
               </p>
               <p>
-                For a Packer region, the available asset sizes are <code>s, m, l</code>, and the asset sizes valid for the region are specified in the <code>{{#region}}</code> helper.<br><strong>Packer example:</strong> <code>size="m"</code>
+                For a Packer region, the available asset sizes are <code>s, m, l</code>. The asset sizes valid for the region are specified in the <code>{{#region}}</code> helper.<br><strong>Packer example:</strong> <code>size="m"</code>
               </p>
             </td>
           </tr>
@@ -687,8 +684,10 @@ group: navigation
     <div class="row-fluid">
       <div class="span12">
         <p>
-          The <code>imagegroup</code> asset type is a container for one or more 
-          images selected by the user.
+          The <code>imagegroup</code> asset type is a container for one or more images selected by the user.
+        </p>
+        <p>
+          The example template below shows you an image asset template that doesn't use <a href="#imageslider-helper">Populr's image slider helper</a>. To see an image asset template that uses our image slider helper, take a look at the <a href="#imageslider-helper">simple example theme</a> near the top of this document.
         </p>
         <div class="tabbable tabs-top">
           <ul class="nav nav-pills">
@@ -701,10 +700,11 @@ group: navigation
 {{#asset "imagegroup" size="m"}}
   {{{title}}}
   &lt;ul class=&quot;images&quot;&gt;
-  {{#images}}
-    &lt;li&gt;&lt;img src=&quot;{{{resize original_url width=640 height=480}}}&quot; title=&quot;{{{title}}}&quot;/&gt;&lt;/li&gt;
-  {{/images}}
+    {{#images}}
+      &lt;li&gt;&lt;img src=&quot;{{{resize original_url width=640 height=480}}}&quot; title=&quot;{{{title}}}&quot;/&gt;&lt;/li&gt;
+    {{/images}}
   &lt;/ul&gt;
+  {{{description}}}
 {{/asset}}{% endraw %}</pre>
             </div>
             <div class="tab-pane" id="asset-code-2-compiled">
@@ -715,6 +715,7 @@ group: navigation
     &lt;ul class=&quot;images&quot;&gt;
       &lt;li&gt;&lt;img src=&quot;https://i.populr.me/640/480/http://lorempixel.com/1280/1024%3F0&quot; title=&quot;Lorem Ipsum&quot;/&gt;&lt;/li&gt;
     &lt;/ul&gt;
+    &lt;div class=&quot;description&quot;&gt;Lorem ipsum dolor sit amet.&lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;{% endraw %}</pre>
             </div>
@@ -722,7 +723,11 @@ group: navigation
         </div>
       </div>
     </div>
-
+    <div class="alert alert-info">
+      <p>
+        <span class="label label-info">Heads up!</span> We strongly recommend you use <a href="#imageslider-helper">Populr's image slider helper</a> in your image assets. Other sliders are unsupported, meaning you can give them a try but if it doesn't work you'll miss out on the super-helpful support of our theming staff. You'll be on your own, cowboy.
+      </p>
+    </div>
     <div class="row-fluid">
       <div class="span12">
         <h3>Template Variables</h3>
@@ -839,16 +844,17 @@ group: navigation
               <pre class="prettyprint linenums language-html">{% raw %}
 {{#asset "documentgroup" size="m"}}
   {{{title}}}
+  {{{description}}}
   &lt;ul class=&quot;documents&quot;&gt;
-  {{#documents}}
-    &lt;li class=&quot;file-extension file-extension-{{{extension}}}&quot;&gt;
-      {{#if title}}
-        &lt;a href=&quot;{{{original_url}}}&quot;&gt;{{{title}}}&lt;/a&gt;
-      {{else}}
-        &lt;a href=&quot;{{{original_url}}}&quot;&gt;{{{source_file_name}}}&lt;/a&gt;
-      {{/if}}
-    &lt;/li&gt;
-  {{/documents}}
+    {{#documents}}
+      &lt;li class=&quot;file-extension file-extension-{{{extension}}}&quot;&gt;
+        {{#if title}}
+          &lt;a href=&quot;{{{original_url}}}&quot;&gt;{{{title}}}&lt;/a&gt;
+        {{else}}
+          &lt;a href=&quot;{{{original_url}}}&quot;&gt;{{{source_file_name}}}&lt;/a&gt;
+        {{/if}}
+      &lt;/li&gt;
+    {{/documents}}
   &lt;/ul&gt;
 {{/asset}}{% endraw %}</pre>
             </div>
@@ -857,7 +863,8 @@ group: navigation
 &lt;div class=&quot;asset asset-type-documentgroup asset-size-m&quot; data-region-id=&quot;0&quot;&gt;
   &lt;div class=&quot;asset-inner&quot;&gt;
     &lt;h2 class=&quot;title&quot;&gt;Aenean Commodo Ligula&lt;/h2&gt;
-    &lt;ul class=&quot;videos&quot;&gt;
+    &lt;div class=&quot;description&quot;&gt;Lorem ipsum dolor sit amet.&lt;/div&gt;
+    &lt;ul class=&quot;documents&quot;&gt;
       &lt;li class=&quot;file-extension file-extension-zip&quot;&gt;
         &lt;a href=&quot;files.populr.me/assets/theme_sample.zip&quot;&gt;theme_sample.zip&lt;/a&gt;
       &lt;/li&gt;
@@ -983,12 +990,13 @@ group: navigation
 {{#asset "embedgroup" size="m" width="640"}}
   {{{title}}}
   &lt;div class=&quot;embeds&quot;&gt;
-  {{#embeds}}
-    &lt;div class=&quot;embed embed-type-{{{css_safe_provider}}}&quot;&gt;
-      {{{html}}}
-    &lt;/div&gt;
-  {{/embeds}}
+    {{#embeds}}
+      &lt;div class=&quot;embed embed-type-{{{css_safe_provider}}}&quot;&gt;
+        {{{html}}}
+      &lt;/div&gt;
+    {{/embeds}}
   &lt;/div&gt;
+  {{{description}}}
 {{/asset}}{% endraw %}</pre>
             </div>
             <div class="tab-pane" id="asset-code-5-compiled">
@@ -1002,6 +1010,7 @@ group: navigation
         &lt;img src=&quot;http://i3.ytimg.com/vi/q-_4mcYsQdE/hqdefault.jpg&quot; alt=&quot;&quot; style=&quot;width:640px;height:480px;display:none;&quot;/&gt;
       &lt;/div&gt;
     &lt;/div&gt;
+    &lt;div class=&quot;description&quot;&gt;Lorem ipsum dolor sit amet.&lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;{% endraw %}</pre>
             </div>
@@ -1134,9 +1143,7 @@ group: navigation
           liking by redirecting urls through our image transformer.
         </p>
         <h3>Helper</h3>
-        <pre class="prettyprint linenums language-html">{% raw %}
-  {{{resize original_url width=640 height=480}}}
-  {% endraw %}</pre>
+        <pre class="prettyprint linenums language-html">{% raw %}{{{resize original_url width=640 height=480}}}{% endraw %}</pre>
       </div>
       <div class="span6">
         <h3>Settings</h3>
@@ -1182,12 +1189,38 @@ group: navigation
         </p>
         <h3>Helper</h3>
         <pre class="prettyprint linenums language-html">{% raw %}
-  {{#if_many images}}
-    &lt;!-- loop through images --&gt;
+&lt;!-- within an imagegroup template --&gt;
+{{#if_many images}}
+  &lt;!-- loop through images --&gt;
+{{else}}
+  &lt;!-- display single image --&gt;
+{{/if_many}}{% endraw %}</pre>
+      </div>
+      <div class="span6">
+        <h3>Settings</h3>
+        <p>There are no settings for this helper.</p>
+      </div>
+    </div>
+  </section>
+  <section id="ifequal-helper">
+    <h2>If Equal</h2>
+    <div class="row-fluid">
+      <div class="span6">
+        <p>
+          The <code>{% raw %}{{{if_equal}}}{% endraw %}</code> helper gives you another way to add conditionals into your templates. The <code>else</code> block is optional.
+        </p>
+        <p>
+          The example here shows how the <code>{% raw %}{{{if_equal}}}{% endraw %}</code> helper can be used to style embedded videos differently from other embeds.
+        <h3>Helper</h3>
+        <pre class="prettyprint linenums language-html">{% raw %}
+&lt;!-- within an embedgroup template --&gt;
+{{#embeds}}
+  {{#if_equal kind &quot;video&quot;}}
+    &lt;div class=&quot;embedded-video&quot;&gt;{{{html}}}&lt;/div&gt;
   {{else}}
-    &lt;!-- display single image --&gt;
-  {{/if_many}}
-  {% endraw %}</pre>
+    &lt;div class=&quot;embed&quot;&gt;{{{html}}}&lt;/div&gt;
+  {{/if_equal}}
+{{/embeds}}{% endraw %}</pre>
       </div>
       <div class="span6">
         <h3>Settings</h3>
@@ -1206,9 +1239,7 @@ group: navigation
           the following: <code>'Bytes', 'KB', 'MB', 'GB', 'TB'</code>
         </p>
         <h3>Helper</h3>
-        <pre class="prettyprint linenums language-html">{% raw %}
-  {{{format_file_size source_file_size precision=2}}}
-  {% endraw %}</pre>
+        <pre class="prettyprint linenums language-html">{% raw %}{{{format_file_size source_file_size precision=2}}}{% endraw %}</pre>
       </div>
       <div class="span6">
         <h3>Settings</h3>
@@ -1241,9 +1272,12 @@ group: navigation
           If there is only one image in an asset's <code>{% raw %}{{{images}}}{% endraw %}</code> array, then that image will <em>not</em> be cropped; it will simply be scaled to fit the full width of its container. However, if there are multiple images in the <code>{% raw %}{{{images}}}{% endraw %}</code> array, they will be first scaled, then cropped as needed to fit the dimensions specified by the <code>width</code> and <code>height</code> parameters.
         </p>
         <h3>Helper</h3>
-        <pre class="prettyprint linenums language-html">{% raw %}
-  {{{imageslider images width=640 height=480}}}
-  {% endraw %}</pre></div>
+        <pre class="prettyprint linenums language-html">{% raw %}{{{imageslider images width=640 height=480}}}{% endraw %}</pre>
+        <p>
+          If your theme uses the image slider helper, you must include the following line of code in your main.less file.
+        <h3>main.less</h3>
+        <pre class="prettyprint linenums language-css">{% raw %}#populr &gt; #image-slider-themes &gt; .basic();{% endraw %}</pre>
+      </div>
       <div class="span6">
         <h3>Settings</h3>
         <table class="table table-bordered table-striped">
@@ -1262,24 +1296,6 @@ group: navigation
               <td><code>height</code></td>
               <td>Target height</td>
             </tr>
-            <tr>
-              <td><code>effect</code></td>
-              <td>
-                Transition effect. Can one of the following: <code>sliceDown, 
-                sliceDownLeft, sliceUp, sliceUpLeft, sliceUpDown, sliceUpDownLeft, 
-                fold, fade, random, slideInRight, slideInLeft, boxRandom, boxRain, 
-                boxRainReverse, boxRainGrow, boxRainGrowReverse</code>. 
-                <span class="muted">(optional, default is <code>fade</code>)</span>
-              </td>
-            </tr>
-            <tr>
-              <td><code>delay</code></td>
-              <td>
-                Time (in milliseconds) each slide should remain in place 
-                <span class="muted">(optional, default is <code>5000</code>)</span>
-              </td>
-            </tr>
-            <!-- TODO: reveal nav option -->
           </tbody>
         </table>
         <p>
@@ -1287,6 +1303,7 @@ group: navigation
           <code>{% raw %}{{{resize}}}{% endraw %}</code> helper, you should <strong>
           always</strong> define both the width and the height of an image slider.
         </p>
+        Our image slider helper is based on the excellent jQuery Cycle 2 slider by Mike Alsup. To fine tune the slider's settings for your theme, refer to the <a href="http://jquery.malsup.com/cycle2/api/" target="_blank">jQuery Cycle 2 API documentation</a>.
       </div>
     </div>
   </section>
