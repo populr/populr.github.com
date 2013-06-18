@@ -11,7 +11,7 @@ group: navigation
   <ul class="nav nav-pills">
     <li><a href="#start">Getting Started</a></li>
     <li><a href="#creating-pops">Creating and Publishing Pops</a></li>
-    <li><a href="#tracers">Tracers & Analaytics</a></li>
+    <li><a href="#tracers">Tracers & Analytics</a></li>
     <li><a href="#assets">Assets</a></li>
     <li><a href="#domains">Domains</a></li>
     <li><a href="#errors">Errors</a></li>
@@ -261,13 +261,14 @@ Throughout the REST API, the structure below is used to represent a pop. An exam
     "custom_links": [
       "http://blogger.com/my-company"
     ],
-    "custom_code": "<p>My Google Analytics Code</p>"
-    "clone_link_enabled": true
-    "clone_link_url": "https://populr.me/clone/0abcde12bcda1/123fwer324"
-    "collaboration_link_enabled": true
-    "collaboration_link_url": "https://populr.me/collaborate/0abcde12bcda1/fdsf341f"
-    "collaboration_interstitial_text": "Please finish editing your pop!"
-    "collaboration_webhook": "http://myserver.com/collaborator_left"
+    "custom_code": "<p>My Google Analytics Code</p>",
+    "background_image_asset_id": "0abcddae12bc1",
+    "clone_link_enabled": true,
+    "clone_link_url": "https://populr.me/clone/0abcde12bcda1/123fwer324",
+    "collaboration_link_enabled": true,
+    "collaboration_link_url": "https://populr.me/collaborate/0abcde12bcda1/fdsf341f",
+    "collaboration_interstitial_text": "Please finish editing your pop!".
+    "collaboration_webhook": "http://myserver.com/collaborator_left",
 }
 </code></pre>
 
@@ -291,7 +292,9 @@ Throughout the REST API, the structure below is used to represent a pop. An exam
 
 <p><code>custom_links</code>: An array of custom links that you would like to add to the default links (if any). These are the links you create in the Options dropdown within the Populr editor.</p>
 
-f<p><code>custom_code</code>: Freeform code that will be inserted at the very end of your pop. Often used to insert Google Analytics or other tracking functionality into pops.</p>
+<p><code>custom_code</code>: Freeform code that will be inserted at the very end of your pop. Often used to insert Google Analytics or other tracking functionality into pops.</p>
+
+<p><code>background_image_asset_id</code>: The ID of the pop's background image. To change the pop's background image, add a new image to the background_images collection and then set the pop's background_image_asset_id to that asset's ID.
 
 <p><code>clone_link_enabled</code>: Set to true if you'd like this pop to be cloneable. After saving, the clone_link_url will contain a valid URL.</p>
 
@@ -426,7 +429,7 @@ f<p><code>custom_code</code>: Freeform code that will be inserted at the very en
 
 </section>
 <section id="tracers">
-  <h2>Tracers &amp; Analaytics</h2>
+  <h2>Tracers &amp; Analytics</h2>
 
 <hr />
 
@@ -592,6 +595,8 @@ f<p><code>custom_code</code>: Freeform code that will be inserted at the very en
 
 <h4>POST http://api.populr.me/v0/images</h4>
 
+<h4>POST http://api.populr.me/v0/background_images</h4>
+
 <h4>POST http://api.populr.me/v0/embeds</h4>
 
 <p>To upload a new image or document asset, make a multi-part/form POST with the following keys:</p>
@@ -615,6 +620,8 @@ f<p><code>custom_code</code>: Freeform code that will be inserted at the very en
 <h4>DELETE http://api.populr.me/v0/documents/:id</h4>
 
 <h4>DELETE http://api.populr.me/v0/images/:id</h4>
+
+<h4>DELETE http://api.populr.me/v0/background_images/:id</h4>
 
 <h4>DELETE http://api.populr.me/v0/embeds/:id</h4>
 
