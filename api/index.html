@@ -1,12 +1,121 @@
----
-layout: page
-title: "API"
-tagline: ""
-icon: /assets/images/api_bug.png
-description: "Integrating with Populr's REST API makes it easy to automatically generate and publish pops, manage assets, domains, and more."
-group: navigation
----
-{% include JB/setup %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>API</title>
+    <meta name="description" content="Integrating with Populr's REST API makes it easy to automatically generate and publish pops, manage assets, domains, and more.">
+    <meta name="author" content="Populr.me">
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="/assets/themes/twitter/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/twitter/bootstrap/css/prettify.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <script src="/assets/themes/twitter/bootstrap/js/jquery-1.7.2.min.js"></script>
+    <script src="/assets/themes/twitter/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/themes/twitter/bootstrap/js/prettify.js"></script>
+    <script src="/assets/js/jquery.masonry.min.js"></script>
+    <script src="/assets/themes/twitter/bootstrap/js/main.js"></script>
+
+  </head>
+
+  <body data-spy="scroll" data-target=".subnav" data-offset="50" data-twttr-rendered="true">
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">Populr Developers</a>
+          <ul class="nav">
+            
+            
+            
+
+
+  
+    
+      
+      	
+      	<li class="active"><a href="/api/index.html" class="active">API</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/api/populate.html">Populate</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/theming/index.html">Theming</a></li>
+      	
+      
+    
+  
+
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        
+<header>
+  <div class="hero-unit">
+    <img style="float:left; padding-right:20px;" height="135" src="/assets/images/api_bug.png"/>
+    <h1>API</h1>
+    <p></p>
+    <p>Integrating with Populr's REST API makes it easy to automatically generate and publish pops, manage assets, domains, and more.</p>
+  </div>
+</header>
+
+<div class="row">
+  <div class="span12">
+    
 <div class="subnav">
   <ul class="nav nav-pills">
     <li><a href="#start">Getting Started</a></li>
@@ -217,7 +326,7 @@ Need an adapter for a language you don't see here? You can use the REST API belo
 <li><p>Create a new pop.</p></li>
 <li><p>Add content and design the pop to match your needs.</p></li>
 <li><p>Return to your pops page and turn your new pop into an API template by clicking the pop's name and selecting 'Make API Template.'</p></li>
-<li><p>Type {{property}} anywhere to define a variable you can replace from the API.</p></li>
+<li><p>Type  anywhere to define a variable you can replace from the API.</p></li>
 <li><p>Edit an asset region and check the "API Region" checkbox to add images or documents from the API.</p></li>
 </ol>
 
@@ -331,7 +440,7 @@ Throughout the REST API, the structure below is used to represent a pop. An exam
 
 <h4>POST http://api.populr.me/v0/pops</h4>
 
-<p>Creates a new, unpublished pop based on the template with ID <code>template_id</code>. Populates the tags <code>{{first_name}}</code> and <code>{{last_name}}</code> with the content provided, and places two image assets in the region called <code>image_region_a</code>.</p>
+<p>Creates a new, unpublished pop based on the template with ID <code>template_id</code>. Populates the tags <code></code> and <code></code> with the content provided, and places two image assets in the region called <code>image_region_a</code>.</p>
 
 <pre><code>{
   "pop": {
@@ -372,7 +481,7 @@ Throughout the REST API, the structure below is used to represent a pop. An exam
 
 <h4>PUT http://api.populr.me/v0/pops/:id</h4>
 
-<p>Updates the pop with a new title, fills in the <code>{{city}}</code> tag, and adds a document to <code>document_region_b</code>.</p>
+<p>Updates the pop with a new title, fills in the <code></code> tag, and adds a document to <code>document_region_b</code>.</p>
 
 <pre><code>{
   "pop": {
@@ -680,3 +789,23 @@ Throughout the REST API, the structure below is used to represent a pop. An exam
 
 <p><code>file_upload_required</code>: "You must submit a multi-part form POST with a 'file' key to create an asset."</p>
 </section>
+
+  </div>
+</div>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; Populr.me 2012 
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+  </body>
+</html>
+

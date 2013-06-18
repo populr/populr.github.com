@@ -1,0 +1,2040 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Theming</title>
+    <meta name="description" content="Creating your own Populr theme is piece of cake once you get to know the system. This guide will help you learn the fundamentals of theming.">
+    <meta name="author" content="Populr.me">
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="/assets/themes/twitter/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/twitter/bootstrap/css/prettify.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <script src="/assets/themes/twitter/bootstrap/js/jquery-1.7.2.min.js"></script>
+    <script src="/assets/themes/twitter/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/themes/twitter/bootstrap/js/prettify.js"></script>
+    <script src="/assets/js/jquery.masonry.min.js"></script>
+    <script src="/assets/themes/twitter/bootstrap/js/main.js"></script>
+
+  </head>
+
+  <body data-spy="scroll" data-target=".subnav" data-offset="50" data-twttr-rendered="true">
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">Populr Developers</a>
+          <ul class="nav">
+            
+            
+            
+
+
+  
+    
+      
+      	
+      	<li><a href="/api/index.html">API</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/api/populate.html">Populate</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li class="active"><a href="/theming/index.html" class="active">Theming</a></li>
+      	
+      
+    
+  
+
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        
+<header>
+  <div class="hero-unit">
+    <img style="float:left; padding-right:20px;" height="135" src="/assets/images/theming_bug.png"/>
+    <h1>Theming</h1>
+    <p></p>
+    <p>Creating your own Populr theme is piece of cake once you get to know the system. This guide will help you learn the fundamentals of theming.</p>
+  </div>
+</header>
+
+<div class="row">
+  <div class="span12">
+    
+
+<div class="subnav">
+  <ul class="nav nav-pills">
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Getting Started<b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><a href="#getting-started">Theming Overview Video</a></li>
+        <li><a href="#simple-example">Simple Example Theme</a></li>
+      </ul>
+    </li>
+    <li><a href="#anatomy-of-a-theme">Anatomy</a></li>
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Regions<b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><a href="#regions">Regions Overview</a></li>
+        <li class="divider"></li>
+        <li><a href="#columnizer-regions">Columnizer Layout Engine</a></li>
+        <li><a href="#packer-regions">Packer Layout Engine</a></li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Assets<b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><a href="#assets">Assets Overview</a></li>
+        <li class="divider"></li>
+        <li><a href="#text-assets">Text Assets</a></li>
+        <li><a href="#imagegroup-assets">ImageGroup Assets</a></li>
+        <li><a href="#documentgroup-assets">DocumentGroup Assets</a></li>
+        <li><a href="#embedgroup-assets">EmbedGroup Assets</a></li>
+        <li class="divider"></li>
+        <li><a href="#asset-template-variations">Asset Template Variations</a></li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Helpers<b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><a href="#helpers">Helpers Overview</a></li>
+        <li class="divider"></li>
+        <li><a href="#resize-helper">Resize Helper</a></li>
+        <li><a href="#ifmany-helper">If Many Helper</a></li>
+        <li><a href="#ifequal-helper">If Equal Helper</a></li>
+        <li><a href="#formatfilesize-helper">Format File Size Helper</a></li>
+        <li><a href="#imageslider-helper">Image Slider Helper</a></li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Styling<b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><a href="#styling">Styling Overview</a></li>
+        <li class="divider"></li>
+        <li><a href="#main-less">Main.less</a></li>
+        <li><a href="#variables-less">Variables.less</a></li>
+        <li><a href="#less-mixins">LESS Mixin Libraries</a></li>
+        <li><a href="#theme-styles">Theme Styles</a></li>
+        <li><a href="#system-classes">System-Generated Classes</a></li>
+      </ul>
+    </li>
+    <li><a href="#mobilization">Mobilization</a></li>
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Building Locally<b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><a href="#building-locally">Building Locally Overview</a></li>
+        <li class="divider"></li>
+        <li><a href="#dummy-content">Dummy Content</a></li>
+        <li><a href="#python-command">Running Locally</a></li>
+      </ul>
+    </li>
+    <li><a href="#recommended-process">Recommended Process</a></li>
+  </ul>
+</div>
+
+<section id="getting-started">
+  <div class="page-header">
+    <h1>Getting Started</h1>
+  </div>
+  <div class="row">
+    <div class="span5">
+      <p>
+        First thing's first, watch this brief video to get an overview of the most important concepts for designing and building a Populr theme.
+      </p>
+    </div>
+    <div class="span7">
+      <iframe src="http://player.vimeo.com/video/57961498?title=0&amp;byline=0&amp;portrait=0" width="500" height="375" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span12">
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span8">
+      <p>
+        Populr theming is based on a couple of existing open-source technologies. 
+        If you already know <a href="http://handlebarsjs.com" title="Handlebars.js semantic templates">Handlebars.js</a> 
+        and <a href="http://lesscss.org/" title="LESS: The dynamic stylesheet language">LESS</a>, 
+        feel free to <a href="#theme-skeleton">skip ahead</a>. Otherwise, keep 
+        reading intrepid explorer!
+      </p>
+      <p>
+        A Populr theme, like any (good) HTML/CSS breakdown, is separated into two 
+        layers: semantic structure/content, and style.
+      </p>
+      <h2>Structure/Content</h2>
+      <p>
+        A theme's structure is built in <a href="http://handlebarsjs.com" title="Handlebars">Handlebars.js</a>, 
+        a JavaScript-based templating language. Although it may appear 
+        overwhelming at first, a Handlebars.js template is simply centered around 
+        one basic construct: the curly-brace <code>{ }</code>. 
+        With this, you can define every piece of stucture and content you will 
+        use in creating your theme. The Handlebars.js elements of the asset return HTML, so they can be wrapped in <code>div</code> tags to apply styling.
+      </p>
+      <h3>Example Asset Template <small>(don't worry about the syntax right now)</small></h3>
+      <pre class="prettyprint linenums language-html">
+{{#asset &quot;text&quot; size=&quot;2&quot;}}
+  {{{title}}}
+  {{{body}}}
+{{/asset}}</pre>
+      <p>
+        Asset templates are comprised of 3 parts: a title, the content, and a description. (Text assets like the one shown above generally don't include a description, since the content is a block of text.) The content is the only mandatory component of the template; titles and descriptions are optional. These parts can be appear in any order within the asset template.
+      </p>
+      <h2>Style</h2>
+      <p>
+        Stylesheets are built in <a href="http://lesscss.org/" title="LESS: The dynamic stylesheet language">LESS</a> 
+        CSS. If you are comfortable with CSS, you will be comfortable with LESS. 
+        Populr uses LESS variables to allow users to change various settings in 
+        the Pop. Refer to the <code>variables.less</code> file in the base theme 
+        for more information.<br>&nbsp;
+      </p>
+      <div class="alert alert-info">
+        <p>
+          <span class="label label-info">Heads up!</span> If you choose not 
+          familiarize yourself with Handlebars.js and LESS before continuing, 
+          you <strong>will</strong> have a difficult journey ahead. Seriously, 
+          read up on these two technologies or we will be forced to flip a table 
+          &nbsp; <span class="nobr">(╯°□°）╯︵┻━┻</span> &nbsp; You don't want us to 
+          do that, do you?
+        </p>
+      </div>
+    </div>
+    <div class="span4">
+      <div class="well skeleton-download">
+        <div class="btn-group">
+          <a class="btn btn-primary btn-large dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="icon-download-alt icon-white"></i> Download Base Theme
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="https://github.com/populr-themes/columnizer_base"><i class="icon-globe"></i> View on GitHub</a></li>
+            <li><a href="https://github.com/populr-themes/columnizer_base/archive/master.zip" download="populr_theme_base.zip"><i class="icon-download-alt"></i> Download ZIP</a></li>
+          </ul>
+        </div>
+        <p>
+          The base theme contains the bare minimum you need to build a new theme:<br>
+          a single columnizer region with 3 columns
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="simple-example">
+  <div class="page-header">
+    <h1>A Simple Example Theme</h1>
+  </div>
+  <div class="row">
+    <div class="span8">
+      <p>
+        Populr themes are simple HTML5 websites with a few special hooks. Once you're comfortable with Handlebars.js, the code below should make sense to you. This is the index.html file for a very simple theme containing just one region. Look it over to get a feel for the syntax.
+      </p>
+      <p>
+        You can also <a class="btn btn-mini btn-primary" href="https://github.com/populr-themes/columnizer_base"><i class="icon-download-alt icon-white"></i> download the base theme</a> to get started with your own theme.
+      </p>
+    </div>
+    <div class="span4"> </div>
+  </div>
+  <h2>index.html</h2>
+  <pre class="prettyprint linenums language-html">
+&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;title&gt;My New Theme&lt;/title&gt;
+  &lt;meta itemprop=&quot;dummyImageCategory&quot; content=&quot;All&quot;&gt;
+  &lt;meta itemprop=&quot;dummyContentLength&quot; content=&quot;medium&quot;&gt;
+  &lt;link rel=&quot;stylesheet/less&quot; type=&quot;text/css&quot; href=&quot;/styles/main.less&quot;&gt;
+  &lt;script src=&quot;http://populr.me/assets/developers/themer.js&quot;&gt;&lt;/script&gt; 
+  &lt;script src=&quot;/js/main.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  <span class="nocode pln">&lt;script id=&quot;theme&quot; type=&quot;text/x-handlebars-template&quot;&gt;</span>
+    {{{title}}}
+    {{#region &quot;columnizer&quot; id=&quot;main-region&quot; max_cols=&quot;3&quot; max_auto_assets=&quot;0&quot; dummy_content=&quot;T-1|I-3|V-3|D-3|E-3&quot;}}
+
+      {{#asset &quot;text&quot; size=&quot;1&quot;}}
+        {{{title}}}
+        {{{body}}}
+      {{/asset}}
+
+      {{#asset &quot;imagegroup&quot; size=&quot;1&quot;}}
+        {{{title}}}
+        {{{imageslider images width=&quot;400&quot; height=&quot;300&quot;}}}
+        {{{description}}}
+      {{/asset}}
+ 
+      {{#asset &quot;documentgroup&quot; size=&quot;1&quot;}}
+        {{{title}}}
+        {{{description}}}
+        &lt;ul&gt;
+          {{#documents}}
+            &lt;li&gt;&lt;a href=&quot;{{original_url}}&quot;&gt;{{title}}&lt;/a&gt;&lt;/li&gt;
+          {{/documents}}
+        &lt;/ul&gt;
+      {{/asset}}
+ 
+      {{#asset &quot;embedgroup&quot; size=&quot;1&quot; width=&quot;400&quot;}}
+        {{{title}}}
+        {{#embeds}}
+          &lt;div class=&quot;embed&quot;&gt;{{{html}}}&lt;/div&gt;
+        {{/embeds}}
+        {{{description}}}
+      {{/asset}}
+
+    {{/region}}
+  <span class="nocode pln">&lt;/script&gt;</span>
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</section>
+<section id="anatomy-of-a-theme">
+  <div class="page-header">
+    <h1>Anatomy of a Theme</h1>
+  </div>
+  <div class="row anatomy-preview">
+    <div class="span6">
+      <p>A Populr theme is basically made up of two things: regions and assets.</p>
+      <h3>Regions</h3>
+      <p>
+        At its core, a region is simply a container for assets. The magic happens 
+        when defining what type of <strong>layout engine</strong> a region uses 
+        to display those assets. We'll talk more about this in a bit. The two 
+        layout engines currently available are:
+      </p>
+      <ul>
+        <li>Columnizer</li>
+        <li>Packer</li>
+      </ul>
+      <h3>Assets</h3>
+      <p>
+        Assets are the heart of Populr. Users can add 5 types of content to Populr:
+      </p>
+      <ul>
+        <li>Text</li>
+        <li>Images</li>
+        <li>Files/documents</li>
+        <li>Embeds</li>
+        <li>Recorded video(s), which are treated as embeds</li>
+      </ul>
+      <p>
+        Each asset is contained inside of a region, and is rendered according to 
+        the region it resides in, as well as the size selected for the asset.
+      </p>
+    </div>
+    <div class="span6">
+      <h3>Sample Pop Layout</h3>
+      <div class="well">
+        <div class="row-fluid" style="margin-bottom:10px;">
+          <div class="span12 region">
+            <div class="row-fluid">
+              <div class="span12"><h4 class="region-title" style="font-weight:normal;"><em>Pop Title</em></h4></div>
+            </div>
+          </div>
+        </div>
+        <div class="row-fluid">
+          <div class="span4 region">
+            <div class="row-fluid">
+              <div class="span12"><h4 class="region-title"><strong>Region</strong></h4></div>
+            </div>
+            <div class="row-fluid">
+              <div class="span12"><div class="asset">Asset</div></div>
+            </div>
+            <div class="row-fluid">
+              <div class="span12"><div class="asset">Asset</div></div>
+            </div>
+          </div>
+          <div class="span8 region">
+            <div class="row-fluid">
+              <div class="span12"><h4 class="region-title"><strong>Region</strong></h4></div>
+            </div>
+            <div class="row-fluid">
+              <div class="span6"><div class="asset">Asset</div></div>
+              <div class="span6"><div class="asset">Asset</div></div>
+            </div>
+            <div class="row-fluid">
+              <div class="span6"><div class="asset">Asset</div></div>
+              <div class="span6"><div class="asset">Asset</div></div>
+            </div>
+            <div class="row-fluid">
+              <div class="span6"><div class="asset">Asset</div></div>
+              <div class="span6"><div class="asset">Asset</div></div>
+            </div>
+          </div>
+        </div>
+        <em>Background Image</em>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="regions">
+  <div class="page-header">
+    <h1>Regions</h1>
+  </div>
+  <div class="row-fluid">
+    <div class="span4">
+      <p>
+        Regions are intelligent layout containers for assets. Every region you define will become an area users can place assets in the Pop editor.
+      </p>
+      <p>
+        Regions are defined with the <code>{{#region}}</code> 
+        Handlebars.js block helper. They are rendered as HTML5 
+        <code>section</code> elements.
+      </p>
+    </div>
+<!--     <div class="span1">&nbsp;</div>
+ -->    <div class="span8">
+      <div class="tabbable tabs-top">
+        <ul class="nav nav-pills">
+          <li class="active"><a href="#region-code-1-template" data-toggle="tab">Template Code</a></li>
+          <li><a href="#region-code-1-compiled" data-toggle="tab">Compiled Output</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="region-code-1-template">
+            <pre class="prettyprint linenums language-html">
+{{#region "columnizer" id="main-region" max_cols="3" max_auto_assets="0" dummy_content="T-1|I-3,D-2,E-1"}}
+  ...
+{{/region}}</pre>
+          </div>
+          <div class="tab-pane" id="region-code-1-compiled">
+            <pre class="prettyprint linenums language-html">
+&lt;section class=&quot;region columnizer-region&quot; id=&quot;main-region&quot; 
+         data-region-type=&quot;columnizer&quot; data-region-id=&quot;0&quot;&gt;
+&lt;/section&gt;</pre>
+          </div>
+        </div>
+      </div>    
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span12">
+      <p>
+        There are a few settings that should be defined for every region.
+      </p>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Usage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>id</code></td>
+            <td>The ID of the region</td>
+          </tr>
+          <tr>
+            <td><code>max_auto_assets</code></td>
+            <td>
+              <p>
+                The maximum number of assets Populr will automatically place in 
+                this region when a user applies your theme to their pop. When automatically 
+                placing assets, Populr will work through your regions in source 
+                order. If it finds a region that doesn't define 
+                <code>max_auto_assets</code>, or if the value is <code>0</code>, 
+                it will add all of the remaining assets to that region. <i>This setting is optional, but recommended.</i>
+              </p>
+              <p>
+                <span class="label label-info">Heads up!</span> Every theme should have at least one region set up with <code>max_auto_assets="0"</code>, usually the main content region.
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <section id="columnizer-regions">
+    <div class="row-fluid">
+      <div class="span6">
+        <h2>Columnizer Layout Engine</h2>
+        <p>
+          The Columnizer engine arranges assets first into rows, then into columns. Each row spans the full width of the region. When a user adds an asset to a row, the engine automatically resizes other assets in that row to make room for the new asset. As the themer, you define the maximum number of columns per row.
+        </p>
+        <h3>Helper</h3>
+        <pre class="prettyprint linenums language-html">
+  {{#region "columnizer" id="main-region" max_auto_assets="0" max_cols="3"}}
+  {{/region}}</pre>
+        <h3>Engine-Specific Settings</h3>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Usage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>max_cols</code></td>
+              <td>
+                <p>The maximum number of columns (assets) in a row</p>
+                <p><strong>Example:</strong> <code>max_cols="3"</code></p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>Asset Sizing</h3>
+        <p>
+          Within Columnizer regions, asset sizes are determined by the number of assets in the row. For example, if a row contains just one asset, then that asset's size 
+          is <code>1</code> and it's assigned the class <code>asset-size-1</code>. If 
+          a row contains two assets, each asset is a size <code>2</code> 
+          and they're each assigned the class <code>asset-size-2</code>.
+        </p>
+      </div>
+      <div class="span6">
+        <div class="anatomy-preview">
+          <div class="well">
+            <div class="region" style="text-align: center;">
+              <h4 class="region-title" style="text-align: left"><strong>Columnizer Region</strong></h4>
+              Row
+              <div class="row-fluid" style="border-bottom: 2px dashed #f5f5f5; padding: 0 0 10px 0;">
+                <div class="span12"><div class="asset">Asset<br><span class="muted"><i>size 1</i></span></div></div>
+              </div>
+              <div style="margin-top: 10px;">Row</div>
+              <div class="row-fluid" style="border-bottom: 2px dashed #f5f5f5; padding: 0 0 10px 0;">
+                <div class="span6"><div class="asset">Asset<br><span class="muted"><i>size 2</i></span></div></div>
+                <div class="span6"><div class="asset">Asset<br><span class="muted"><i>size 2</i></span></div></div>
+              </div>
+              <div style="margin-top: 10px;">Row</div>
+              <div class="row-fluid">
+                <div class="span4"><div class="asset">Asset<br><span class="muted"><i>size 3</i></span></div></div>
+                <div class="span4"><div class="asset">Asset<br><span class="muted"><i>size 3</i></span></div></div>
+                <div class="span4"><div class="asset">Asset<br><span class="muted"><i>size 3</i></span></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="packer-regions">
+    <div class="row-fluid">
+      <div class="span6">
+        <h2>Packer Layout Engine</h2>
+        <p>
+          The Packer engine stacks assets vertically based on the column a user 
+          places them in. Users have manual control over the width of each asset, and the engine packs each asset 
+          as close to the top of the page as possible.
+        </p>
+        <h3>Helper</h3>
+          <pre class="prettyprint linenums language-html">
+{{#region "packer" id="main-region" max_auto_assets="0" columns="3" column_width="120" gutter_width="10" sizes="s,m,l" default_size="s"}}
+{{/region}}</pre>
+        <h3>Engine-Specific Settings</h3>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Usage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>columns</code></td>
+              <td>
+                <p>The number of columns in the region</p>
+                <p><strong>Example:</strong> <code>columns="2"</code></p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>column_width</code></td>
+              <td>
+                <p>The width of the smallest asset size in pixels</p>
+                <p><strong>Example:</strong> <code>column_width="300"</code></p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>gutter_width</code></td>
+              <td>
+                <p>The amount of space between assets in pixels</p>
+                <p><strong>Example:</strong> <code>gutter_width="20"</code></p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>sizes</code></td>
+              <td>
+                <p>
+                  The asset sizes available. Must be a <em>comma-delimited</em> 
+                  list and can contain one or more of the following sizes:
+                </p>
+                <ul>
+                  <li><code>s</code> (small)</li>
+                  <li><code>m</code> (medium)</li>
+                  <li><code>l</code> (large)</li>
+                </ul>
+                <p><strong>Example:</strong> <code>sizes="s,m,l"</code></p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>default_size</code></td>
+              <td>
+                <p>
+                  The default size at which an asset will appear when dragged into the region. We recommend you set this to the smallest possible size.
+                </p>
+                <p><strong>Example:</strong> <code>default_size="s"</code></p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>Asset Sizing</h3>
+        <p>
+          Within Packer regions, users can choose the size for each asset. So if a user sets an asset to, for example, the smallest size possible, that asset's size 
+          is <code>s</code> and it's assigned the class <code>asset-size-s</code>.
+        </p>
+        <p>
+          The valid sizes are specified in the <code>sizes</code> setting on the <code>{{#region}}</code> block helper. You can make up to three sizes available: <code>s, m, and l</code>.
+        </p>
+      </div>
+      <div class="span6">
+        <div class="anatomy-preview">
+          <div class="well">
+            <div class="region packer-region" style="text-align: center;">
+              <h4 class="region-title" style="text-align: left"><strong>Packer Region</strong></h4>
+              <div class="asset asset-size-s" style="padding: 134px 4px; margin-top: 28px;">Asset<br><span class="muted"><i>size S</i></span></div>
+              <div class="asset asset-size-s" style="margin-top: 28px;">Asset<br><span class="muted"><i>size S</i></span></div>
+              <div class="asset asset-size-s" style="margin-top: 28px;">Asset<br><span class="muted"><i>size S</i></span></div>
+              <div class="asset asset-size-s">Asset<br><span class="muted"><i>size S</i></span></div>
+              <div class="asset asset-size-s">Asset<br><span class="muted"><i>size S</i></span></div>
+              <div class="asset asset-size-m">Asset<br><span class="muted"><i>size M</i></span></div>
+              <div class="asset asset-size-l">Asset<br><span class="muted"><i>size L</i></span></div>
+            </div>
+          </div>
+          <script>
+            $(document).ready(function(){
+              $('#regions .anatomy-preview .packer-region').masonry({
+                itemSelector: '.asset',
+                columnWidth: 140
+              });  
+            });
+          </script>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+<section id="assets">
+  <div class="page-header">
+    <h1>Assets</h1>
+  </div>
+  <div class="row-fluid">
+    <div class="span4">
+      <p>
+        Assets are the actual content a user places in Pop. Each type of asset 
+        has unique properties that you can access when creating your theme. 
+        Assets are defined with the <code>{{#asset}}</code> 
+        Handlebars.js block helper, and are rendered as <code>div</code> elements.
+      </p>
+      <p>
+        <span class="label label-info">Heads up!</span> Asset templates 
+        <em>must</em> be nested inside of region definitions, and you 
+        <em>must</em> define asset templates for every asset type and every 
+        available asset size in each region.
+      </p>
+    </div>
+    <div class="span8">
+      <div class="tabbable tabs-top">
+        <ul class="nav nav-pills">
+          <li class="active"><a href="#asset-code-1-template" data-toggle="tab">Template Code</a></li>
+          <li><a href="#asset-code-1-compiled" data-toggle="tab">Compiled Output</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="asset-code-1-template">
+            <pre class="prettyprint linenums language-html">
+{{#asset "text" size="2"}}
+  {{{title}}}
+  &lt;div class=&quot;content&quot;&gt;
+    {{{body}}}
+  &lt;/div&gt;
+{{/asset}}</pre>
+          </div>
+          <div class="tab-pane" id="asset-code-1-compiled">
+            <pre class="prettyprint linenums language-html">
+&lt;div class=&quot;asset asset-type-text asset-size-2&quot; data-region-id=&quot;0&quot;&gt;
+  &lt;div class=&quot;asset-inner&quot;&gt;
+    &lt;h2 class=&quot;title&quot;&gt;Aenean Commodo Ligula&lt;/h2&gt;
+    &lt;div class=&quot;content&quot;&gt;
+      &lt;div class=&quot;body&quot;&gt;Lorem ipsum dolor sit amet.&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span12">
+      <p>
+        The <code>size</code> setting must be defined for every asset template.
+      </p>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Usage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>size</code></td>
+            <td>
+              <p>The size this asset template is associated with.</p>
+              <p>
+                For a Columnizer region, the available asset sizes are <code>1, 2, 3...</code> and so on.<br><strong>Columnizer example:</strong> <code>size="2"</code>
+              </p>
+              <p>
+                For a Packer region, the available asset sizes are <code>s, m, l</code>. The asset sizes valid for the region are specified in the <code></code> helper.<br><strong>Packer example:</strong> <code>size="m"</code>
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <section id="text-assets">
+    <h2>Text Asset Type</h2>
+    <div class="row-fluid">
+      <div class="span12">
+        <p>
+          The <code>text</code> asset type is the most basic asset in Populr. It 
+          allows the user to enter a title and body content.
+        </p>
+        <h3>Template Variables</h3>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Variable</th>
+              <th>Description</th>
+              <th>Contents</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>{{{title}}}</code></td>
+              <td>Title of the asset</td>
+              <td>
+                <code class="prettyprint language-html">
+                  &lt;h2 class=&quot;title&quot;&gt;Lorem Ipsum&lt;/h2&gt;
+                </code>
+              </td>
+            </tr>
+            <tr>
+              <td><code>{{{body}}}</code></td>
+              <td>Body content of the asset</td>
+              <td>
+                <code class="prettyprint language-html">
+                  &lt;div class=&quot;body content&quot;&gt;&lt;p&gt;Lorem ipsum dolor sit amet.&lt;/p&gt;&lt;/div&gt;
+                </code>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <section id="imagegroup-assets">
+    <h2>ImageGroup Asset Type</h2>
+    <div class="row-fluid">
+      <div class="span12">
+        <p>
+          The <code>imagegroup</code> asset type is a container for one or more images selected by the user.
+        </p>
+        <p>
+          The example template below shows you an image asset template that doesn't use <a href="#imageslider-helper">Populr's image slider helper</a>. To see an image asset template that uses our image slider helper, take a look at the <a href="#imageslider-helper">simple example theme</a> near the top of this document.
+        </p>
+        <div class="tabbable tabs-top">
+          <ul class="nav nav-pills">
+            <li class="active"><a href="#asset-code-2-template" data-toggle="tab">Template Code</a></li>
+            <li><a href="#asset-code-2-compiled" data-toggle="tab">Compiled Output</a></li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" id="asset-code-2-template">
+              <pre class="prettyprint linenums language-html">
+{{#asset "imagegroup" size="m"}}
+  {{{title}}}
+  &lt;ul class=&quot;images&quot;&gt;
+    {{#images}}
+      &lt;li&gt;&lt;img src=&quot;{{{resize original_url width=640 height=480}}}&quot; title=&quot;{{{title}}}&quot;/&gt;&lt;/li&gt;
+    {{/images}}
+  &lt;/ul&gt;
+  {{{description}}}
+{{/asset}}</pre>
+            </div>
+            <div class="tab-pane" id="asset-code-2-compiled">
+              <pre class="prettyprint linenums language-html">
+&lt;div class=&quot;asset asset-type-imagegroup asset-size-m&quot; data-region-id=&quot;0&quot;&gt;
+  &lt;div class=&quot;asset-inner&quot;&gt;
+    &lt;h2 class=&quot;title&quot;&gt;Aenean Commodo Ligula&lt;/h2&gt;
+    &lt;ul class=&quot;images&quot;&gt;
+      &lt;li&gt;&lt;img src=&quot;https://i.populr.me/640/480/http://lorempixel.com/1280/1024%3F0&quot; title=&quot;Lorem Ipsum&quot;/&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div class=&quot;description&quot;&gt;Lorem ipsum dolor sit amet.&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="alert alert-info">
+      <p>
+        <span class="label label-info">Heads up!</span> We strongly recommend you use <a href="#imageslider-helper">Populr's image slider helper</a> in your image assets. Other sliders are unsupported, meaning you can give them a try but if it doesn't work you'll miss out on the super-helpful support of our theming staff. You'll be on your own, cowboy.
+      </p>
+    </div>
+    <div class="row-fluid">
+      <div class="span12">
+        <h3>Template Variables</h3>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Variable</th>
+              <th>Description</th>
+              <th>Contents</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>{{{title}}}</code></td>
+              <td>Title of the asset</td>
+              <td>
+                <code class="prettyprint language-html">
+                  &lt;h2 class=&quot;title&quot;&gt;Lorem Ipsum&lt;/h2&gt;
+                </code>
+              </td>
+            </tr>
+            <tr>
+              <td><code>{{{description}}}</code></td>
+              <td>Description content of the asset</td>
+              <td>
+                <code class="prettyprint language-html">
+                  &lt;div class=&quot;description&quot;&gt;&lt;p&gt;Lorem ipsum dolor sit amet.&lt;/p&gt;&lt;/div&gt;
+                </code>
+              </td>
+            </tr>
+            <tr>
+              <td><code>{{{images}}}</code></td>
+              <td>
+                Array of images in the <code>imagegroup</code>
+              </td>
+              <td>
+                <code>[images]</code>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>Templating {{{images}}}</h3>
+        <p>
+          The <code>{{{images}}}</code> variable is an 
+          array of individual images. Even when there is only one image in the asset, that image is stored as an element of the array. To display the asset contents, you must use a helper either to loop through 
+          each image or to access a specific image in the array.
+        </p>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Variable</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>{{{title}}}</code></td>
+              <td>Title of the image</td>
+            </tr>
+            <tr>
+              <td><code>{{{description}}}</code></td>
+              <td>Description of the image</td>
+            </tr>
+            <tr>
+              <td><code>{{{original_url}}}</code></td>
+              <td>
+                URL for the image<br><span class="label label-info">Heads up!</span> You 
+                should almost always pass this value into the 
+                <a href="#helpers">resize helper</a>.
+              </td>
+            </tr>
+            <tr>
+              <td><code>{{{source_file_name}}}</code></td>
+              <td>Original filename</td>
+            </tr>
+            <tr>
+              <td><code>{{{source_file_size}}}</code></td>
+              <td>
+                Original filesize, in bytes<br> 
+                <span class="label label-info">Heads up!</span> You can use the 
+                <code>{{{format_file_size}}}</code> helper 
+                to automatically display the filesize in an easy-to-read format.
+              </td>
+            </tr>
+            <tr>
+              <td><code>{{{width}}}</code></td>
+              <td>Original image width</td>
+            </tr>
+            <tr>
+              <td><code>{{{height}}}</code></td>
+              <td>Original image height</td>
+            </tr>
+            <!-- TODO: add info about palettes -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <section id="documentgroup-assets">
+    <h2>DocumentGroup Asset Type</h2>
+    <div class="row-fluid">
+      <div class="span12">
+        <p>
+          The <code>documentgroup</code> asset type is a container for one or 
+          more files uploaded by the user.
+        </p>
+        <div class="tabbable tabs-top">
+          <ul class="nav nav-pills">
+            <li class="active"><a href="#asset-code-4-template" data-toggle="tab">Template Code</a></li>
+            <li><a href="#asset-code-4-compiled" data-toggle="tab">Compiled Output</a></li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" id="asset-code-4-template">
+              <pre class="prettyprint linenums language-html">
+{{#asset "documentgroup" size="m"}}
+  {{{title}}}
+  {{{description}}}
+  &lt;ul class=&quot;documents&quot;&gt;
+    {{#documents}}
+      &lt;li class=&quot;file-extension file-extension-{{{extension}}}&quot;&gt;
+        {{#if title}}
+          &lt;a href=&quot;{{{original_url}}}&quot;&gt;{{{title}}}&lt;/a&gt;
+        {{else}}
+          &lt;a href=&quot;{{{original_url}}}&quot;&gt;{{{source_file_name}}}&lt;/a&gt;
+        {{/if}}
+      &lt;/li&gt;
+    {{/documents}}
+  &lt;/ul&gt;
+{{/asset}}</pre>
+            </div>
+            <div class="tab-pane" id="asset-code-4-compiled">
+              <pre class="prettyprint linenums language-html">
+&lt;div class=&quot;asset asset-type-documentgroup asset-size-m&quot; data-region-id=&quot;0&quot;&gt;
+  &lt;div class=&quot;asset-inner&quot;&gt;
+    &lt;h2 class=&quot;title&quot;&gt;Aenean Commodo Ligula&lt;/h2&gt;
+    &lt;div class=&quot;description&quot;&gt;Lorem ipsum dolor sit amet.&lt;/div&gt;
+    &lt;ul class=&quot;documents&quot;&gt;
+      &lt;li class=&quot;file-extension file-extension-zip&quot;&gt;
+        &lt;a href=&quot;files.populr.me/assets/theme_sample.zip&quot;&gt;theme_sample.zip&lt;/a&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row-fluid">
+      <div class="span12">
+        <h3>Template Variables</h3>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Variable</th>
+              <th>Description</th>
+              <th>Contents</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>{{{title}}}</code></td>
+              <td>Title of the asset</td>
+              <td>
+                <code class="prettyprint language-html">
+                  &lt;h2 class=&quot;title&quot;&gt;Lorem Ipsum&lt;/h2&gt;
+                </code>
+              </td>
+            </tr>
+            <tr>
+              <td><code>{{{description}}}</code></td>
+              <td>Description content of the asset</td>
+              <td>
+                <code class="prettyprint language-html">
+                  &lt;div class=&quot;description&quot;&gt;&lt;p&gt;Lorem ipsum dolor sit amet.&lt;/p&gt;&lt;/div&gt;
+                </code>
+              </td>
+            </tr>
+            <tr>
+              <td><code>{{{documents}}}</code></td>
+              <td>
+                Array of documents in the <code>documentgroup</code>
+              </td>
+              <td>
+                <code>[documents]</code>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>Templating {{{documents}}}</h3>
+        <p>
+          The <code>{{{documents}}}</code> variable is an 
+          array of individual user-uploaded documents. Even when there is only one document in the asset, that document is stored as an element of the array. To display the asset contents, you must use a helper either to loop through 
+          each document or to access a specific document in the array.
+        </p>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Variable</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>{{{title}}}</code></td>
+              <td>Title of the document</td>
+            </tr>
+            <tr>
+              <td><code>{{{description}}}</code></td>
+              <td>Description of the document</td>
+            </tr>
+            <tr>
+              <td><code>{{{original_url}}}</code></td>
+              <td>URL to document</td>
+            </tr>
+            <tr>
+              <td><code>{{{extension}}}</code></td>
+              <td>Extension name of the document, without period</td>
+            </tr>
+            <tr>
+              <td><code>{{{source_file_name}}}</code></td>
+              <td>Original filename of the uploaded document, including extension</td>
+            </tr>
+            <tr>
+              <td><code>{{{source_file_size}}}</code></td>
+              <td>
+                Original filesize, in bytes. 
+                <span class="label label-info">Heads up!</span> You can use the 
+                <code>{{{format_file_size}}}</code> helper 
+                to automatically display the filesize in an easy-to-read format.
+              </td>
+            </tr>
+            <tr>
+              <td><code>{{{source_content_type}}}</code></td>
+              <td>Content type of document (<code>application/octet-stream</code> if unknown)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="embedgroup-assets">
+    <h2>EmbedGroup Asset Type</h2>
+    <div class="row-fluid">
+      <div class="span12">
+        <p>
+          The <code>embedgroup</code> asset type is a container for one or 
+          more embedded elements added by the user.
+        </p>
+        <div class="tabbable tabs-top">
+          <ul class="nav nav-pills">
+            <li class="active"><a href="#asset-code-5-template" data-toggle="tab">Template Code</a></li>
+            <li><a href="#asset-code-5-compiled" data-toggle="tab">Compiled Output</a></li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" id="asset-code-5-template">
+              <pre class="prettyprint linenums language-html">
+{{#asset "embedgroup" size="m" width="640"}}
+  {{{title}}}
+  &lt;div class=&quot;embeds&quot;&gt;
+    {{#embeds}}
+      &lt;div class=&quot;embed embed-type-{{{css_safe_provider}}}&quot;&gt;
+        {{{html}}}
+      &lt;/div&gt;
+    {{/embeds}}
+  &lt;/div&gt;
+  {{{description}}}
+{{/asset}}</pre>
+            </div>
+            <div class="tab-pane" id="asset-code-5-compiled">
+              <pre class="prettyprint linenums language-html">
+&lt;div class=&quot;asset asset-type-embedgroup asset-size-m&quot; data-region-id=&quot;0&quot;&gt;
+  &lt;div class=&quot;asset-inner&quot;&gt;
+    &lt;h2 class=&quot;title&quot;&gt;Aenean Commodo Ligula&lt;/h2&gt;
+    &lt;div class=&quot;embed embed-type-{{{css_safe_provider}}}&quot;&gt;
+      &lt;div class=&quot;embedded-object&quot;&gt;
+        &lt;iframe width=&quot;640&quot; height=&quot;480&quot; src=&quot;http://www.youtube.com/embed/q-_4mcYsQdE?wmode=transparent&amp;fs=1&amp;feature=oembed&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;
+        &lt;img src=&quot;http://i3.ytimg.com/vi/q-_4mcYsQdE/hqdefault.jpg&quot; alt=&quot;&quot; style=&quot;width:640px;height:480px;display:none;&quot;/&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;description&quot;&gt;Lorem ipsum dolor sit amet.&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row-fluid">
+      <div class="span12">
+        <p>
+          <span class="label label-info">Heads up!</span> Note that embeds are the only asset type for which the widths have to be specified in the <code>{{#asset}}</code> block helper.
+        </p>
+        <h3>Template Variables</h3>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Variable</th>
+              <th>Description</th>
+              <th>Contents</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>{{{title}}}</code></td>
+              <td>Title of the asset</td>
+              <td>
+                <code class="prettyprint language-html">
+                  &lt;h2 class=&quot;title&quot;&gt;Lorem Ipsum&lt;/h2&gt;
+                </code>
+              </td>
+            </tr>
+            <tr>
+              <td><code>{{{description}}}</code></td>
+              <td>Description content of the asset</td>
+              <td>
+                <code class="prettyprint language-html">
+                  &lt;div class=&quot;description&quot;&gt;&lt;p&gt;Lorem ipsum dolor sit amet.&lt;/p&gt;&lt;/div&gt;
+                </code>
+              </td>
+            </tr>
+            <tr>
+              <td><code>{{{embeds}}}</code></td>
+              <td>
+                Array of embeds in the <code>embedgroup</code>
+              </td>
+              <td>
+                <code>[embeds]</code>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>Templating {{{embeds}}}</h3>
+        <p>
+          The <code>{{{embeds}}}</code> variable is an 
+          array of individual user-selected embed elements. Even when there is only one embed in the asset, that embed is stored as an element of the array. To display the asset contents, you must use a helper either to loop through 
+          each embed or to access a specific embed in the array.
+        </p>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Variable</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>{{{title}}}</code></td>
+              <td>Title of the embed</td>
+            </tr>
+            <tr>
+              <td><code>{{{description}}}</code></td>
+              <td>Description of the embed</td>
+            </tr>
+            <tr>
+              <td><code>{{{html}}}</code></td>
+              <td>Actual html of the embed</td>
+            </tr>
+            <tr>
+              <td><code>{{{provider}}}</code></td>
+              <td>Website embed originated from</td>
+            </tr>
+            <tr>
+              <td><code>{{{css_safe_provider}}}</code></td>
+              <td>CSS-safe version of embed provider</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+    <section id="asset-template-variations">
+    <h2>Asset Template Variations</h2>
+    <div class="row-fluid">
+      <div class="span12">
+        <p>
+          Each region must contain asset templates for every combination of asset type and size that can appear in the region. This provides an opportunity to apply different layouts and styling to assets depending on parent region, asset type, or size. Furthermore, the <code>{{{if_many}}}</code> helper can be used to apply layout and style variations depending on how many items are contained in an asset - see the <a href="#ifmany-helper">{{{if_many}}} helper documentation</a> for details.
+        </p>
+        <p>
+          Get creative! The most successful Populr themes are the ones that give users a range of stylistic variations. Add a region at the top of the theme for a hero image or video. Vary your typography depending on the size of the asset. Change your image slider parameters for the body and footer regions. Mix things up a bit and you'll have a beautiful theme in no time.
+        </p>
+      </div>
+    </div>
+  </section>
+
+</section>
+
+<section id="helpers">
+  <div class="page-header">
+    <h1>Template Helpers</h1>
+  </div>
+  <div class="row-fluid">
+    <div class="span12">
+      <p>
+        Populr provides several additional Handlebars.js helpers which will assist 
+        you in creating your theme.
+      </p>
+    </div>
+  </div>
+  <section id="resize-helper">
+    <h2>Resize</h2>
+    <div class="row-fluid">
+      <div class="span6">
+        <p>
+          The <code>{{{resize}}}</code> helper is fundamental 
+          to Populr theming. Users can upload any size image they want in the 
+          Populr editor. Obviously, this is not ideal for a good looking theme, 
+          so the resize helper allows you to scale and crop images to your 
+          liking by redirecting urls through our image transformer.
+        </p>
+        <h3>Helper</h3>
+        <pre class="prettyprint linenums language-html">{{{resize original_url width=640 height=480}}}</pre>
+      </div>
+      <div class="span6">
+        <h3>Settings</h3>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Usage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>width</code></td>
+              <td>Target width <span class="muted">(optional)</span></td>
+            </tr>
+            <tr>
+              <td><code>height</code></td>
+              <td>Target height <span class="muted">(optional)</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          <span class="label label-info">Heads up!</span> Defining either a width 
+          <strong>or</strong> a height will proportionally scale the image to fit 
+          the defined dimension. If you define both the width <strong>and</strong> 
+          the height, the image will be scaled and cropped to fit within both 
+          dimensions. A value of <code>0</code> will act the same as an undefined value.
+        </p>
+      </div>
+    </div>
+  </section>
+  <section id="ifmany-helper">
+    <h2>If Many</h2>
+    <div class="row-fluid">
+      <div class="span6">
+        <p>
+          The <code>{{{if_many}}}</code> helper gives you the 
+          ability to detect whether a group asset has one item or multiple items 
+          in its contents. This is particularly useful when you want to create one 
+          template for a single item, and another for multiple. This helper works 
+          exactly the same as a normal Handlebars.js <code>if</code> helper. The <code>else</code> block is 
+          optional.
+        </p>
+        <h3>Helper</h3>
+        <pre class="prettyprint linenums language-html">
+&lt;!-- within an imagegroup template --&gt;
+{{#if_many images}}
+  &lt;!-- loop through images --&gt;
+{{else}}
+  &lt;!-- display single image --&gt;
+{{/if_many}}</pre>
+      </div>
+      <div class="span6">
+        <h3>Settings</h3>
+        <p>There are no settings for this helper.</p>
+      </div>
+    </div>
+  </section>
+  <section id="ifequal-helper">
+    <h2>If Equal</h2>
+    <div class="row-fluid">
+      <div class="span6">
+        <p>
+          The <code>{{{if_equal}}}</code> helper gives you another way to add conditionals into your templates. The <code>else</code> block is optional.
+        </p>
+        <p>
+          The example here shows how the <code>{{{if_equal}}}</code> helper can be used to style embedded videos differently from other embeds.
+        <h3>Helper</h3>
+        <pre class="prettyprint linenums language-html">
+&lt;!-- within an embedgroup template --&gt;
+{{#embeds}}
+  {{#if_equal kind &quot;video&quot;}}
+    &lt;div class=&quot;embedded-video&quot;&gt;{{{html}}}&lt;/div&gt;
+  {{else}}
+    &lt;div class=&quot;embed&quot;&gt;{{{html}}}&lt;/div&gt;
+  {{/if_equal}}
+{{/embeds}}</pre>
+      </div>
+      <div class="span6">
+        <h3>Settings</h3>
+        <p>There are no settings for this helper.</p>
+      </div>
+    </div>
+  </section>
+  <section id="formatfilesize-helper">
+    <h2>Format File Size</h2>
+    <div class="row-fluid">
+      <div class="span6">
+        <p>
+          The <code>{{{format_file_size}}}</code> helper 
+          formats a filesize, listed in bytes, to a more-readable representation. 
+          It will automatically decide if the size should be displayed as one of 
+          the following: <code>'Bytes', 'KB', 'MB', 'GB', 'TB'</code>
+        </p>
+        <h3>Helper</h3>
+        <pre class="prettyprint linenums language-html">{{{format_file_size source_file_size precision=2}}}</pre>
+      </div>
+      <div class="span6">
+        <h3>Settings</h3>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Usage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>precision</code></td>
+              <td>Number of decimal places <span class="muted">(optional, default is <code>2</code>)</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <section id="imageslider-helper">
+    <h2>Image Slider</h2>
+    <div class="row-fluid">
+      <div class="span6">
+        <p>
+          The <code>{{{imageslider}}}</code> helper creates a 
+          ready-made JavaScript image slider for your <code>imagegroup</code> assets.
+        </p>
+        <p>
+          If there is only one image in an asset's <code>{{{images}}}</code> array, then that image will <em>not</em> be cropped; it will simply be scaled to fit the full width of its container. However, if there are multiple images in the <code>{{{images}}}</code> array, they will be first scaled, then cropped as needed to fit the dimensions specified by the <code>width</code> and <code>height</code> parameters.
+        </p>
+        <h3>Helper</h3>
+        <pre class="prettyprint linenums language-html">{{{imageslider images width=640 height=480}}}</pre>
+        <p>
+          If your theme uses the image slider helper, you must include the following line of code in your main.less file.
+        <h3>main.less</h3>
+        <pre class="prettyprint linenums language-css">#populr &gt; #image-slider-themes &gt; .basic();</pre>
+      </div>
+      <div class="span6">
+        <h3>Settings</h3>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Usage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>width</code></td>
+              <td>Target width</td>
+            </tr>
+            <tr>
+              <td><code>height</code></td>
+              <td>Target height</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          <span class="label label-info">Heads up!</span> Unlike a simple 
+          <code>{{{resize}}}</code> helper, you should <strong>
+          always</strong> define both the width and the height of an image slider.
+        </p>
+        Our image slider helper is based on the excellent jQuery Cycle 2 slider by Mike Alsup. To fine tune the slider's settings for your theme, refer to the <a href="http://jquery.malsup.com/cycle2/api/" target="_blank">jQuery Cycle 2 API documentation</a>.
+      </div>
+    </div>
+  </section>
+</section>
+
+<section id="styling">
+  <div class="page-header">
+    <h1>Styling</h1>
+  </div>
+  <div class="row-fluid">
+    <div class="span12">
+      <p>
+        The CSS styling for Populr themes is generally stored in 2 LESS files: main.less and variables.less.
+      </p>
+    </div>
+  </div>
+  <section id="main-less">
+    <h2>Main.less</h2>
+    <div class="row-fluid">
+      <div class="span12">
+        <p>
+          Main.less is where the majority of your CSS should be stored. It contains calls to import variables.less and any other necessary LESS files.
+        </p>
+      </div>
+    </div>
+  </section>
+  <section id="variables-less">
+    <h2>Variables.less</h2>
+    <div class="row-fluid">
+      <div class="span12">
+        <p>
+          Variables.less stores LESS variables that can be changed by the user through Populr's pop editing interface, or that are updated by the pop rendering engine when the page loads.
+        </p>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="20%"><code>@base-url</code></td>
+              <td>
+                <p>
+                  The pop's base URL. Should be set to the value <code>'..'</code>. Do not change this value; the system uses this variable to generate paths to the theme's file.
+                </p>
+                <p>
+                  This variable is used to set relative links within a theme definition. For example, the background image for a page element can be set via CSS like this:
+                </p>
+                <code>background: transparent url("@{base-url}/images/region-bg.png") no-repeat;</code>
+              </td>
+            </tr>
+            <tr>
+              <td><code>@custom-color</code></td>
+              <td>
+                <p>
+                  If a theme includes the "Custom" style, this variable can be overridden by the user through a color picker that will appear in the Style menu. <a href="#theme-styles">Learn more about styles and the custom color picker</a>
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>@background-color</code></td>
+              <td>
+                <p>
+                  The background color used when this page is first rendered
+                </p>
+                <p>
+                  Once a user sets a background image for their pop, Populr will calculate the average color of the image and store that value in <code>@background-color</code>. When someone opens the pop, Populr will display this color as the pop background while the background image is being loaded. This technique creates a less abrupt transition when the background image is finally loaded and displayed.
+              </td>
+            </tr>
+            <tr>
+              <td><code>@headline-font-family</code></td>
+              <td>
+                <p>
+                  The default font family for the pop title and asset titles when the theme is selected
+                </p>
+                <p>
+                  This value can be overridden by the user with the Font drop-down menu.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>@headline-font-weight</code></td>
+              <td>
+                <p>
+                  The default font weight for the pop title and asset titles when the theme is selected
+                </p>
+                <p>
+                  This value can be overridden by the user with the text formatting bar.
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <section id="less-mixins">
+    <h2>LESS Mixin Libraries</h2>
+    <div class="row-fluid">
+      <div class="span12">
+        <p>
+          At Populr, we often find it helpful to use LESS mixin libraries when creating a theme. These libraries provide a quick way to add cross-browser compatibility or some functional or stylistic coolness. Our favorites are:
+          <ul>
+            <li><a href="http://markdotto.com/bootstrap/" target="_blank">Preboot.less</a></li>
+            <li><a href="http://lesselements.com/" target="_blank">LESS Elements</a></li>
+            <li><a href="http://lesshat.com/" target="_blank">LESSHat</a></li>
+          </ul>
+        </p>
+      </div>
+    </div>
+  </section>
+  <section id="theme-styles">
+    <h2>Theme Styles</h2>
+    <div class="row-fluid">
+      <div class="span12">
+        <p>
+          Put simply, theme styles are variations on a theme. Populr's UI gives end users the ability to customize their pop by choosing from a set of styles defined by the theme designer. Styles can represent a series of color palettes for a theme, a set of variations in the asset layout, or other While styles are optional, we encourage theme designers to create at least 2 styles for each theme. (One simple way to meet this request is to create a light and a dark style for your theme.)
+        </p>
+        <p>
+          For example, the theme Norway uses styles to give users a choice of color variations for the background of the title and footer. Users can choose from 4 colors selected by the designer who built the theme.
+        </p>
+        <p>
+          Each theme style is defined in its own LESS file, located in the theme's styles directory. Every theme that uses more than one style must have the default style specified in a file named palette-default.less. Additional styles can be named whatever sematically makes sense. In the case of Norway, the additional styles have fun names based on the color they represent: palette-sulu.less, palette-tango.less, etc.
+        </p>
+        <p>
+          These theme style files are referenced from the theme's index.html file with the following syntax (using the theme Norway as an example):
+          <pre class="prettyprint linenums language-html">&lt;meta itemprop=&quot;palette&quot; content=&quot;palette-default&quot; title=&quot;Malibu&quot; data-preview=&quot;#66b5f2&quot;&gt;
+&lt;meta itemprop=&quot;palette&quot; content=&quot;palette-sulu&quot; title=&quot;Sulu&quot; data-preview=&quot;#bcf266&quot;&gt;
+&lt;meta itemprop=&quot;palette&quot; content=&quot;palette-tango&quot; title=&quot;Tango&quot; data-preview=&quot;#f36d24&quot;&gt;
+&lt;meta itemprop=&quot;palette&quot; content=&quot;palette-custom&quot; title=&quot;Custom&quot; data-preview=&quot;custom&quot;&gt;</pre>
+        </p>
+        <p>
+          These attributes are used like this:
+        </p>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="20%"><code>itemprop</code></td>
+              <td>
+                <p>
+                  Should always be set to "palette"
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>content</code></td>
+              <td>
+                <p>
+                  The name of the LESS file containing the theme style's CSS. Do not include the ".less" file extension.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>title</code></td>
+              <td>
+                <p>
+                  The name of the theme style that will appear in the Styles dropdown menu of the pop editor. This is what the end user will see when choosing styles.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>data-preview</code></td>
+              <td>
+                <p>
+                  This attribute defines the color bars that act as a thumbnail for each style. Populr will turn each comma-separated hex value for this attribute into a vertical bar in the styles thumbnail box. (Thumbnail boxes appear in the Styles dropdown menu of the pop editor.) These thumbnail boxes give the end user a visual cue for each style.
+                </p>
+                <p>
+                  For example, let's look at the theme Center. The Styles dropdown menu for Center looks like this by default:<br>
+                  <img src="../assets/images/theming/Center-styles.png" />
+                </p>
+                <p>
+                  <br>
+                  Here are the meta tag definitions that result in these thumbnails.
+          <pre class="prettyprint linenums language-html">&lt;meta itemprop=&quot;palette&quot; content=&quot;palette-default&quot; title=&quot;Light&quot; data-preview=&quot;#cccccc&quot;&gt;
+&lt;meta itemprop=&quot;palette&quot; content=&quot;palette-dark&quot; title=&quot;Dark&quot; data-preview=&quot;#111111&quot;&gt;
+&lt;meta itemprop=&quot;palette&quot; content=&quot;palette-transparent&quot; title=&quot;Transparent&quot; data-preview=&quot;#888,#fff,#888,#fff,#888,#fff,#888,#fff,#888,#fff&quot;&gt;</pre>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          The theme properties that vary across styles are defined in main.less with variables. Norway's main.less file specifies the background of the header area like this:
+          <pre class="prettyprint linenums language-less">// main.less in Norway
+background: @header-color url("@{base-url}/images/header-overlay.png") repeat bottom center;</pre>
+        </p>
+        <p>
+          Note the use of <code>@header-color</code> to specify the background color. To set that color, each theme style assigns a unique value to <code>@header-color</code>. The theme's palette-default.less file contains this line of CSS:
+          <pre class="prettyprint linenums language-less">// palette-default.less in Norway
+@header-color: #66b5f2;</pre>
+        </p>
+        <p>
+          By default, this theme will use the hex color #66b5f2 for the header's background color. A different style file for this theme (palette-sulu.less) contains this line:
+          <pre class="prettyprint linenums language-less">// palette-sulu.less in Norway
+@header-color: #bcf266;</pre>
+        </p>
+        <p>
+          ...so an end user who selects the style "Sulu" is basically redefining the value of the <code>@header-color</code> LESS variable through Populr's UI.
+        </p>
+      </div>
+    </div>
+    <h3>Adding the Custom Color Picker</h3>
+    <div class="row-fluid">
+      <div class="span6">
+        <p>
+          Populr has a built-in way for the end user to specify a custom color for a theme. This is accomplished through a special theme style.
+        </p>
+        <p>
+          The custom color theme style file must be named palette-custom.less. Also, the style definition tag in the theme's index.html file must be set up as follows:
+          <pre class="prettyprint linenums language-html">&lt;!-- index.html in Norway --&gt;
+&lt;meta itemprop=&quot;palette&quot; content=&quot;palette-custom&quot; title=&quot;Custom&quot; data-preview=&quot;custom&quot;&gt;</pre>
+        </p>
+        <p>
+          This will give the end users a color picker in the Style dropdown menu of the pop editor. The color selected by the user will be assigned to the less variable <code>@custom-color</code>. To continue to our example with the theme Norway, the custom style file contains this line of CSS:
+          <pre class="prettyprint linenums language-less">// palette-custom.less in Norway
+@header-color: @custom-color;</pre>
+        </p>
+      </div>
+      <div class="span6">
+        <img src="../assets/images/theming/color-picker.png" />
+      </div>
+    </div>
+  </section>
+  <section id="system-classes">
+    <h2>System-Generated Classes</h2>
+    <div class="row-fluid">
+      <div class="span12">
+        <p>
+          Populr's theming engine automatically applies system-generated classes to certain page elements. Here are a few that will be especially valuable for building unique behaviors into your theme, such as applying styling variations based on content location, size, etc.
+        </p>
+      </div>
+    </div>
+    <h3>Rows in Columnizer Regions</h3>
+    <div class="row-fluid">
+      <div class="span12">
+        <p>
+          Each columnizer row will automatically have both of the following classes applied.
+          <ul>
+            <li><code>columnizer-row</code></li>
+            <li><code>columnizer-cols#</code>, where <code>#</code> is the number of assets contained in the row</li>
+          </ul>
+        </p>
+      </div>
+    </div>
+    <p>&nbsp;</p>
+    <h3>Assets in Columnizer Regions</h3>
+    <div class="row-fluid">
+      <div class="span12">
+        <p>
+          Each asset in a columnizer row is assigned to a class according to its index in the row.
+          <ul>
+            <li><code>columnizer-col#</code>, where <code>#</code> is the index number of the asset in the row. The first asset has an index of <code>1</code>, the second an index of <code>2</code>, and so on.</li>
+          </ul>
+        </p>
+      </div>
+    </div>
+    <p>&nbsp;</p>
+    <h3>Asset Types</h3>
+    <div class="row-fluid">
+      <div class="span12">
+        <p>
+          Every asset is assigned to a class according to its type. Only one of the following classes is applied per asset.
+          <ul>
+            <li><code>asset-type-text</code></li>
+            <li><code>asset-type-imagegroup</code></li>
+            <li><code>asset-type-documentgroup</code></li>
+            <li><code>asset-type-embedgroup</code></li>
+          </ul>
+        </p>
+      </div>
+    </div>
+    <p>&nbsp;</p>
+    <h3>Asset Size</h3>
+    <div class="row-fluid">
+      <div class="span12">
+        <p>
+          Every asset is assigned to a class according to its size. Only one of the following classes is applied per asset.
+        </p>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span3">
+        <p><strong>Assets in Columnizer Regions</strong></p>
+        <ul>
+          <li><code>asset-size-1</code></li>
+          <li><code>asset-size-2</code></li>
+          <li><code>asset-size-3</code></li>
+          <li>...and so on</li>
+        </ul>
+      </div>
+      <div class="span3">
+        <p><strong>Assets in Packer Regions</strong></p>
+        <ul>
+          <li><code>asset-size-s</code></li>
+          <li><code>asset-size-m</code></li>
+          <li><code>asset-size-l</code></li>
+        </ul>
+      </div>
+      <div class="span6"> </div>
+    </div>
+  </section>
+</section>
+
+<section id="mobilization">
+  <div class="page-header">
+    <h1>Mobilization</h1>
+  </div>
+  <div class="row-fluid">
+    <div class="span12">
+      <p>
+        Populr's theming engine does a great job rendering themes on mobile devices. In fact, we promise our customers that their content will look good on smartphones and tablets. As such, we require all themes to work on mobile devices with the help of responsive design.
+      </p>
+      <p>
+        We built a LESS mixin that handles a lot of the work for you. This mixin stacks each region vertially, then stacks all assets vertically within each region. You just have to add the mixin to your first media query within your main.less file. Take a look at this example:
+      </p>
+      <h2>main.less</h2>
+      <pre class="prettyprint linenums language-css">@media screen and (max-width: 768px) {
+  #populr &gt; .mobile-reset();
+  ...
+}</pre>
+      <p>
+        That'll get your mobilization started. You'll almost certainly have to make additional adjustments in your media query to get things looking good. Be sure to test with a comprehensive set of <a href="#dummy-content">dummy content</a> to make sure you catch any mobile layout bugs!
+      </p>
+      <p>
+        Also, testing your theme on smaller screens can only be <em>approximated</em> by narrowing your browser window. To ensure your theme is stable on mobile, use a good simulator, or test on the mobile devices you have on hand.
+      </p>
+      <p>
+        Note that the main.less file must contain the following import statement in order for the mobile mixin to work.
+      </p>
+      <h4>main.less</h4>
+      <pre class="prettyprint linenums language-css">@import 'http://populr.me/assets/developers/populr_mixins.less';
+</pre>
+    </div>
+  </div>
+</section>
+
+<section id="building-locally">
+  <div class="page-header">
+    <h1>Building Locally</h1>
+  </div>
+  <div class="row-fluid">
+    <div class="span12">
+      <p>
+        The Populr theming engine was developed to enable talented designers and developers like you to work on your theme locally before uploading it to Populr. To illustrate theme behavior outside of the pop editor interface, a theme can be loaded with dummy content from Populr's servers. The theme can then be run locally on your machine using a simple HTTP server, such as the one built into Python.
+      </p>
+    </div>
+  </div>
+
+  <section id="dummy-content">
+    <h2>Using Dummy Content to Test Your Regions</h2>
+    <div class="row-fluid">
+      <div class="span12">
+        <p>
+          Dummy content is generic asset content that's displayed in your theme when you run your theme locally in your browser. The text is <a href="http://en.wikipedia.org/wiki/Lorem_ipsum" target="_blank">lorum ipsum</a> text, the images are from <a href="http://500px.com/" target="_blank">500px</a>, the embed is one of the <a href="http://www.youtube.com/watch?v=YE7VzlLtp-4" target="_blank">world's greatest short films</a>, etc.
+        </p>
+        <p>
+          Dummy content is defined as an attribute of the <code>{{region}}</code> Handlebars.js helper. You might have noticed this earlier while reviewing the <a href="#theme-skeleton">sample theme</a>. Here it is again:
+        </p>
+        <pre class="prettyprint linenums language-html">
+{{#region "columnizer" id="main-region" max_cols="3" max_auto_assets="0" dummy_content="I-3,T-1|T-2,E-1,D-4"}}</pre>
+        <h3>Columnizer Dummy Content Sizes</h3>
+        <p>
+          Each comma-separated string of the dummy content represents a single asset. The syntax for each asset is as follows:<br><code>[asset type]-[# of items]</code>
+        </p>
+        <p>
+          <code>[asset type]</code> can have the following values:
+          <ul>
+            <li><code>T</code> for text assets</li>
+            <li><code>I</code> for image assets</li>
+            <li><code>V</code> for video recordings (which are treated by Populr as embed assets even though they are listed separately in the pop editor UI)</li>
+            <li><code>D</code> for document assets</li>
+            <li><code>E</code> for embed assets</li>
+          </ul>
+        </p>
+        <p>
+          <code>[# of items]</code> represents something different based on the asset type.
+          <ul>
+            <li>For text assets, it represents the number of paragraphs of lorum ipsum text that will be generated.</li>
+            <li>For all other assets, it represents the number of items that are contained within the asset. For example, a piece of dummy content defined as <code>I-3</code> represents an image asset containing 3 images.</li>
+          </ul>
+        </p>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span6">
+        <p>
+          Dummy content for columnizer regions does not specify a size. Instead, the <code>|</code> (pipe) character is used to specify the end of a columnizer row, and asset sizes are determined based on the number of assets in a row. For example, dummy content defined as <code>T-1,T-1|I-3</code> represents two text assets in the first row, each with a size of <code>2</code> and containing a single paragraph of lorum ipsum text, and single image asset in the next row with a size of <code>1</code> and containing 3 images.
+        </p>
+      </div>
+      <div class="span6">
+        <div class="anatomy-preview">
+          <div class="well">
+            <div class="region" style="text-align: center;">
+              <h4 class="region-title" style="text-align: left"><strong>Columnizer Region where </strong><code>dummy-content="T-1,T-1|I-3"</code></h4>
+              <div class="row-fluid" style="padding: 0 0 10px 0;">
+                <div class="span6"><div class="asset">Text Asset<br></div></div>
+                <div class="span6"><div class="asset">Text Asset<br></div></div>
+              </div>
+              <div class="row-fluid" style="padding: 0 0 10px 0;">
+                <div class="span12"><div class="asset">Image Asset<br>containing 3 images</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span12">
+        <h3>Packer Dummy Content Sizes</h3>
+        <p>
+          Dummy content for packer regions works the same way it does for columnizers, with one important difference: each asset must have a size, making the syntax:<br><code>[asset type]-[# of items]-[asset size]</code>
+        </p>
+        <p>
+          The available asset size values are <code>s, m, l</code>.
+        </p>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span12">
+        <h3>Dummy Content Properties</h3>
+        <p>
+          The index.html file must contain the following <code>meta</code> tags inside the <code>head</code> tag in order for dummy content to render properly.
+        </p>
+        <pre class="prettyprint linenums language-html">
+&lt;head&gt;
+  &lt;meta itemprop=&quot;dummyImageCategory&quot; content=&quot;All&quot;&gt;
+  &lt;meta itemprop=&quot;dummyContentLength&quot; content=&quot;medium&quot;&gt;
+  ...</pre>
+      <h4>dummyImageCategory</h4>
+      <p>
+        Dummy images are pulled from the <a href="http://500px.com/" target="_blank">500px</a> photography site. The <code>content</code> property can be used to specify a search term that will filter the images from 500px. For example, setting <code>content="kitten"</code> will use pictures of adorable kittens for all dummy images.
+      </p>
+      <h4>dummyContentLength</h4>
+      <p>
+        This property specifies how much dummy text appears in the asset titles and descriptions of your dummy content.
+      </p>
+      <p>
+        <strong>We strongly recommend using <code>content="medium"</code> while building your theme</strong>, as this is the most efficient setting for catching bugs. This setting will render all available text styles for your dummy asset titles and descriptions: bold, italic, underline, linked text, ordered lists, and unordered lists. (Lists will render only in asset descriptions.)
+      </p>
+      <p>
+        You can also use <code>content="short"</code> to use dummy content of a more typical length and style, and <code>content="long"</code> to ensure that lengthy pieces of text don't break your layouts.
+      </p>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span12">
+        <h3>Dummy Content Mixin</h3>
+        <p>
+          The main.less file must contain the following import statement in order for dummy content to render properly.
+        </p>
+        <h4>main.less</h4>
+        <pre class="prettyprint linenums language-css">@import 'http://populr.me/assets/developers/populr_mixins.less';
+</pre>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span12">
+        <h3>Dummy Content Sets</h3>
+        <p>
+          We've typed up the following sets of dummy content to use when building your theme. Each set is defined to include all 5 types of content (text, image, video recording, document, embed) at all available sizes for a particular region. Copy the set you need for your region and paste it into the dummy_content property.
+        </p>
+        <script src="https://gist.github.com/johnhorstman/5601783.js"></script>
+      </div>
+    </div>
+  </section>
+
+  <section id="python-command">
+    <h2>Running Your Theme Locally Using a Simple Python HTTP Server</h2>
+    <div class="row-fluid">
+      <div class="span12">
+        <p>
+          To see how your theme looks when it's populated with your dummy content, run an HTTP server locally on your machine and use it to host your theme. The Populr team uses Python to create a server, since it comes with a simple HTTP server built right in.  
+        </p>
+        <p>
+          To run a server on your Mac using Python, open Terminal, then use the <code>cd</code> command to change to your theme's directory. Once you're there, use this command to start your server:
+        </p>
+        <pre class="prettyprint linenums language-html">
+python -m SimpleHTTPServer 8080</pre>
+        <p>
+          You can then check out your theme by opening a browser and entering the URL <code>http://localhost:8080</code>.
+        </p>
+      </div>
+    </div>
+  </section>
+</section>
+
+<section id="recommended-process">
+  <div class="page-header">
+    <h1>Recommended Theme Build Process</h1>
+  </div>
+  <div class="row-fluid">
+    <div class="span12">
+      <p>
+        Now that you've seen the nuts and bolts of a Populr theme, read through our recommended process for taking your theme from concept to finished product. This'll save you some time, some effort, and at least a few headaches.
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="span7">
+
+      <h2>Step 1: Design</h2>
+        <p>
+          Designing up front will shorten your development time. Keep these pointers in mind while designing.
+        </p>
+        <h3>Pick a concept</h3>
+          <p>
+            First, get an idea of what your theme is "about." Themes turn out best when built around a purpose. What's the aesthetic: vintage, modern, playful? You could also think in terms of how it will be used. Will this theme be useful for newsletters, event invitations, or something else entirely?
+          </p>
+        <h3>Plan your regions</h3>
+          <p>
+            Next, plan your theme's regions. For your first theme, we recommend designing for two regions to keep it simple. Maybe you want a large region for the users' primary content and a footer region with different styling at the bottom. Maybe a hero region at the top for an eye-catching image or headline, and the page body underneath.
+          </p>
+        <h3>Sketch your asset styles</h3>
+          <p>
+            With your theme's purpose in mind, sketch out how your assets will look in each region. While some people jump straight into building, those people often run into design issues that they hadn't initially considered. Planning your design first will keep your CSS cleaner & shorter. Download this <a href="https://www.dropbox.com/s/qm7fd7yzc6g7wco/kincannon.psd">design spec PSD for our Kincannon theme</a> (or the <a href="https://www.dropbox.com/s/1hf8nbr0d3tixs9/kincannon.png">PNG version</a>) to see an example of how to use mockups to plan your theme design. Basically, you want to plan the styling for all combinations of asset type and size.
+          </p>
+          <p>
+            <b>Remember that you'll have to define and style all 5 assets for every size that you allow in each region.</b>
+          </p>
+        <h3>Design for compatibility</h3>
+          <p>
+            Finally, keep in mind that we require all of our themes to be compatible with Chrome, Safari, Firefox, and Internet Explorer all the way back to IE7. Your theme doesn't have to be pixel-perfect in all browsers, but when it does fail it should fail elegantly.
+          </p>
+        <h2>Step 2: Build</h2>
+        <p>
+          With your design in mind, you're ready to start coding. Follow these tips for a smooth build.
+        </p>
+        <h3>Check the issue log first</h3>
+          <p>
+            Before you build, check our <a href="http://tips.populr.me/theme-issues" target="_blank">theme issue log</a>. There are a handful of issues that all themers should know about.
+          </p>
+        <h3>Start with our base theme</h3>
+          <p>
+            Start your theme from our base theme (<a href="https://github.com/populr-themes/columnizer_base">GitHub repo</a> or <a href="https://github.com/populr-themes/columnizer_base/archive/master.zip" target="_blank">ZIP file</a>). It's a clean, basic columnizer region with just enough code written to run as stand-alone theme.
+          </p>
+        <h3>Test as you go</h3>
+          <p>
+            Use dummy content well and test as you work. If you set up your dummy content to test all available asset types and sizes in each region, you'll save time by catching design bugs early. Review the <a href="#dummy-content">dummy content documentation</a> earlier on this page if you've forgotten how it works.
+          </p>
+      <h2>Step 3: Test</h2>
+        <p>
+          There's only so much testing you can do using dummy content. You'll have to test your theme out in the live system to make sure it's ready for showtime.
+        </p>
+        <h3>Sync your theme with GitHub</h3>
+          <p>
+            You can use GitHub to load your theme into Populr. Follow the instructions in this pop titled "<a href="http://playground.populr.me/theme-upload" target="_blank">Loading Your Theme Into Populr</a>" and you'll have it working in no time. Once your theme is loaded, it will appear in the pop editor's Themes dropdown with a red border around it. The red border indicates that your theme is in beta.
+          </p>
+        <h3>Test in the editor</h3>
+          <p>
+            Create a new pop and apply your theme to test it in Populr's editor. Keep an eye out for strange behavior or layout issues.
+          </p>
+          <p>
+            The QA team at Populr uses this <b><a href="http://checkvist.com/checklists/167228">theme QA checklist</a></b> to make sure everything's behaving the way it should. Follow those steps and you'll catch any remaining errors in your theme.
+          </p>
+      <h2>Step 4: Publish</h2>
+        <p>
+          Once your theme is bug-free, it's ready to be published. Publishing your theme will allow you to distribute it to others.
+        </p>
+        <h3>Publish from the "My account" screen</h3>
+          <p>
+            Go to the "My account" page and open the Themes tab. Click the Publish link for your theme. It will now appear in the editor in your Themes dropdown without the red border.
+          </p>
+        <h3>Share with others</h3>
+          <p>
+            Once published, you can <b>share your theme with others by clicking on the Grant Access link</b> of the Themes tab in the "My account" page. Just send that link to anyone with a Populr account. When they click the link, your theme will be added to their account.
+          </p>
+    </div>
+    <div class="span5">
+      <p>
+        &nbsp;<br>&nbsp;<br>
+        <i>The Kincannon theme design was fleshed out in a PSD before any code was written.</i><br>
+        <a href="../assets/images/theming/kincannon.psd">Download the full Kincannon PSD</a>
+      </p>
+      <a href="../assets/images/theming/kincannon.psd"><img src="../assets/images/theming/kincannon_top.png" style="border: 1px solid #ccc" /></a>
+    </div>
+  </div>
+
+</section>
+
+<section id="ready">
+  <div class="page-header">
+    <h1>Ready to get poppin'?</h1>
+  </div>
+  <div class="row-fluid">
+    <div class="span12">
+      <p>
+        Congratulations! You made it to the end of the Populr documentation page. What a thorough and industrious developer you must be :).
+      </p>
+      <p>
+        If you still have questions about this stuff, get in touch with us: send an email to John at <a href="mailto:john@populr.me">john@populr.me</a> and he'll get you sorted right out.
+      </p>
+      <p>Pop pop!</p>
+    </div>
+  </div>
+
+</section>
+
+  </div>
+</div>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; Populr.me 2012 
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+  </body>
+</html>
+
