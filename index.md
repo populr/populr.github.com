@@ -8,11 +8,12 @@ tagline: Time to Get Poppin'!
 
 <div class="row">
   <div class="span6">
-    <h1>API</h1>
+    <h1>Automate with the API</h1>
     <p>Integrating with Populr's REST API makes it easy to write code that generates and publishes pops, manages assets, domains, and more.</p>
     <a href="{{ BASE_PATH }}/api/index.html" class="btn btn-primary">Get Started with Our API</a>
   <p>
-	</p>
+  </p>
+    <h1>Automate with Populate</h1>
     <p>Looking to create a large number of pops without writing code? The Populate app at <a href="http://populate.populr.me/">populate.populr.me</a> makes it easy to create pops based on a web form or batch-create pops from an CSV spreadsheet.</p>
     <a href="{{ BASE_PATH }}/api/populate.html" class="btn btn-primary">Get Started with Populate</a>
 
