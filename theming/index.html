@@ -38,21 +38,17 @@
   
     
       
-      	
-      	<li><a href="/api/index.html">API</a></li>
-      	
+        
+        <li><a href="/api/index.html">API</a></li>
+        
       
     
   
     
       
-      	
-      	<li><a href="/api/populate.html">Populate</a></li>
-      	
-      
-    
-  
-    
+        
+        <li><a href="/api/populate.html">Populate</a></li>
+        
       
     
   
@@ -86,9 +82,13 @@
   
     
       
-      	
-      	<li class="active"><a href="/theming/index.html" class="active">Theming</a></li>
-      	
+    
+  
+    
+      
+        
+        <li class="active"><a href="/theming/index.html" class="active">Theming</a></li>
+        
       
     
   
@@ -159,6 +159,8 @@
         <li><a href="#ifequal-helper">If Equal Helper</a></li>
         <li><a href="#formatfilesize-helper">Format File Size Helper</a></li>
         <li><a href="#imageslider-helper">Image Slider Helper</a></li>
+        <li><a href="#sharing-helper">Sharing Button Helper</a></li>
+        <li><a href="#links-helper">Pop Links Helper</a></li>
       </ul>
     </li>
     <li class="dropdown">
@@ -295,7 +297,7 @@
   <h2>index.html</h2>
   <pre class="prettyprint linenums language-html">
 &lt;!doctype html&gt;
-&lt;html&gt;
+&lt;html itemscope&gt;
 &lt;head&gt;
   &lt;meta charset=&quot;utf-8&quot;&gt;
   &lt;title&gt;My New Theme&lt;/title&gt;
@@ -834,7 +836,7 @@
     </div>
     <div class="alert alert-info">
       <p>
-        <span class="label label-info">Heads up!</span> We strongly recommend you use <a href="#imageslider-helper">Populr's image slider helper</a> in your image assets. Other sliders are unsupported, meaning you can give them a try but if it doesn't work you'll miss out on the super-helpful support of our theming staff. You'll be on your own, cowboy.
+        <span class="label label-info">Heads up!</span> We strongly recommend you use <a href="#imageslider-helper">Populr's image slider helper</a> in your image assets. Other sliders are unsupported, meaning you can give them a try but if it doesn't work you'll miss out on the super-helpful support of our theming staff. You'll be on your own, cowboy/girl.
       </p>
     </div>
     <div class="row-fluid">
@@ -1229,6 +1231,7 @@
 </section>
 
 <section id="helpers">
+
   <div class="page-header">
     <h1>Template Helpers</h1>
   </div>
@@ -1240,6 +1243,7 @@
       </p>
     </div>
   </div>
+
   <section id="resize-helper">
     <h2>Resize</h2>
     <div class="row-fluid">
@@ -1284,6 +1288,7 @@
       </div>
     </div>
   </section>
+
   <section id="ifmany-helper">
     <h2>If Many</h2>
     <div class="row-fluid">
@@ -1311,6 +1316,7 @@
       </div>
     </div>
   </section>
+
   <section id="ifequal-helper">
     <h2>If Equal</h2>
     <div class="row-fluid">
@@ -1337,6 +1343,7 @@
       </div>
     </div>
   </section>
+
   <section id="formatfilesize-helper">
     <h2>Format File Size</h2>
     <div class="row-fluid">
@@ -1369,6 +1376,7 @@
       </div>
     </div>
   </section>
+
   <section id="imageslider-helper">
     <h2>Image Slider</h2>
     <div class="row-fluid">
@@ -1405,6 +1413,20 @@
               <td><code>height</code></td>
               <td>Target height</td>
             </tr>
+            <tr>
+              <td><code>crop-single</code></td>
+              <td>
+                <p>
+                  Image cropping setting <span class="muted">(optional, default is <code>false</code>)</span><br>
+                </p>
+                <p>
+                  If set to <code>true</code>, then all images appearing in the image slider will be cropped to the size specified in the image slider helper.
+                </p>
+                <p>
+                  If set to <code>false</code> or left undefined, then when the image slider contains just one image, that image will be scaled down to match the <code>width</code> property of the image slider, and the image height will be calculated proportionally (ignoring the <code>height</code> property of the image slider).
+                </p>
+              </td>
+            </tr>
           </tbody>
         </table>
         <p>
@@ -1416,6 +1438,92 @@
       </div>
     </div>
   </section>
+
+  <section id="sharing-helper">
+    <h2>Sharing</h2>
+    <div class="row-fluid">
+      <div class="span6">
+        <p>
+          The <code>{% raw %}{{sharing}}{% endraw %}</code> helper lets you add social sharing buttons to your theme. This helper will add buttons to tweet the pop on Twitter, like the pop on Facebook, +1 the pop on Google+, and share the pop through a large number of additional service with <a href="http://www.addthis.com/" target="_blank">AddThis</a>. Users can choose whether or not to display these buttons for each pop by toggling the Show Social Sharing switch in the Options dropdown menu of the pop editor.
+        </p>
+        <p>
+          Note that if you don't manually insert this helper in the location of your choice, Populr will automatically insert it at the bottom of your theme.
+        </p>
+        <h3>Helper</h3>
+        <pre class="prettyprint linenums language-html">{% raw %}{{sharing}}{% endraw %}</pre>
+      </div>
+      <div class="span6">
+        <h3>Settings</h3>
+        <p>There are no settings for this helper.</p>
+        <h3>Default appearance</h3>
+        <img src="../assets/images/theming/sharing_buttons.png" />
+      </div>
+    </div>
+  </section>
+
+  <section id="links-helper">
+    <h2>Link icons</h2>
+    <div class="row-fluid">
+      <div class="span6">
+        <p>
+          The <code>{% raw %}{{pop_links}}{% endraw %}</code> helper lets your users add small link icons to their pop. For example, someone could set up links to their Facebook and Twitter pages, then display those links in their pop using the Facebook and Twitter favicons. You can override the favicon with an icon of your choosing. Users set these links up in their account settings. They can then choose whether or not to display these link icons for each pop by toggling the Show Default Links switch in the Options dropdown menu of the pop editor.
+        </p>
+        <p>
+          Note that if you don't manually insert this helper in the location of your choice, Populr will automatically insert it at the bottom of your theme.
+        </p>
+        <h3>Helper</h3>
+        <pre class="prettyprint linenums language-html">{% raw %}{{pop_links}}{% endraw %}</pre>
+      </div>
+      <div class="span6">
+        <h3>Settings</h3>
+        <p>There are no settings for this helper.</p>
+        <h3>Default appearance</h3>
+        For example, links to Facebook and Twitter pages will look like this:<br>
+        <img src="../assets/images/theming/pop_links.png" />
+      </div>
+    </div>
+  </section>
+
+  <section id="logo-helper">
+    <h2>Logo</h2>
+    <div class="row-fluid">
+      <div class="span6">
+        <p>
+          The <code>{% raw %}{{logo}}{% endraw %}</code> helper lets your users add a logo to their pop, in a location you specify. A user adds a logo image through the Logo dropdown menu of the pop editor.
+        </p>
+        <p>
+          Note that if you don't manually insert this helper in the location of your choice, Populr will automatically insert it at the top of your theme.
+        </p>
+        <h3>Helper</h3>
+        <pre class="prettyprint linenums language-html">{% raw %}{{logo}}{% endraw %}</pre>
+      </div>
+      <div class="span6">
+        <h3>Settings</h3>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Usage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>width</code></td>
+              <td>Target width <span class="muted">(optional)</span></td>
+            </tr>
+            <tr>
+              <td><code>height</code></td>
+              <td>Target height <span class="muted">(optional)</span>. By default, the image will scale itself proportionally to a height of 90 pixels.</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          <span class="label label-info">Heads up!</span> You don't have to specify a width or height, but if you choose to define one, don't define the other.
+        </p>
+      </div>
+    </div>
+  </section>
+  
 </section>
 
 <section id="styling">
@@ -1454,6 +1562,14 @@
             </tr>
           </thead>
           <tbody>
+            <tr>
+              <td width="20%"><code>@populr-theme-version</code></td>
+              <td>
+                <p>
+                  Flag that sets the theme's grid. When set to <code>0</code>, the theme rendering engine will use Populr's legacy grid. This serves as a good default setting. If you would like to get fancy with your own grid, set this to <code>1</code>.
+                </p>
+              </td>
+            </tr>
             <tr>
               <td width="20%"><code>@base-url</code></td>
               <td>
@@ -1544,7 +1660,16 @@
           <pre class="prettyprint linenums language-html">&lt;meta itemprop=&quot;palette&quot; content=&quot;palette-default&quot; title=&quot;Malibu&quot; data-preview=&quot;#66b5f2&quot;&gt;
 &lt;meta itemprop=&quot;palette&quot; content=&quot;palette-sulu&quot; title=&quot;Sulu&quot; data-preview=&quot;#bcf266&quot;&gt;
 &lt;meta itemprop=&quot;palette&quot; content=&quot;palette-tango&quot; title=&quot;Tango&quot; data-preview=&quot;#f36d24&quot;&gt;
+<<<<<<< HEAD
+&lt;meta itemprop=&quot;palette&quot; content=&quot;palette-custom&quot; title=&quot;Custom&quot; data-preview=&quot;custom&quot;&gt;{% endraw %}</pre>
+          <div class="alert alert-info">
+            <p>
+              <span class="label label-info">Heads up!</span> For these tags to work properly, your html tag must include the itemscope element, like so: <code>&lt;html itemscope&gt;</code>
+            </p>
+          </div>
+=======
 &lt;meta itemprop=&quot;palette&quot; content=&quot;palette-custom&quot; title=&quot;Custom&quot; data-preview=&quot;custom&quot;&gt;</pre>
+>>>>>>> 4427170914bfa5e22b5599acb2cc08bd56de1f61
         </p>
         <p>
           These attributes are used like this:
@@ -1848,7 +1973,16 @@ background: @header-color url("@{base-url}/images/header-overlay.png") repeat bo
 &lt;head&gt;
   &lt;meta itemprop=&quot;dummyImageCategory&quot; content=&quot;All&quot;&gt;
   &lt;meta itemprop=&quot;dummyContentLength&quot; content=&quot;medium&quot;&gt;
+<<<<<<< HEAD
+  ...{% endraw %}</pre>
+      <div class="alert alert-info">
+        <p>
+          <span class="label label-info">Heads up!</span> For these tags to work properly, your html tag must include the itemscope element, like so: <code>&lt;html itemscope&gt;</code>
+        </p>
+      </div>
+=======
   ...</pre>
+>>>>>>> 4427170914bfa5e22b5599acb2cc08bd56de1f61
       <h4>dummyImageCategory</h4>
       <p>
         Dummy images are pulled from the <a href="http://500px.com/" target="_blank">500px</a> photography site. The <code>content</code> property can be used to specify a search term that will filter the images from 500px. For example, setting <code>content="kitten"</code> will use pictures of adorable kittens for all dummy images.
@@ -1926,9 +2060,16 @@ python -m SimpleHTTPServer 8080</pre>
         <p>
           Designing up front will shorten your development time. Keep these pointers in mind while designing.
         </p>
+        <h3>Review the requirements</h3>
+          <p>
+            We set certain design and feature requirements for all Populr themes. It's best to review these before you begin designing; that way you'll have them in mind while you plan out your theme.
+          </p>
+          <p>
+            <a href="http://tips.populr.me/theme-design-tips" target="_blank">Populr theme design requirements</a>
+          </p>
         <h3>Pick a concept</h3>
           <p>
-            First, get an idea of what your theme is "about." Themes turn out best when built around a purpose. What's the aesthetic: vintage, modern, playful? You could also think in terms of how it will be used. Will this theme be useful for newsletters, event invitations, or something else entirely?
+            Get an idea of what your theme is "about." Themes turn out best when built around a purpose. What's the aesthetic: vintage, modern, playful? You could also think in terms of how it will be used. Will this theme be useful for newsletters, event invitations, or something else entirely?
           </p>
         <h3>Plan your regions</h3>
           <p>
@@ -1939,7 +2080,7 @@ python -m SimpleHTTPServer 8080</pre>
             With your theme's purpose in mind, sketch out how your assets will look in each region. While some people jump straight into building, those people often run into design issues that they hadn't initially considered. Planning your design first will keep your CSS cleaner & shorter. Download this <a href="https://www.dropbox.com/s/qm7fd7yzc6g7wco/kincannon.psd">design spec PSD for our Kincannon theme</a> (or the <a href="https://www.dropbox.com/s/1hf8nbr0d3tixs9/kincannon.png">PNG version</a>) to see an example of how to use mockups to plan your theme design. Basically, you want to plan the styling for all combinations of asset type and size.
           </p>
           <p>
-            <b>Remember that you'll have to define and style all 5 assets for every size that you allow in each region.</b>
+            <b>Remember that you'll have to define and style all asset types for every size that you allow in each region.</b>
           </p>
         <h3>Design for compatibility</h3>
           <p>
