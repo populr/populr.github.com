@@ -1,17 +1,126 @@
----
-layout: page
-title: "API"
-tagline: ""
-icon: /assets/images/api_bug.png
-description: "Integrating with Populr's REST API makes it easy to automatically generate and publish pops, manage assets, domains, and more."
-group: navigation
----
-{% include JB/setup %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>API</title>
+    <meta name="description" content="Integrating with Populr's REST API makes it easy to automatically generate and publish pops, manage assets, domains, and more.">
+    <meta name="author" content="Populr.me">
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="/assets/themes/twitter/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/twitter/bootstrap/css/prettify.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <script src="/assets/themes/twitter/bootstrap/js/jquery-1.7.2.min.js"></script>
+    <script src="/assets/themes/twitter/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/themes/twitter/bootstrap/js/prettify.js"></script>
+    <script src="/assets/js/jquery.masonry.min.js"></script>
+    <script src="/assets/themes/twitter/bootstrap/js/main.js"></script>
+
+  </head>
+
+  <body data-spy="scroll" data-target=".subnav" data-offset="50" data-twttr-rendered="true">
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">Populr Developers</a>
+          <ul class="nav">
+            
+            
+            
+
+
+  
+    
+      
+      	
+      	<li class="active"><a href="/api/index.html" class="active">API</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/api/populate.html">Populate</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/theming/index.html">Theming</a></li>
+      	
+      
+    
+  
+
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        
+<header>
+  <div class="hero-unit">
+    <img style="float:left; padding-right:20px;" height="135" src="/assets/images/api_bug.png"/>
+    <h1>API</h1>
+    <p></p>
+    <p>Integrating with Populr's REST API makes it easy to automatically generate and publish pops, manage assets, domains, and more.</p>
+  </div>
+</header>
+
+<div class="row">
+  <div class="span12">
+    
 <div class="subnav">
   <ul class="nav nav-pills">
     <li><a href="#start">Getting Started</a></li>
     <li><a href="#creating-pops">Creating and Publishing Pops</a></li>
-    <li><a href="#tracers">Tracers & Analaytics</a></li>
+    <li><a href="#tracers">Tracers & Analytics</a></li>
     <li><a href="#assets">Assets</a></li>
     <li><a href="#domains">Domains</a></li>
     <li><a href="#errors">Errors</a></li>
@@ -134,7 +243,7 @@ pre code {
 }
 </style>
 
-<section id="start">
+<section id="start" style="padding-top:0;">
   <h2>Getting Started</h2>
 
 <h3>Authentication</h3>
@@ -217,7 +326,7 @@ Need an adapter for a language you don't see here? You can use the REST API belo
 <li><p>Create a new pop.</p></li>
 <li><p>Add content and design the pop to match your needs.</p></li>
 <li><p>Return to your pops page and turn your new pop into an API template by clicking the pop's name and selecting 'Make API Template.'</p></li>
-<li><p>Type {{property}} anywhere to define a variable you can replace from the API.</p></li>
+<li><p>Type  anywhere to define a variable you can replace from the API.</p></li>
 <li><p>Edit an asset region and check the "API Region" checkbox to add images or documents from the API.</p></li>
 </ol>
 
@@ -261,13 +370,14 @@ Throughout the REST API, the structure below is used to represent a pop. An exam
     "custom_links": [
       "http://blogger.com/my-company"
     ],
-    "custom_code": "<p>My Google Analytics Code</p>"
-    "clone_link_enabled": true
-    "clone_link_url": "https://populr.me/clone/0abcde12bcda1/123fwer324"
-    "collaboration_link_enabled": true
-    "collaboration_link_url": "https://populr.me/collaborate/0abcde12bcda1/fdsf341f"
-    "collaboration_interstitial_text": "Please finish editing your pop!"
-    "collaboration_webhook": "http://myserver.com/collaborator_left"
+    "custom_code": "<p>My Google Analytics Code</p>",
+    "background_image_asset_id": "0abcddae12bc1",
+    "clone_link_enabled": true,
+    "clone_link_url": "https://populr.me/clone/0abcde12bcda1/123fwer324",
+    "collaboration_link_enabled": true,
+    "collaboration_link_url": "https://populr.me/collaborate/0abcde12bcda1/fdsf341f",
+    "collaboration_interstitial_text": "Please finish editing your pop!".
+    "collaboration_webhook": "http://myserver.com/collaborator_left",
 }
 </code></pre>
 
@@ -291,7 +401,9 @@ Throughout the REST API, the structure below is used to represent a pop. An exam
 
 <p><code>custom_links</code>: An array of custom links that you would like to add to the default links (if any). These are the links you create in the Options dropdown within the Populr editor.</p>
 
-f<p><code>custom_code</code>: Freeform code that will be inserted at the very end of your pop. Often used to insert Google Analytics or other tracking functionality into pops.</p>
+<p><code>custom_code</code>: Freeform code that will be inserted at the very end of your pop. Often used to insert Google Analytics or other tracking functionality into pops.</p>
+
+<p><code>background_image_asset_id</code>: The ID of the pop's background image. To change the pop's background image, add a new image to the background_images collection and then set the pop's background_image_asset_id to that asset's ID.
 
 <p><code>clone_link_enabled</code>: Set to true if you'd like this pop to be cloneable. After saving, the clone_link_url will contain a valid URL.</p>
 
@@ -328,7 +440,7 @@ f<p><code>custom_code</code>: Freeform code that will be inserted at the very en
 
 <h4>POST http://api.populr.me/v0/pops</h4>
 
-<p>Creates a new, unpublished pop based on the template with ID <code>template_id</code>. Populates the tags <code>{{first_name}}</code> and <code>{{last_name}}</code> with the content provided, and places two image assets in the region called <code>image_region_a</code>.</p>
+<p>Creates a new, unpublished pop based on the template with ID <code>template_id</code>. Populates the tags <code></code> and <code></code> with the content provided, and places two image assets in the region called <code>image_region_a</code>.</p>
 
 <pre><code>{
   "pop": {
@@ -369,7 +481,7 @@ f<p><code>custom_code</code>: Freeform code that will be inserted at the very en
 
 <h4>PUT http://api.populr.me/v0/pops/:id</h4>
 
-<p>Updates the pop with a new title, fills in the <code>{{city}}</code> tag, and adds a document to <code>document_region_b</code>.</p>
+<p>Updates the pop with a new title, fills in the <code></code> tag, and adds a document to <code>document_region_b</code>.</p>
 
 <pre><code>{
   "pop": {
@@ -426,7 +538,7 @@ f<p><code>custom_code</code>: Freeform code that will be inserted at the very en
 
 </section>
 <section id="tracers">
-  <h2>Tracers &amp; Analaytics</h2>
+  <h2>Tracers &amp; Analytics</h2>
 
 <hr />
 
@@ -592,6 +704,8 @@ f<p><code>custom_code</code>: Freeform code that will be inserted at the very en
 
 <h4>POST http://api.populr.me/v0/images</h4>
 
+<h4>POST http://api.populr.me/v0/background_images</h4>
+
 <h4>POST http://api.populr.me/v0/embeds</h4>
 
 <p>To upload a new image or document asset, make a multi-part/form POST with the following keys:</p>
@@ -615,6 +729,8 @@ f<p><code>custom_code</code>: Freeform code that will be inserted at the very en
 <h4>DELETE http://api.populr.me/v0/documents/:id</h4>
 
 <h4>DELETE http://api.populr.me/v0/images/:id</h4>
+
+<h4>DELETE http://api.populr.me/v0/background_images/:id</h4>
 
 <h4>DELETE http://api.populr.me/v0/embeds/:id</h4>
 
@@ -673,3 +789,23 @@ f<p><code>custom_code</code>: Freeform code that will be inserted at the very en
 
 <p><code>file_upload_required</code>: "You must submit a multi-part form POST with a 'file' key to create an asset."</p>
 </section>
+
+  </div>
+</div>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; Populr.me 2012 
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+  </body>
+</html>
+
