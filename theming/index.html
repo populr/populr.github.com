@@ -161,6 +161,9 @@
         <li><a href="#imageslider-helper">Image Slider Helper</a></li>
         <li><a href="#sharing-helper">Sharing Button Helper</a></li>
         <li><a href="#links-helper">Pop Links Helper</a></li>
+        <li><a href="#logo-helper">Logo Helper</a></li>
+        <li><a href="#navigation-helper">Navigation Links</a></li>
+        <li><a href="#default-background-image">Default Background Image</a></li>
       </ul>
     </li>
     <li class="dropdown">
@@ -1233,13 +1236,12 @@
 <section id="helpers">
 
   <div class="page-header">
-    <h1>Template Helpers</h1>
+    <h1>Helpers</h1>
   </div>
   <div class="row-fluid">
     <div class="span12">
       <p>
-        Populr provides several additional Handlebars.js helpers which will assist 
-        you in creating your theme.
+        Populr provides several additional Handlebars.js template helpers and other bits of code to assist you in building your theme.
       </p>
     </div>
   </div>
@@ -1444,13 +1446,13 @@
     <div class="row-fluid">
       <div class="span6">
         <p>
-          The <code>{% raw %}{{sharing}}{% endraw %}</code> helper lets you add social sharing buttons to your theme. This helper will add buttons to tweet the pop on Twitter, like the pop on Facebook, +1 the pop on Google+, and share the pop through a large number of additional service with <a href="http://www.addthis.com/" target="_blank">AddThis</a>. Users can choose whether or not to display these buttons for each pop by toggling the Show Social Sharing switch in the Options dropdown menu of the pop editor.
+          The <code>{{sharing}}</code> helper lets you add social sharing buttons to your theme. This helper will add buttons to tweet the pop on Twitter, like the pop on Facebook, +1 the pop on Google+, and share the pop through a large number of additional service with <a href="http://www.addthis.com/" target="_blank">AddThis</a>. Users can choose whether or not to display these buttons for each pop by toggling the Show Social Sharing switch in the Options dropdown menu of the pop editor.
         </p>
         <p>
           Note that if you don't manually insert this helper in the location of your choice, Populr will automatically insert it at the bottom of your theme.
         </p>
         <h3>Helper</h3>
-        <pre class="prettyprint linenums language-html">{% raw %}{{sharing}}{% endraw %}</pre>
+        <pre class="prettyprint linenums language-html">{{sharing}}</pre>
       </div>
       <div class="span6">
         <h3>Settings</h3>
@@ -1462,17 +1464,17 @@
   </section>
 
   <section id="links-helper">
-    <h2>Link icons</h2>
+    <h2>Pop links</h2>
     <div class="row-fluid">
       <div class="span6">
         <p>
-          The <code>{% raw %}{{pop_links}}{% endraw %}</code> helper lets your users add small link icons to their pop. For example, someone could set up links to their Facebook and Twitter pages, then display those links in their pop using the Facebook and Twitter favicons. You can override the favicon with an icon of your choosing. Users set these links up in their account settings. They can then choose whether or not to display these link icons for each pop by toggling the Show Default Links switch in the Options dropdown menu of the pop editor.
+          The <code>{{pop_links}}</code> helper lets your users add small link icons to their pop. For example, someone could set up links to their Facebook and Twitter pages, then display those links in their pop using the Facebook and Twitter favicons. You can override the favicon with an icon of your choosing. Users set these links up in their account settings. They can then choose whether or not to display these link icons for each pop by toggling the Show Default Links switch in the Options dropdown menu of the pop editor.
         </p>
         <p>
           Note that if you don't manually insert this helper in the location of your choice, Populr will automatically insert it at the bottom of your theme.
         </p>
         <h3>Helper</h3>
-        <pre class="prettyprint linenums language-html">{% raw %}{{pop_links}}{% endraw %}</pre>
+        <pre class="prettyprint linenums language-html">{{pop_links}}</pre>
       </div>
       <div class="span6">
         <h3>Settings</h3>
@@ -1489,13 +1491,13 @@
     <div class="row-fluid">
       <div class="span6">
         <p>
-          The <code>{% raw %}{{logo}}{% endraw %}</code> helper lets your users add a logo to their pop, in a location you specify. A user adds a logo image through the Logo dropdown menu of the pop editor.
+          The <code>{{logo}}</code> helper lets your users add a logo to their pop, in a location you specify. A user adds a logo image through the Logo dropdown menu of the pop editor.
         </p>
         <p>
           Note that if you don't manually insert this helper in the location of your choice, Populr will automatically insert it at the top of your theme.
         </p>
         <h3>Helper</h3>
-        <pre class="prettyprint linenums language-html">{% raw %}{{logo}}{% endraw %}</pre>
+        <pre class="prettyprint linenums language-html">{{logo}}</pre>
       </div>
       <div class="span6">
         <h3>Settings</h3>
@@ -1524,6 +1526,112 @@
     </div>
   </section>
   
+  <section id="navigation-helper">
+    <h2>Navigation links</h2>
+    <div class="row-fluid">
+      <div class="span9">
+        <p>
+          Through a combination of helpers, you can add a navigation menu to your theme. Take a look at the example below, which builds a navigation menu from the asset titles of all size 1 text assets.
+        </p>
+        <h3>Example</h3>
+        <pre class="prettyprint linenums language-html">
+&lt;ul id=&quot;navigation&quot;&gt;
+  {{#each pop.contents}}
+    {{#if_equal layout.size &quot;1&quot;}}
+      {{#if_equal type &quot;Text&quot;}}
+        &lt;li&gt;&lt;a href=&quot;#{{{cssify title_raw}}}&quot;&gt;{{{strip_html title_raw}}}&lt;/a&gt;&lt;/li&gt;
+      {{/if_equal}}
+    {{/if_equal}}
+  {{/each}}
+&lt;/ul&gt;</pre>
+      </div>
+      <div class="span3">
+      </div>
+    </div>
+  </section>
+  
+  <section id="default-background-image">
+    <h2>Default background image</h2>
+    <div class="row-fluid">
+      <div class="span6">
+        <p>
+          You can set a default background image for your theme by adding the following meta tag to your theme header. Users will always have the capability to override the default background through the Background dropdown menu of the pop editor.
+        </p>
+        <h3>Example</h3>
+        <pre class="prettyprint linenums language-html">
+&lt;head&gt;
+  &lt;meta itemprop=&quot;defaultBackground&quot; content=&quot;/images/background.jpg&quot; data-width=&quot;1800&quot; data-height=&quot;1800&quot; data-position=&quot;c&quot; data-style=&quot;fill&quot; data-color=&quot;#665b42&quot;&gt;
+  ...</pre>
+        <div class="alert alert-info">
+          <p>
+            <span class="label label-info">Heads up!</span> For this tag to work properly, your html tag must include the itemscope element, like so: <code>&lt;html itemscope&gt;</code>
+          </p>
+        </div>
+      </div>
+      <div class="span6">
+        <h3>Settings</h3>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Usage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>itemprop</td>
+              <td><code>defaultBackground</code> (do not change)</td>
+            </tr>
+            <tr>
+              <td><code>content</code></td>
+              <td>Path to the background image file. Can be a relative path.</td>
+            </tr>
+            <tr>
+              <td><code>data-width</code></td>
+              <td>Image width in pixels</td>
+            </tr>
+            <tr>
+              <td><code>data-height</code></td>
+              <td>Image height in pixels</td>
+            </tr>
+            <tr>
+              <td><code>data-position</code></td>
+              <td>
+                <p>
+                  Background image position. Values can be:<br>
+                  <code>c</code> = Center<br>
+                  <code>nw</code> = Top left (northwest)<br>
+                  <code>ne</code> = Top right (northeast)<br>
+                  <code>sw</code> = Bottom left (southwest)<br>
+                  <code>se</code> = Bottom right (southeast)<br>
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>data-style</code></td>
+              <td>
+                <p>
+                  Background image size. Values can be:<br>
+                  <code>fill</code> = The image will be scaled to cover the page background.<br>
+                  <code>tile</code> = The image will be repeated horizontally and vertically at its original size.<br>
+                  <code>fixed</code> = The image will be in a stationary location at its original size.<br>
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>data-color</code></td>
+              <td>
+                <p>
+                  The average color of the image. This color will fill the page background while the image is loading.<br>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  
 </section>
 
 <section id="styling">
@@ -1542,11 +1650,15 @@
     <div class="row-fluid">
       <div class="span12">
         <p>
-          Main.less is where the majority of your CSS should be stored. It contains calls to import variables.less and any other necessary LESS files.
+          Main.less is where the majority of your CSS should be stored. It contains calls to import variables.less, populr_mixins.less, and any other necessary LESS files.
+        </p>
+        <p>
+          <span class="label label-info">Heads up!</span> You must import variables.less before populr_mixins.less.
         </p>
       </div>
     </div>
   </section>
+
   <section id="variables-less">
     <h2>Variables.less</h2>
     <div class="row-fluid">
@@ -1577,7 +1689,7 @@
                   The pop's base URL. Should be set to the value <code>'..'</code>. Do not change this value; the system uses this variable to generate paths to the theme's file.
                 </p>
                 <p>
-                  This variable is used to set relative links within a theme definition. For example, the background image for a page element can be set via CSS like this:
+                  This variable is used to set relative links within your CSS. For example, the background image for a page element can be set like this:
                 </p>
                 <code>background: transparent url("@{base-url}/images/region-bg.png") no-repeat;</code>
               </td>
@@ -1627,6 +1739,19 @@
       </div>
     </div>
   </section>
+
+  <section id="populr-mixins">
+    <h2>Populr_mixins.less</h2>
+    <div class="row-fluid">
+      <div class="span12">
+        <p>
+          Populr_mixins.less adds several important mixins to your theme, such as Populr's mobilization styling. Make sure it gets imported in your main.less file with the following line:
+          <pre class="prettyprint linenums language-css">@import 'http://populr.me/assets/developers/populr_mixins.less';</pre>
+        </p>
+      </div>
+    </div>
+  </section>
+
   <section id="less-mixins">
     <h2>LESS Mixin Libraries</h2>
     <div class="row-fluid">
@@ -1660,16 +1785,12 @@
           <pre class="prettyprint linenums language-html">&lt;meta itemprop=&quot;palette&quot; content=&quot;palette-default&quot; title=&quot;Malibu&quot; data-preview=&quot;#66b5f2&quot;&gt;
 &lt;meta itemprop=&quot;palette&quot; content=&quot;palette-sulu&quot; title=&quot;Sulu&quot; data-preview=&quot;#bcf266&quot;&gt;
 &lt;meta itemprop=&quot;palette&quot; content=&quot;palette-tango&quot; title=&quot;Tango&quot; data-preview=&quot;#f36d24&quot;&gt;
-<<<<<<< HEAD
-&lt;meta itemprop=&quot;palette&quot; content=&quot;palette-custom&quot; title=&quot;Custom&quot; data-preview=&quot;custom&quot;&gt;{% endraw %}</pre>
+&lt;meta itemprop=&quot;palette&quot; content=&quot;palette-custom&quot; title=&quot;Custom&quot; data-preview=&quot;custom&quot;&gt;</pre>
           <div class="alert alert-info">
             <p>
               <span class="label label-info">Heads up!</span> For these tags to work properly, your html tag must include the itemscope element, like so: <code>&lt;html itemscope&gt;</code>
             </p>
           </div>
-=======
-&lt;meta itemprop=&quot;palette&quot; content=&quot;palette-custom&quot; title=&quot;Custom&quot; data-preview=&quot;custom&quot;&gt;</pre>
->>>>>>> 4427170914bfa5e22b5599acb2cc08bd56de1f61
         </p>
         <p>
           These attributes are used like this:
@@ -1973,16 +2094,12 @@ background: @header-color url("@{base-url}/images/header-overlay.png") repeat bo
 &lt;head&gt;
   &lt;meta itemprop=&quot;dummyImageCategory&quot; content=&quot;All&quot;&gt;
   &lt;meta itemprop=&quot;dummyContentLength&quot; content=&quot;medium&quot;&gt;
-<<<<<<< HEAD
-  ...{% endraw %}</pre>
+  ...</pre>
       <div class="alert alert-info">
         <p>
           <span class="label label-info">Heads up!</span> For these tags to work properly, your html tag must include the itemscope element, like so: <code>&lt;html itemscope&gt;</code>
         </p>
       </div>
-=======
-  ...</pre>
->>>>>>> 4427170914bfa5e22b5599acb2cc08bd56de1f61
       <h4>dummyImageCategory</h4>
       <p>
         Dummy images are pulled from the <a href="http://500px.com/" target="_blank">500px</a> photography site. The <code>content</code> property can be used to specify a search term that will filter the images from 500px. For example, setting <code>content="kitten"</code> will use pictures of adorable kittens for all dummy images.
@@ -2115,7 +2232,7 @@ python -m SimpleHTTPServer 8080</pre>
             Create a new pop and apply your theme to test it in Populr's editor. Keep an eye out for strange behavior or layout issues.
           </p>
           <p>
-            The QA team at Populr uses this <b><a href="http://checkvist.com/checklists/167228">theme QA checklist</a></b> to make sure everything's behaving the way it should. Follow those steps and you'll catch any remaining errors in your theme.
+            The QA team at Populr uses this <b><a href="https://docs.google.com/document/d/1SUODH0Hrnqi6rzxlWqXRGMHhMrv-BVJMl_Kq6duCJe4/edit?usp=sharing">theme QA checklist</a></b> to make sure everything's behaving the way it should. Follow those steps and you'll catch any remaining errors in your theme. Note that we don't pay our 3rd-party themers until their theme passes this checklist.
           </p>
       <h2>Step 4: Publish</h2>
         <p>
