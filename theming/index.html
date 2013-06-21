@@ -100,6 +100,11 @@
         <li><a href="#sharing-helper">Sharing Button Helper</a></li>
         <li><a href="#links-helper">Pop Links Helper</a></li>
         <li><a href="#logo-helper">Logo Helper</a></li>
+        <li><a href="#strip-html-helper">strip_html helper</a></li>
+        <li><a href="#raw-helpers">Raw text helpers</a></li>
+        <li><a href="#cssify-helper">cssify helper</a></li>
+        <li><a href="#base-path-helper">base_path helper</a></li>
+        <li><a href="#log-helper">Log helper</a></li>
         <li><a href="#navigation-helper">Navigation Links</a></li>
         <li><a href="#default-background-image">Default Background Image</a></li>
       </ul>
@@ -111,6 +116,7 @@
         <li class="divider"></li>
         <li><a href="#main-less">Main.less</a></li>
         <li><a href="#variables-less">Variables.less</a></li>
+        <li><a href="#populr-mixins">Populr_mixins.less</a></li>
         <li><a href="#less-mixins">LESS Mixin Libraries</a></li>
         <li><a href="#theme-styles">Theme Styles</a></li>
         <li><a href="#system-classes">System-Generated Classes</a></li>
@@ -1179,7 +1185,7 @@
   <div class="row-fluid">
     <div class="span12">
       <p>
-        Populr provides several additional Handlebars.js template helpers and other bits of code to assist you in building your theme.
+        Populr provides several Handlebars.js template helpers and other bits of code to assist you in building your theme.
       </p>
     </div>
   </div>
@@ -1195,10 +1201,10 @@
           so the resize helper allows you to scale and crop images to your 
           liking by redirecting urls through our image transformer.
         </p>
-        <h3>Helper</h3>
-        <pre class="prettyprint linenums language-html">{{{resize original_url width=640 height=480}}}</pre>
       </div>
       <div class="span6">
+        <h3>Helper</h3>
+        <pre class="prettyprint linenums language-html">{{{resize original_url width=640 height=480}}}</pre>
         <h3>Settings</h3>
         <table class="table table-bordered table-striped">
           <thead>
@@ -1241,6 +1247,8 @@
           exactly the same as a normal Handlebars.js <code>if</code> helper. The <code>else</code> block is 
           optional.
         </p>
+      </div>
+      <div class="span6">
         <h3>Helper</h3>
         <pre class="prettyprint linenums language-html">
 &lt;!-- within an imagegroup template --&gt;
@@ -1249,8 +1257,6 @@
 {{else}}
   &lt;!-- display single image --&gt;
 {{/if_many}}</pre>
-      </div>
-      <div class="span6">
         <h3>Settings</h3>
         <p>There are no settings for this helper.</p>
       </div>
@@ -1266,6 +1272,9 @@
         </p>
         <p>
           The example here shows how the <code>{{{if_equal}}}</code> helper can be used to style embedded videos differently from other embeds.
+        </p>
+      </div>
+      <div class="span6">
         <h3>Helper</h3>
         <pre class="prettyprint linenums language-html">
 &lt;!-- within an embedgroup template --&gt;
@@ -1276,8 +1285,6 @@
     &lt;div class=&quot;embed&quot;&gt;{{{html}}}&lt;/div&gt;
   {{/if_equal}}
 {{/embeds}}</pre>
-      </div>
-      <div class="span6">
         <h3>Settings</h3>
         <p>There are no settings for this helper.</p>
       </div>
@@ -1294,10 +1301,10 @@
           It will automatically decide if the size should be displayed as one of 
           the following: <code>'Bytes', 'KB', 'MB', 'GB', 'TB'</code>
         </p>
-        <h3>Helper</h3>
-        <pre class="prettyprint linenums language-html">{{{format_file_size source_file_size precision=2}}}</pre>
       </div>
       <div class="span6">
+        <h3>Helper</h3>
+        <pre class="prettyprint linenums language-html">{{{format_file_size source_file_size precision=2}}}</pre>
         <h3>Settings</h3>
         <table class="table table-bordered table-striped">
           <thead>
@@ -1328,14 +1335,15 @@
         <p>
           If there is only one image in an asset's <code>{{{images}}}</code> array, then that image will <em>not</em> be cropped; it will simply be scaled to fit the full width of its container. However, if there are multiple images in the <code>{{{images}}}</code> array, they will be first scaled, then cropped as needed to fit the dimensions specified by the <code>width</code> and <code>height</code> parameters.
         </p>
-        <h3>Helper</h3>
-        <pre class="prettyprint linenums language-html">{{{imageslider images width=640 height=480}}}</pre>
         <p>
           If your theme uses the image slider helper, you must include the following line of code in your main.less file.
+        </p>
         <h3>main.less</h3>
         <pre class="prettyprint linenums language-css">#populr &gt; #image-slider-themes &gt; .basic();</pre>
       </div>
       <div class="span6">
+        <h3>Helper</h3>
+        <pre class="prettyprint linenums language-html">{{{imageslider images width=640 height=480}}}</pre>
         <h3>Settings</h3>
         <table class="table table-bordered table-striped">
           <thead>
@@ -1389,10 +1397,10 @@
         <p>
           Note that if you don't manually insert this helper in the location of your choice, Populr will automatically insert it at the bottom of your theme.
         </p>
-        <h3>Helper</h3>
-        <pre class="prettyprint linenums language-html">{{sharing}}</pre>
       </div>
       <div class="span6">
+        <h3>Helper</h3>
+        <pre class="prettyprint linenums language-html">{{sharing}}</pre>
         <h3>Settings</h3>
         <p>There are no settings for this helper.</p>
         <h3>Default appearance</h3>
@@ -1411,10 +1419,10 @@
         <p>
           Note that if you don't manually insert this helper in the location of your choice, Populr will automatically insert it at the bottom of your theme.
         </p>
-        <h3>Helper</h3>
-        <pre class="prettyprint linenums language-html">{{pop_links}}</pre>
       </div>
       <div class="span6">
+        <h3>Helper</h3>
+        <pre class="prettyprint linenums language-html">{{pop_links}}</pre>
         <h3>Settings</h3>
         <p>There are no settings for this helper.</p>
         <h3>Default appearance</h3>
@@ -1434,10 +1442,10 @@
         <p>
           Note that if you don't manually insert this helper in the location of your choice, Populr will automatically insert it at the top of your theme.
         </p>
-        <h3>Helper</h3>
-        <pre class="prettyprint linenums language-html">{{logo}}</pre>
       </div>
       <div class="span6">
+        <h3>Helper</h3>
+        <pre class="prettyprint linenums language-html">{{logo}}</pre>
         <h3>Settings</h3>
         <table class="table table-bordered table-striped">
           <thead>
@@ -1459,6 +1467,103 @@
         </table>
         <p>
           <span class="label label-info">Heads up!</span> You don't have to specify a width or height, but if you choose to define one, don't define the other.
+        </p>
+      </div>
+    </div>
+  </section>
+  
+  <section id="strip-html-helper">
+    <h2>strip_html</h2>
+    <div class="row-fluid">
+      <div class="span6">
+        <p>
+          The <code>{{{strip_html}}}</code> helper will strip the HTML from any template you pass to it. For example, when <code>{{{strip_html title}}}</code> is inserted into an asset template, it will return the asset's title as plain text.
+        </p>
+      </div>
+      <div class="span6">
+        <h3>Helper</h3>
+        <pre class="prettyprint linenums language-html">{{{strip_html [template]}}}</pre>
+        <h3>Settings</h3>
+        <p>
+          There are no settings for this helper.
+        </p>
+      </div>
+    </div>
+  </section>
+  
+  <section id="raw-helpers">
+    <h2>Raw text helpers</h2>
+    <div class="row-fluid">
+      <div class="span6">
+        <p>
+          These helpers will return the value of their respective templates as plain text. For example, <code>{{{title_raw}}}</code> will return its asset's title as plain text. The output of these helpers is effectively the same as the output when using the {{{strip_html}}} helper on a template.
+        </p>
+      </div>
+      <div class="span6">
+        <h3>Helpers</h3>
+        <pre class="prettyprint linenums language-html">{{{title_raw}}}
+{{{body_raw}}}
+{{{description_raw}}}</pre>
+        <h3>Settings</h3>
+        <p>
+          There are no settings for this helper.
+        </p>
+      </div>
+    </div>
+  </section>
+  
+  <section id="cssify-helper">
+    <h2>cssify</h2>
+    <div class="row-fluid">
+      <div class="span6">
+        <p>
+          The <code>{{{cssify}}}</code> helper will turn a template's contents into CSS-friendly syntax. For example, if <code>{{{cssify title_raw}}}</code> is inserted into an asset template, and that asset's title is "So it goes.", it will return the asset's title as "so-it-goes".
+        </p>
+      </div>
+      <div class="span6">
+        <h3>Helper</h3>
+        <pre class="prettyprint linenums language-html">{{{cssify [template]}}}</pre>
+        <h3>Settings</h3>
+        <p>
+          There are no settings for this helper.
+        </p>
+      </div>
+    </div>
+  </section>
+  
+  <section id="base-path-helper">
+    <h2>base_path</h2>
+    <div class="row-fluid">
+      <div class="span6">
+        <p>
+          The <code>{{{base_path}}}</code> helper is used for specifying a relative file path within your theme's Handlebars template. If you have to specify a relative file path inside the <code>&lt;script id=&quot;theme&quot; type=&quot;text/x-handlebars-template&quot;&gt;</code> tag of your index.html file, you must use this helper.
+        </p>
+      </div>
+      <div class="span6">
+        <h3>Example</h3>
+        <pre class="prettyprint linenums language-html">&lt;img src='{{{base_path}}}/images/bg_image.png' /&gt;</pre>
+        <h3>Settings</h3>
+        <p>
+          There are no settings for this helper.
+        </p>
+      </div>
+    </div>
+  </section>
+  
+  <section id="log-helper">
+    <h2>Log helper</h2>
+    <div class="row-fluid">
+      <div class="span6">
+        <p>
+          The Populr <code>{{log}}</code> helper will write a template's context state to the browser console.
+        </p>
+      </div>
+      <div class="span6">
+        <h3>Example</h3>
+        <pre class="prettyprint linenums language-html">{{log}}</pre>
+        <h3>Settings</h3>
+        <p>
+          There are no settings for this helper.
         </p>
       </div>
     </div>
@@ -1495,11 +1600,6 @@
         <p>
           You can set a default background image for your theme by adding the following meta tag to your theme header. Users will always have the capability to override the default background through the Background dropdown menu of the pop editor.
         </p>
-        <h3>Example</h3>
-        <pre class="prettyprint linenums language-html">
-&lt;head&gt;
-  &lt;meta itemprop=&quot;defaultBackground&quot; content=&quot;/images/background.jpg&quot; data-width=&quot;1800&quot; data-height=&quot;1800&quot; data-position=&quot;c&quot; data-style=&quot;fill&quot; data-color=&quot;#665b42&quot;&gt;
-  ...</pre>
         <div class="alert alert-info">
           <p>
             <span class="label label-info">Heads up!</span> For this tag to work properly, your html tag must include the itemscope element, like so: <code>&lt;html itemscope&gt;</code>
@@ -1507,6 +1607,11 @@
         </div>
       </div>
       <div class="span6">
+        <h3>Example</h3>
+        <pre class="prettyprint linenums language-html">
+&lt;head&gt;
+  &lt;meta itemprop=&quot;defaultBackground&quot; content=&quot;/images/background.jpg&quot; data-width=&quot;1800&quot; data-height=&quot;1800&quot; data-position=&quot;c&quot; data-style=&quot;fill&quot; data-color=&quot;#665b42&quot;&gt;
+  ...</pre>
         <h3>Settings</h3>
         <table class="table table-bordered table-striped">
           <thead>
@@ -1720,16 +1825,17 @@
         </p>
         <p>
           These theme style files are referenced from the theme's index.html file with the following syntax (using the theme Norway as an example):
-          <pre class="prettyprint linenums language-html">&lt;meta itemprop=&quot;palette&quot; content=&quot;palette-default&quot; title=&quot;Malibu&quot; data-preview=&quot;#66b5f2&quot;&gt;
+        </p>
+        <h3>index.html in Norway</h3>
+        <pre class="prettyprint linenums language-html">&lt;meta itemprop=&quot;palette&quot; content=&quot;palette-default&quot; title=&quot;Malibu&quot; data-preview=&quot;#66b5f2&quot;&gt;
 &lt;meta itemprop=&quot;palette&quot; content=&quot;palette-sulu&quot; title=&quot;Sulu&quot; data-preview=&quot;#bcf266&quot;&gt;
 &lt;meta itemprop=&quot;palette&quot; content=&quot;palette-tango&quot; title=&quot;Tango&quot; data-preview=&quot;#f36d24&quot;&gt;
 &lt;meta itemprop=&quot;palette&quot; content=&quot;palette-custom&quot; title=&quot;Custom&quot; data-preview=&quot;custom&quot;&gt;</pre>
-          <div class="alert alert-info">
-            <p>
-              <span class="label label-info">Heads up!</span> For these tags to work properly, your html tag must include the itemscope element, like so: <code>&lt;html itemscope&gt;</code>
-            </p>
-          </div>
-        </p>
+        <div class="alert alert-info">
+          <p>
+            <span class="label label-info">Heads up!</span> For these tags to work properly, your html tag must include the itemscope element, like so: <code>&lt;html itemscope&gt;</code>
+          </p>
+        </div>
         <p>
           These attributes are used like this:
         </p>
@@ -1833,35 +1939,10 @@ background: @header-color url("@{base-url}/images/header-overlay.png") repeat bo
     <div class="row-fluid">
       <div class="span12">
         <p>
-          Populr's theming engine automatically applies system-generated classes to certain page elements. Here are a few that will be especially valuable for building unique behaviors into your theme, such as applying styling variations based on content location, size, etc.
+          Populr's theming engine automatically adds system-generated classes to certain page elements. Here are a few that will be especially valuable for building unique behaviors into your theme, such as applying styling variations based on content location, size, etc.
         </p>
       </div>
     </div>
-    <h3>Rows in Columnizer Regions</h3>
-    <div class="row-fluid">
-      <div class="span12">
-        <p>
-          Each columnizer row will automatically have both of the following classes applied.
-          <ul>
-            <li><code>columnizer-row</code></li>
-            <li><code>columnizer-cols#</code>, where <code>#</code> is the number of assets contained in the row</li>
-          </ul>
-        </p>
-      </div>
-    </div>
-    <p>&nbsp;</p>
-    <h3>Assets in Columnizer Regions</h3>
-    <div class="row-fluid">
-      <div class="span12">
-        <p>
-          Each asset in a columnizer row is assigned to a class according to its index in the row.
-          <ul>
-            <li><code>columnizer-col#</code>, where <code>#</code> is the index number of the asset in the row. The first asset has an index of <code>1</code>, the second an index of <code>2</code>, and so on.</li>
-          </ul>
-        </p>
-      </div>
-    </div>
-    <p>&nbsp;</p>
     <h3>Asset Types</h3>
     <div class="row-fluid">
       <div class="span12">
@@ -1877,7 +1958,7 @@ background: @header-color url("@{base-url}/images/header-overlay.png") repeat bo
       </div>
     </div>
     <p>&nbsp;</p>
-    <h3>Asset Size</h3>
+    <h3>Asset Sizes</h3>
     <div class="row-fluid">
       <div class="span12">
         <p>
@@ -1905,6 +1986,56 @@ background: @header-color url("@{base-url}/images/header-overlay.png") repeat bo
       </div>
       <div class="span6"> </div>
     </div>
+    <p>&nbsp;</p>
+    <h3>Rows in Columnizer Regions</h3>
+    <div class="row-fluid">
+      <div class="span12">
+        <p>
+          Each columnizer row will automatically have both of the following classes applied.
+          <ul>
+            <li><code>columnizer-row</code></li>
+            <li><code>columnizer-cols#</code>, where <code>#</code> is the number of assets contained in the row</li>
+          </ul>
+        </p>
+      </div>
+    </div>
+    <p>&nbsp;</p>
+    <h3>Assets in Columnizer Regions</h3>
+    <div class="row-fluid">
+      <div class="span12">
+        <p>
+          Each asset in a columnizer row is assigned to a class according to its index in the row.
+          <ul>
+            <li><code>columnizer-col#</code>, where <code>#</code> is the index number of the asset in the row. The first asset has an index of <code>1</code>, the second an index of <code>2</code>, and so on.</li>
+          </ul>
+        </p>
+      </div>
+    </div>
+    <p>&nbsp;</p>
+    <h3>Classes added to the &lt;html&gt; tag</h3>
+    <div class="row-fluid">
+      <div class="span12">
+        <p>
+          Populr uses <a href="http://modernizr.com/" target="_blank">Modernizr</a> to add several classes automatically to the &lt;html&gt; tag. <a href="http://modernizr.com/" target="_blank">Head over to their site</a> for the details.
+        </p>
+        <p>
+          &lt;html&gt; will also get IE classes in the style originally <a href="http://www.paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/" target="_blank">proposed by Paul Irish</a> and improved by a few others.
+        </p>
+      </div>
+    </div>
+    <h3>Classes added to the &lt;body&gt; tag</h3>
+    <div class="row-fluid">
+      <div class="span12">
+        <p>
+          Pops will have a number of classes added to the &lt;body&gt; tag as well.
+        </p>
+        <ul>
+          <li>The theme style name will be added to &lt;body&gt; as a class. (See the <a href="#theme-styles">theme styles</a> section for more info.)</li>
+          <li>&lt;body&gt; will get several classes that act as flags based on whether or not the user has enabled certain features for their pop. These classes are: <code>has-title</code>, <code>has-logo</code>, <code>has-sharing</code>, and <code>has-links</code>.</li>
+          <li>If JavaScript is enabled in the pop viewer's browser, &lt;body&gt; gets the class <code>js</code>. If JavaScript is disabled, &lt;body&gt; gets <code>no-js</code>.</li>
+        </ul>
+      </div>
+    </div>
   </section>
 </section>
 
@@ -1920,7 +2051,7 @@ background: @header-color url("@{base-url}/images/header-overlay.png") repeat bo
       <p>
         We built a LESS mixin that handles a lot of the work for you. This mixin stacks each region vertially, then stacks all assets vertically within each region. You just have to add the mixin to your first media query within your main.less file. Take a look at this example:
       </p>
-      <h2>main.less</h2>
+      <h3>main.less</h3>
       <pre class="prettyprint linenums language-css">@media screen and (max-width: 768px) {
   #populr &gt; .mobile-reset();
   ...
