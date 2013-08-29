@@ -95,18 +95,21 @@
         <li><a href="#resize-helper">Resize Helper</a></li>
         <li><a href="#ifmany-helper">If Many Helper</a></li>
         <li><a href="#ifequal-helper">If Equal Helper</a></li>
+        <li><a href="#ifor-helper">If Or Helper</a></li>
+        <li><a href="#ifand-helper">If And Helper</a></li>
         <li><a href="#formatfilesize-helper">Format File Size Helper</a></li>
         <li><a href="#imageslider-helper">Image Slider Helper</a></li>
         <li><a href="#sharing-helper">Sharing Button Helper</a></li>
         <li><a href="#links-helper">Pop Links Helper</a></li>
         <li><a href="#logo-helper">Logo Helper</a></li>
-        <li><a href="#strip-html-helper">strip_html helper</a></li>
-        <li><a href="#raw-helpers">Raw text helpers</a></li>
-        <li><a href="#cssify-helper">cssify helper</a></li>
-        <li><a href="#base-path-helper">base_path helper</a></li>
-        <li><a href="#log-helper">Log helper</a></li>
+        <li><a href="#strip-html-helper">strip_html Helper</a></li>
+        <li><a href="#raw-helpers">Raw Text Helpers</a></li>
+        <li><a href="#cssify-helper">CSSify Helper</a></li>
+        <li><a href="#base-path-helper">base_path Helper</a></li>
+        <li><a href="#log-helper">Log Helper</a></li>
         <li><a href="#navigation-helper">Navigation Links</a></li>
         <li><a href="#default-background-image">Default Background Image</a></li>
+        <li><a href="#background-on-element">Apply Background to Element</a></li>
       </ul>
     </li>
     <li class="dropdown">
@@ -116,7 +119,8 @@
         <li class="divider"></li>
         <li><a href="#main-less">Main.less</a></li>
         <li><a href="#variables-less">Variables.less</a></li>
-        <li><a href="#populr-mixins">Populr_mixins.less</a></li>
+        <li><a href="#populr-mixins-less">Populr_mixins.less</a></li>
+        <li><a href="#helpful-populr-mixins">Helpful Populr Mixins</a></li>
         <li><a href="#less-mixins">LESS Mixin Libraries</a></li>
         <li><a href="#theme-styles">Theme Styles</a></li>
         <li><a href="#system-classes">System-Generated Classes</a></li>
@@ -129,7 +133,7 @@
         <li><a href="#building-locally">Building Locally Overview</a></li>
         <li class="divider"></li>
         <li><a href="#dummy-content">Dummy Content</a></li>
-        <li><a href="#python-command">Running Locally</a></li>
+        <li><a href="#local-environment">Local Theming Environment</a></li>
       </ul>
     </li>
     <li><a href="#recommended-process">Recommended Process</a></li>
@@ -454,7 +458,7 @@
       <div class="span6">
         <h2>Columnizer Layout Engine</h2>
         <p>
-          The Columnizer engine arranges assets first into rows, then into columns. Each row spans the full width of the region. When a user adds an asset to a row, the engine automatically resizes other assets in that row to make room for the new asset. As the themer, you define the maximum number of columns per row.
+          The Columnizer engine arranges assets first into rows, then into columns. Each row spans the full width of the region. When a user adds an asset to a row, the engine automatically resizes other assets in that row to make room for the new asset. As the themer, you define the maximum number of columns per row, from as few as 1 to as many as you'd like to style.
         </p>
         <h3>Helper</h3>
         <pre class="prettyprint linenums language-html">
@@ -516,6 +520,11 @@
     <div class="row-fluid">
       <div class="span6">
         <h2>Packer Layout Engine</h2>
+        <div class="alert alert-info">
+          <p>
+            <span class="label label-info">Heads up!</span> Packer is a legacy layout engine with an uncertain future. We strongly recommend using the Columnizer layout engine unless you have a very good reason not to.
+          </p>
+        </div>
         <p>
           The Packer engine stacks assets vertically based on the column a user 
           places them in. Users have manual control over the width of each asset, and the engine packs each asset 
@@ -1291,6 +1300,62 @@
     </div>
   </section>
 
+  <section id="ifor-helper">
+    <h2>If Or</h2>
+    <div class="row-fluid">
+      <div class="span6">
+        <p>
+          The <code>{{{if_or}}}</code> helper is passed 2 parameters, and will evaluate as true if either parameter is true. The <code>else</code> block is optional.
+        </p>
+        <p>
+          The example here shows how the <code>{{{if_or}}}</code> helper can be used to render a div in an asset only if the asset's title or description are visible.
+        </p>
+      </div>
+      <div class="span6">
+        <h3>Helper</h3>
+        <pre class="prettyprint linenums language-html">
+{{#asset &quot;imagegroup&quot; size=&quot;1&quot;}}
+  {{{imageslider images width=&quot;220&quot; height=&quot;147&quot;}}}
+  {{#if_or title_visible description_visible}}
+    &lt;div class=&quot;text&quot;&gt;
+      {{{title}}}
+      {{{description}}}
+    &lt;/div&gt;
+  {{/if_or}}
+{{/asset}}</pre>
+        <h3>Settings</h3>
+        <p>There are no settings for this helper.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="ifand-helper">
+    <h2>If And</h2>
+    <div class="row-fluid">
+      <div class="span6">
+        <p>
+          The <code>{{{if_and}}}</code> helper is passed 2 parameters, and will evaluate as true only if both parameters are true. The <code>else</code> block is optional.
+        </p>
+        <p>
+          The example here shows how the <code>{{{if_and}}}</code> helper can be used to render a div in between a text asset title and description only when both are visible.
+        </p>
+      </div>
+      <div class="span6">
+        <h3>Helper</h3>
+        <pre class="prettyprint linenums language-html">
+{{#asset &quot;text&quot; size=&quot;1&quot;}}
+  {{{title}}}
+  {{#if_and title_visible body_visible}}
+    &lt;div class=&quot;h-rule&quot; /&gt;
+  {{/if_and}}
+  {{{body}}}
+{{/asset}}</pre>
+        <h3>Settings</h3>
+        <p>There are no settings for this helper.</p>
+      </div>
+    </div>
+  </section>
+
   <section id="formatfilesize-helper">
     <h2>Format File Size</h2>
     <div class="row-fluid">
@@ -1445,7 +1510,7 @@
       </div>
       <div class="span6">
         <h3>Helper</h3>
-        <pre class="prettyprint linenums language-html">{{logo}}</pre>
+        <pre class="prettyprint linenums language-html">{{logo max_width=250}}</pre>
         <h3>Settings</h3>
         <table class="table table-bordered table-striped">
           <thead>
@@ -1456,12 +1521,12 @@
           </thead>
           <tbody>
             <tr>
-              <td><code>width</code></td>
-              <td>Target width <span class="muted">(optional)</span></td>
+              <td><code>max_width</code></td>
+              <td>Maximum width in pixels <span class="muted">(optional)</span></td>
             </tr>
             <tr>
-              <td><code>height</code></td>
-              <td>Target height <span class="muted">(optional)</span>. By default, the image will scale itself proportionally to a height of 90 pixels.</td>
+              <td><code>max_height</code></td>
+              <td>Maximum height in pixels <span class="muted">(optional)</span></td>
             </tr>
           </tbody>
         </table>
@@ -1622,7 +1687,7 @@
           </thead>
           <tbody>
             <tr>
-              <td>itemprop</td>
+              <td><code>itemprop<itemprop></td>
               <td><code>defaultBackground</code> (do not change)</td>
             </tr>
             <tr>
@@ -1675,6 +1740,48 @@
     </div>
   </section>
   
+  <section id="background-on-element">
+    <h2>Apply Background to Element</h2>
+    <div class="row-fluid">
+      <div class="span6">
+        <p>
+          The user-specified background image is applied to the pop's <code>&lt;body&gt;</code> tag by default. However, you can override this default and set that image as the background for a different element on the page. In the example to the right, taken from the theme named Cumberland, the background image is applied to the first columnizer row in the pop.
+        </p>
+        <div class="alert alert-info">
+          <p>
+            <span class="label label-info">Heads up!</span> For this tag to work properly, your html tag must include the itemscope element, like so: <code>&lt;html itemscope&gt;</code>
+          </p>
+        </div>
+      </div>
+      <div class="span6">
+        <h3>Example</h3>
+        <pre class="prettyprint linenums language-html">
+&lt;head&gt;
+  &lt;meta itemprop=&quot;backgroundContainer&quot; content=&quot;.columnizer-row:first-child&quot;&gt;
+  ...</pre>
+        <h3>Settings</h3>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Usage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>itemprop</code></td>
+              <td><code>backgroundContainer</code> (do not change)</td>
+            </tr>
+            <tr>
+              <td><code>content</code></td>
+              <td>CSS selector specifying the element that gets the background</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
 </section>
 
 <section id="styling">
@@ -1783,13 +1890,90 @@
     </div>
   </section>
 
-  <section id="populr-mixins">
+  <section id="populr-mixins-less">
     <h2>Populr_mixins.less</h2>
     <div class="row-fluid">
       <div class="span12">
         <p>
-          Populr_mixins.less adds several important mixins to your theme, such as Populr's mobilization styling. Make sure it gets imported in your main.less file with the following line:
+          Populr_mixins.less contains several important mixins for your theme. Make sure to add the following line to the top of your main.less file:
           <pre class="prettyprint linenums language-css">@import 'http://populr.me/assets/developers/populr_mixins.less';</pre>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="helpful-populr-mixins">
+    <h2>Some Helpful Populr Mixins</h2>
+    <h3>Text Color</h3>
+      <p>
+        <code>#populr > .text-color-over-color(@color-parameter);</code>
+      </p>
+      <p>
+        It's often desirable for a piece of text to change its color based on the color behind it. For example, if a user chooses a very bright background image for their pop, text set against the image should be a dark color, so that it's legible. However, if a user chooses a very dark background image, that same text will only be legible if it's a light color.
+      </p>
+      <p>
+        The .text-color-over-color() helper provides a quick solution for this scenario. This helper takes a single parameter &ndash; the color behind the text &ndash; and sets the CSS <code>color</code> attribute based on what text color would be legible against the parameter color.
+      </p>
+      <p>
+        Let's look at an example wherein an asset's title text is set against the pop background image. The following CSS will automatically apply legible text colors.
+      </p>
+      <pre class="prettyprint linenums language-css">
+.asset-title {
+  #populr > .text-color-over-color(@background-color);
+}</pre>
+      <p>
+        @background-color is a LESS variable automatically calculated as the average color of the user-specified background image. So this code will compile into one of the following results based on the brightness of @background-color.
+      </p>
+    <div class="row-fluid">
+      <div class="span6">
+        <h4>@background-color is dark</h4>
+      <pre class="prettyprint linenums language-css">
+.asset-title {
+  color: #fff;
+}</pre>
+      </div>
+      <div class="span6">
+        <h4>@background-color is bright</h4>
+      <pre class="prettyprint linenums language-css">
+.asset-title {
+  color: #333;
+}</pre>
+      </div>
+    </div>
+
+    <h3>Inline Title and Logo</h3>
+      <p>
+        <code>#populr > .inline-logo-title();</code>
+      </p>
+      <p>
+        This mixin provides a quick way to add elegant responsive behavior to your theme's logo helper and title if they sit side by side. It's used in the themes called Edgefield and Cumberland.
+      </p>
+
+    <h3>Icon styling</h3>
+      <p>
+        <code>#populr > .icon(@color-parameter);</code>
+      </p>
+      <p>
+        This mixin applies some attractive default styling to the icons that users can add via the pop editor. The color parameter sets the backdrop color for the icon. The icon itself is colored according to the .text-color-over-color() mixin.
+      </p>
+      <p>
+        The .icon() mixin will be automatically incorporated into your theme's stylesheet if you set <code>@populr-theme-version: 0;</code> in your variables.less file. If you set <code>@populr-theme-version: 1;</code>, you will have to manually add this mixin if you want to incorporate this styling; you can also omit this mixin and style the icons yourself.
+      </p>
+
+    <h3>Button styling</h3>
+      <p>
+        <code>#populr > .link-button(@color-parameter);</code>
+      </p>
+      <p>
+        This mixin applies some attractive default styling to the link buttons that users can apply to their text via the pop editor. The color parameter sets the backdrop color for the button. The button text is colored according to the .text-color-over-color() mixin.
+      </p>
+      <p>
+        The .link-button() mixin will be automatically incorporated into your theme's stylesheet if you set <code>@populr-theme-version: 0;</code> in your variables.less file. If you set <code>@populr-theme-version: 1;</code>, you will have to manually add this mixin if you want to incorporate this styling; you can also omit this mixin and style the buttons yourself.
+      </p>
+
+    <div class="row-fluid">
+      <div class="span12">
+        <p>
         </p>
       </div>
     </div>
@@ -1815,7 +1999,7 @@
     <div class="row-fluid">
       <div class="span12">
         <p>
-          Put simply, theme styles are variations on a theme. Populr's UI gives end users the ability to customize their pop by choosing from a set of styles defined by the theme designer. Styles can represent a series of color palettes for a theme, a set of variations in the asset layout, or other While styles are optional, we encourage theme designers to create at least 2 styles for each theme. (One simple way to meet this request is to create a light and a dark style for your theme.)
+          Put simply, theme styles are variations on a theme. Populr's UI gives end users the ability to customize their pop by choosing from a set of styles defined by the theme designer. Styles can represent a series of color palettes for a theme, a set of variations in the asset layout, or other design changes. While styles are optional, we encourage theme designers to create at least 2 styles for each theme. (One simple way to meet this request is to create a light and a dark style for your theme.)
         </p>
         <p>
           For example, the theme Norway uses styles to give users a choice of color variations for the background of the title and footer. Users can choose from 4 colors selected by the designer who built the theme.
@@ -1826,7 +2010,7 @@
         <p>
           These theme style files are referenced from the theme's index.html file with the following syntax (using the theme Norway as an example):
         </p>
-        <h3>index.html in Norway</h3>
+        <h3>index.html in the theme called Norway</h3>
         <pre class="prettyprint linenums language-html">&lt;meta itemprop=&quot;palette&quot; content=&quot;palette-default&quot; title=&quot;Malibu&quot; data-preview=&quot;#66b5f2&quot;&gt;
 &lt;meta itemprop=&quot;palette&quot; content=&quot;palette-sulu&quot; title=&quot;Sulu&quot; data-preview=&quot;#bcf266&quot;&gt;
 &lt;meta itemprop=&quot;palette&quot; content=&quot;palette-tango&quot; title=&quot;Tango&quot; data-preview=&quot;#f36d24&quot;&gt;
@@ -1933,19 +2117,73 @@ background: @header-color url("@{base-url}/images/header-overlay.png") repeat bo
         <img src="../assets/images/theming/color-picker.png" />
       </div>
     </div>
-  </section>
-  <section id="system-classes">
-    <h2>System-Generated Classes</h2>
+    <h3>Theme Styles While Building Locally</h3>
     <div class="row-fluid">
       <div class="span12">
         <p>
-          Populr's theming engine automatically adds system-generated classes to certain page elements. Here are a few that will be especially valuable for building unique behaviors into your theme, such as applying styling variations based on content location, size, etc.
+          Populr's local theming environment will allow you to test your theme styles one at a time by adding import statements to the top of your main.less file. For example, if one of your theme styles was stored in a file named red_accent.less, you could test that theme style in the local theming environment by adding this line to the top of your main.less file:
+        </p>
+        <pre class="prettyprint linenums language-css">@import 'red_accent';</pre>
+        <p>
+          To test a different style for this theme, you'd replace <code>red_accent</code> with the file name for the desired style.
+        </p>
+        <p>
+          For more information on building locally with the local theming environment, <a href="#building-locally">jump to that section</a> of the documentation.
         </p>
       </div>
     </div>
+  </section>
+  <section id="system-classes">
+    <h2>System-Generated Classes</h2>
+        <p>
+          Populr's theming engine automatically adds system-generated classes to certain page elements. Here are a few that will be especially valuable for building unique behaviors into your theme, such as applying styling variations based on content location, size, etc.
+        </p>
+    <p>&nbsp;</p>
+    <h3>Classes added to the &lt;html&gt; tag</h3>
+        <p>
+          Populr uses <a href="http://modernizr.com/" target="_blank">Modernizr</a> to add several classes automatically to the &lt;html&gt; tag. <a href="http://modernizr.com/" target="_blank">Head over to their site</a> for the details.
+        </p>
+        <p>
+          &lt;html&gt; will also get IE classes in the style originally <a href="http://www.paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/" target="_blank">proposed by Paul Irish</a> and improved by a few others.
+        </p>
+    <p>&nbsp;</p>
+    <h3>Classes added to the &lt;body&gt; tag</h3>
+        <p>
+          Pops will have a number of classes added to the &lt;body&gt; tag as well.
+        </p>
+        <ul>
+          <li>The theme style name will be added to &lt;body&gt; as a class. (See the <a href="#theme-styles">theme styles</a> section for more info.)</li>
+          <li>&lt;body&gt; will get several classes that act as flags based on whether or not the user has enabled certain features for their pop. These classes are: <code>has-title</code>, <code>has-logo</code>, <code>has-sharing</code>, and <code>has-links</code>.</li>
+          <li>If JavaScript is enabled in the pop viewer's browser, &lt;body&gt; gets the class <code>js</code>. If JavaScript is disabled, &lt;body&gt; gets <code>no-js</code>.</li>
+        </ul>
+    <p>&nbsp;</p>
+    <h3>Rows in Columnizer Regions</h3>
+        <p>
+          Each columnizer row will automatically have the following classes applied.
+        </p>
+        <ul>
+          <li><code>columnizer-row</code></li>
+          <li><code>columnizer-cols#</code>, where <code>#</code> is the number of assets contained in the row</li>
+          <li><code>columnizer-row-contents-[contents]</code> where <code>[contents]</code> lists each asset type within the row in the corresponding order. For example:</li>
+            <ul>
+              <li>A columnizer row containing only a single text asset gets the class <code>.columnizer-row-contents-text</code></li>
+              <li>A columnizer row containing two image assets gets the class <code>.columnizer-row-contents-imagegroup-imagegroup</code></li>
+              <li>A columnizer row containing a embed asset, a text asset, and then an document asset (in that order) gets the class <code>.columnizer-row-contents-embedgroup-text-documentgroup</code></li>
+            </ul>
+        </ul>
+        <p>
+          Also, each columnizer row has a clearfix automatically applied by Pouplr's theming engine. This clearfix adds the <code>:after</code> pseudo-element to the .columnizer-row div and applies a little CSS styling. Because <code>.columnizer-row:after</code> is used by Populr's theming engine, you should avoid relying on it when styling a theme. One alternative could be to use <code>.columnizer-row-inner</code>, a div nested just inside of <code>.columnizer-row</code>.
+        </p>
+    <p>&nbsp;</p>
+    <h3>Assets in Columnizer Regions</h3>
+        <p>
+          Each asset in a columnizer row is assigned to a class according to its index in the row.
+          <ul>
+            <li><code>columnizer-col#</code>, where <code>#</code> is the index number of the asset in the row. The first asset has an index of <code>1</code>, the second an index of <code>2</code>, and so on.</li>
+          </ul>
+        </p>
+    <p>&nbsp;</p>
     <h3>Asset Types</h3>
-    <div class="row-fluid">
-      <div class="span12">
         <p>
           Every asset is assigned to a class according to its type. Only one of the following classes is applied per asset.
           <ul>
@@ -1955,87 +2193,45 @@ background: @header-color url("@{base-url}/images/header-overlay.png") repeat bo
             <li><code>asset-type-embedgroup</code></li>
           </ul>
         </p>
-      </div>
-    </div>
     <p>&nbsp;</p>
     <h3>Asset Sizes</h3>
-    <div class="row-fluid">
-      <div class="span12">
         <p>
           Every asset is assigned to a class according to its size. Only one of the following classes is applied per asset.
         </p>
-      </div>
-    </div>
-    <div class="row-fluid">
-      <div class="span3">
-        <p><strong>Assets in Columnizer Regions</strong></p>
-        <ul>
-          <li><code>asset-size-1</code></li>
-          <li><code>asset-size-2</code></li>
-          <li><code>asset-size-3</code></li>
-          <li>...and so on</li>
-        </ul>
-      </div>
-      <div class="span3">
-        <p><strong>Assets in Packer Regions</strong></p>
-        <ul>
-          <li><code>asset-size-s</code></li>
-          <li><code>asset-size-m</code></li>
-          <li><code>asset-size-l</code></li>
-        </ul>
-      </div>
-      <div class="span6"> </div>
-    </div>
+        <div class="row-fluid">
+          <div class="span3">
+            <p><strong>Assets in Columnizer Regions</strong></p>
+            <ul>
+              <li><code>asset-size-1</code></li>
+              <li><code>asset-size-2</code></li>
+              <li><code>asset-size-3</code></li>
+              <li>...and so on for as many sizes as the region allows</li>
+            </ul>
+          </div>
+          <div class="span3">
+            <p><strong>Assets in Packer Regions</strong></p>
+            <ul>
+              <li><code>asset-size-s</code></li>
+              <li><code>asset-size-m</code></li>
+              <li><code>asset-size-l</code></li>
+            </ul>
+          </div>
+          <div class="span6"> </div>
+        </div>
     <p>&nbsp;</p>
-    <h3>Rows in Columnizer Regions</h3>
-    <div class="row-fluid">
-      <div class="span12">
+    <h3>Text Sizes</h3>
         <p>
-          Each columnizer row will automatically have both of the following classes applied.
-          <ul>
-            <li><code>columnizer-row</code></li>
-            <li><code>columnizer-cols#</code>, where <code>#</code> is the number of assets contained in the row</li>
-          </ul>
-        </p>
-      </div>
-    </div>
-    <p>&nbsp;</p>
-    <h3>Assets in Columnizer Regions</h3>
-    <div class="row-fluid">
-      <div class="span12">
-        <p>
-          Each asset in a columnizer row is assigned to a class according to its index in the row.
-          <ul>
-            <li><code>columnizer-col#</code>, where <code>#</code> is the index number of the asset in the row. The first asset has an index of <code>1</code>, the second an index of <code>2</code>, and so on.</li>
-          </ul>
-        </p>
-      </div>
-    </div>
-    <p>&nbsp;</p>
-    <h3>Classes added to the &lt;html&gt; tag</h3>
-    <div class="row-fluid">
-      <div class="span12">
-        <p>
-          Populr uses <a href="http://modernizr.com/" target="_blank">Modernizr</a> to add several classes automatically to the &lt;html&gt; tag. <a href="http://modernizr.com/" target="_blank">Head over to their site</a> for the details.
-        </p>
-        <p>
-          &lt;html&gt; will also get IE classes in the style originally <a href="http://www.paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/" target="_blank">proposed by Paul Irish</a> and improved by a few others.
-        </p>
-      </div>
-    </div>
-    <h3>Classes added to the &lt;body&gt; tag</h3>
-    <div class="row-fluid">
-      <div class="span12">
-        <p>
-          Pops will have a number of classes added to the &lt;body&gt; tag as well.
+          Users can choose from 3 sizes for any text in their pop: default, smaller, and larger. When a user applies either the smaller or larger size to a piece of text, that text gets wrapped in a div with a class that modifies the text size.
         </p>
         <ul>
-          <li>The theme style name will be added to &lt;body&gt; as a class. (See the <a href="#theme-styles">theme styles</a> section for more info.)</li>
-          <li>&lt;body&gt; will get several classes that act as flags based on whether or not the user has enabled certain features for their pop. These classes are: <code>has-title</code>, <code>has-logo</code>, <code>has-sharing</code>, and <code>has-links</code>.</li>
-          <li>If JavaScript is enabled in the pop viewer's browser, &lt;body&gt; gets the class <code>js</code>. If JavaScript is disabled, &lt;body&gt; gets <code>no-js</code>.</li>
+          <li>Smaller text size: <code>&lt;div class=&quot;font-size-smaller&quot;&gt;</code></li>
+          <li>Default text size: No class applied</li>
+          <li>Larger text size: <code>&lt;div class=&quot;font-size-larger&quot;&gt;</code></li>
         </ul>
-      </div>
-    </div>
+        <p>
+          You don't have to style these classes yourself; Populr will simply decrease or increase the font size when these classes are applied. However, you're free to style them if you wish. One suggestion: styling the <code>font-size-smaller</code> class in your asset titles opens up some cool opportunities for fancy subtitles.
+        </p>
+
   </section>
 </section>
 
@@ -2079,7 +2275,7 @@ background: @header-color url("@{base-url}/images/header-overlay.png") repeat bo
   <div class="row-fluid">
     <div class="span12">
       <p>
-        The Populr theming engine was developed to enable talented designers and developers like you to work on your theme locally before uploading it to Populr. To illustrate theme behavior outside of the pop editor interface, a theme can be loaded with dummy content from Populr's servers. The theme can then be run locally on your machine using a simple HTTP server, such as the one built into Python.
+        The Populr theming engine allows you to work on your theme locally before uploading it to Populr. Any theme can generate its own sample pop using dummy content pulled from Populr's servers, and this sample pop is run from Populr's local theming environment.
       </p>
     </div>
   </div>
@@ -2089,7 +2285,7 @@ background: @header-color url("@{base-url}/images/header-overlay.png") repeat bo
     <div class="row-fluid">
       <div class="span12">
         <p>
-          Dummy content is generic asset content that's displayed in your theme when you run your theme locally in your browser. The text is <a href="http://en.wikipedia.org/wiki/Lorem_ipsum" target="_blank">lorum ipsum</a> text, the images are from <a href="http://500px.com/" target="_blank">500px</a>, the embed is one of the <a href="http://www.youtube.com/watch?v=YE7VzlLtp-4" target="_blank">world's greatest short films</a>, etc.
+          Dummy content is generic asset content that's displayed when running your theme in the local theming environment. The text is <a href="http://en.wikipedia.org/wiki/Lorem_ipsum" target="_blank">lorum ipsum</a> text, the images are from <a href="http://500px.com/" target="_blank">500px</a>, the embed is one of the <a href="http://www.youtube.com/watch?v=YE7VzlLtp-4" target="_blank">world's greatest short films</a>, etc.
         </p>
         <p>
           Dummy content is defined as an attribute of the <code>{{region}}</code> Handlebars.js helper. You might have noticed this earlier while reviewing the <a href="#theme-skeleton">sample theme</a>. Here it is again:
@@ -2207,20 +2403,23 @@ background: @header-color url("@{base-url}/images/header-overlay.png") repeat bo
     </div>
   </section>
 
-  <section id="python-command">
-    <h2>Running Your Theme Locally Using a Simple Python HTTP Server</h2>
+  <section id="local-environment">
+    <h2>Running the Local Theming Environment on your Machine</h2>
     <div class="row-fluid">
       <div class="span12">
         <p>
-          To see how your theme looks when it's populated with your dummy content, run an HTTP server locally on your machine and use it to host your theme. The Populr team uses Python to create a server, since it comes with a simple HTTP server built right in.  
+          At any time, you see how your theme looks by running Populr's local theming environment on your machine. The local theming environment is a simple HTTP server that runs from your theme's directory. Once you start the environment, you can use a browser to see how your theme looks on a pop containing dummy content (as covered in the previous section).
         </p>
         <p>
-          To run a server on your Mac using Python, open Terminal, then use the <code>cd</code> command to change to your theme's directory. Once you're there, use this command to start your server:
+          The Populr team uses Python to run the local theming environment, since Python has a simple HTTP server built right in. The local theming environment should also work with other methods of running an HTTP server locally.
+        </p>
+        <p>
+          To start the local theming environment on your Mac using Python, open Terminal, then use the <code>cd</code> command to change to your theme's directory. Once you're in the right directory, use this command to start your server:
         </p>
         <pre class="prettyprint linenums language-html">
 python -m SimpleHTTPServer 8080</pre>
         <p>
-          You can then check out your theme by opening a browser and entering the URL <code>http://localhost:8080</code>.
+          You can then check out your theme by opening a browser and entering the URL <code>http://localhost:8080</code>. You will see a pop that uses your theme, constructed from the dummy content you specified in your theme's region definition(s).
         </p>
       </div>
     </div>
