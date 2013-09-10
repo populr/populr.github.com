@@ -1,5 +1,6 @@
 
 http://developers.populr.me/api/index.html
+http://developers.populr.me/api/populate.html
 http://developers.populr.me/atom.xml
 http://developers.populr.me/blog/archive.html
 http://developers.populr.me/blog/categories.html
